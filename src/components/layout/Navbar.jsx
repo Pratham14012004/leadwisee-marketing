@@ -1,88 +1,88 @@
-
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import { FaSun, FaMoon, FaBars, FaTimes, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-// Styled components
-const NavContainer = styled.header`
-  position: fixed;
+const Nav = styled.nav`
+  background-color: ${props => props.theme.colors.background};
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  background-color: ${props => props.theme.body};
+  z-index: 100;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  transition: all 0.3s ease;
 `;
 
-const NavInner = styled.div`
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 80px;
 `;
 
-const Logo = styled(Link)`
-  font-size: 1.5rem;
+const LogoContainer = styled(Link)`
+  text-decoration: none;
+  color: ${props => props.theme.colors.text};
+  font-size: 1.8rem;
   font-weight: 700;
-  color: ${props => props.theme.primary};
-  
-  span {
-    color: ${props => props.theme.secondary};
-  }
-`;
-
-const NavLinks = styled.nav`
-  display: none;
-  
-  @media (min-width: 1024px) {
-    display: flex;
-    align-items: center;
-  }
-`;
-
-const NavLink = styled(Link)`
-  margin: 0 1rem;
-  font-weight: 500;
-  color: ${props => props.active ? props.theme.primary : props.theme.text};
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: ${props => props.active ? '100%' : '0'};
-    height: 2px;
-    background-color: ${props => props.theme.primary};
-    transition: width 0.3s ease;
-  }
-  
-  &:hover:after {
-    width: 100%;
-  }
-`;
-
-const DropdownContainer = styled.div`
-  position: relative;
-  margin: 0 1rem;
-`;
-
-const DropdownTrigger = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
+
+  span {
+    color: ${props => props.theme.colors.primary};
+  }
+`;
+
+const NavMenu = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 968px) {
+    display: none;
+  }
+`;
+
+const NavItem = styled.div`
+  position: relative;
+`;
+
+const NavLinkStyled = styled(NavLink)`
+  text-decoration: none;
+  color: ${props => props.theme.colors.text};
   font-weight: 500;
-  color: ${props => props.active ? props.theme.primary : props.theme.text};
-  
-  svg {
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-    transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0)'};
+  padding: 0.5rem 1rem;
+  margin: 0 0.2rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
+
+  &.active {
+    color: ${props => props.theme.colors.primary};
+  }
+`;
+
+const NavButton = styled.button`
+  background: none;
+  border: none;
+  color: ${props => props.theme.colors.text};
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  margin: 0 0.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
   }
 `;
 
@@ -90,525 +90,415 @@ const DropdownMenu = styled(motion.div)`
   position: absolute;
   top: 100%;
   left: 0;
-  width: 200px;
-  background-color: ${props => props.theme.body};
-  box-shadow: ${props => props.theme.shadow};
-  border-radius: 0.25rem;
-  overflow: hidden;
+  background-color: ${props => props.theme.colors.background};
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.8rem 0;
+  min-width: 200px;
   z-index: 10;
 `;
 
-const DropdownLink = styled(Link)`
+const DropdownItem = styled(NavLink)`
   display: block;
-  padding: 0.75rem 1rem;
-  color: ${props => props.active ? props.theme.primary : props.theme.text};
-  transition: background-color 0.3s ease;
-  
+  padding: 0.6rem 1.2rem;
+  text-decoration: none;
+  color: ${props => props.theme.colors.text};
+  transition: all 0.3s ease;
+
   &:hover {
-    background-color: ${props => props.theme.backgroundSecondary};
+    background-color: ${props => props.theme.colors.bgAlt};
+    color: ${props => props.theme.colors.primary};
+  }
+
+  &.active {
+    color: ${props => props.theme.colors.primary};
   }
 `;
 
-const ThemeToggler = styled.button`
+const ContactButton = styled(Link)`
+  background-color: ${props => props.theme.colors.primary};
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.primaryDark};
+    transform: translateY(-2px);
+  }
+`;
+
+const ThemeToggle = styled.button`
   background: none;
   border: none;
-  color: ${props => props.theme.text};
-  margin-left: 1.5rem;
+  color: ${props => props.theme.colors.text};
+  font-size: 1.2rem;
   cursor: pointer;
+  margin-left: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  svg {
-    font-size: 1.25rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+    transform: rotate(15deg);
   }
 `;
 
 const MobileMenuButton = styled.button`
+  display: none;
   background: none;
   border: none;
-  color: ${props => props.theme.text};
+  color: ${props => props.theme.colors.text};
   font-size: 1.5rem;
-  display: flex;
-  align-items: center;
   cursor: pointer;
-  
-  @media (min-width: 1024px) {
-    display: none;
+
+  @media screen and (max-width: 968px) {
+    display: block;
   }
 `;
 
 const MobileMenu = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: ${props => props.theme.body};
-  z-index: 2000;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
+  display: none;
+
+  @media screen and (max-width: 968px) {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: ${props => props.theme.colors.background};
+    z-index: 99;
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+  }
 `;
 
-const MobileMenuHeader = styled.div`
+const MobileNavItem = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const MobileLinkStyled = styled(NavLink)`
+  display: block;
+  text-decoration: none;
+  color: ${props => props.theme.colors.text};
+  font-weight: 500;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid ${props => props.theme.colors.bgAlt};
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
+
+  &.active {
+    color: ${props => props.theme.colors.primary};
+  }
+`;
+
+const MobileNavButton = styled.button`
+  background: none;
+  border: none;
+  color: ${props => props.theme.colors.text};
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.8rem 0;
+  text-align: left;
+  width: 100%;
+  border-bottom: 1px solid ${props => props.theme.colors.bgAlt};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
 `;
 
-const MobileNavLinks = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
+const MobileDropdown = styled(motion.div)`
+  padding-left: 1rem;
 `;
 
-const MobileNavLink = styled(Link)`
+const MobileDropdownItem = styled(NavLink)`
+  display: block;
+  text-decoration: none;
+  color: ${props => props.theme.colors.text};
+  padding: 0.6rem 0;
+  border-bottom: 1px solid ${props => props.theme.colors.bgAlt};
+  font-weight: 400;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
+
+  &.active {
+    color: ${props => props.theme.colors.primary};
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const MobileContactButton = styled(Link)`
+  display: block;
+  background-color: ${props => props.theme.colors.primary};
+  color: white;
   padding: 1rem;
-  font-size: 1.25rem;
+  border-radius: 4px;
   font-weight: 500;
-  border-bottom: 1px solid ${props => props.theme.border};
-  color: ${props => props.active ? props.theme.primary : props.theme.text};
-`;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
 
-const MobileDropdownLink = styled(Link)`
-  padding: 1rem 1rem 1rem 2rem;
-  font-size: 1.125rem;
-  border-bottom: 1px solid ${props => props.theme.border};
-  color: ${props => props.active ? props.theme.primary : props.theme.textLight};
-`;
-
-const CallToAction = styled(Link)`
-  display: none;
-  
-  @media (min-width: 1024px) {
-    display: inline-block;
-    padding: 0.5rem 1.25rem;
-    background-color: ${props => props.theme.primary};
-    color: white;
-    border-radius: 0.25rem;
-    margin-left: 1.5rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-    
-    &:hover {
-      background-color: ${props => props.theme.primaryDark};
-      color: white;
-    }
+  &:hover {
+    background-color: ${props => props.theme.colors.primaryDark};
   }
 `;
 
 const Navbar = ({ theme, toggleTheme }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
-  
+  const [servicesDropdown, setServicesDropdown] = useState(false);
+  const [industriesDropdown, setIndustriesDropdown] = useState(false);
+  const [resourcesDropdown, setResourcesDropdown] = useState(false);
+  const [mobileServicesDropdown, setMobileServicesDropdown] = useState(false);
+  const [mobileIndustriesDropdown, setMobileIndustriesDropdown] = useState(false);
+  const [mobileResourcesDropdown, setMobileResourcesDropdown] = useState(false);
+
   const location = useLocation();
-  
-  // Services dropdown items
-  const services = [
-    { name: 'PPC Marketing', path: '/services/ppc-marketing' },
-    { name: 'Social Media Marketing', path: '/services/social-media-marketing' },
-    { name: 'E-commerce Marketing', path: '/services/ecommerce-marketing' }
-  ];
-  
-  // Industries dropdown items
-  const industries = [
-    { name: 'B2B SAAS', path: '/industries/b2b-saas' },
-    { name: 'E-commerce', path: '/industries/ecommerce' },
-    { name: 'Retail', path: '/industries/retail' },
-    { name: 'Real Estate', path: '/industries/real-estate' },
-    { name: 'Fashion', path: '/industries/fashion' },
-    { name: 'Healthcare', path: '/industries/healthcare' },
-    { name: 'OTT', path: '/industries/ott' },
-    { name: 'Coaching & Consulting', path: '/industries/coaching-consulting' },
-    { name: 'Interior Design', path: '/industries/interior-design' }
-  ];
-  
-  // Resources dropdown items
-  const resources = [
-    { name: 'Blog', path: '/blog' },
-    { name: 'Case Studies', path: '/case-studies' },
-    { name: 'Testimonials', path: '/testimonials' }
-  ];
-  
-  // Function to toggle dropdown
-  const toggleDropdown = (dropdown) => {
-    if (openDropdown === dropdown) {
-      setOpenDropdown(null);
-    } else {
-      setOpenDropdown(dropdown);
-    }
-  };
-  
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = () => {
-      setOpenDropdown(null);
-    };
-    
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
-  
-  // Listen for scroll to add shadow to navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-  
-  // Close mobile menu when route changes
+
+  // Close mobile menu when location changes
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);
-  
+
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'auto';
     }
-    
+
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'auto';
     };
   }, [mobileMenuOpen]);
-  
+
   return (
-    <NavContainer style={{ boxShadow: isScrolled ? '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none' }}>
-      <NavInner>
-        <Logo to="/">
+    <Nav>
+      <Container>
+        <LogoContainer to="/">
           Lead<span>wisee</span>
-        </Logo>
-        
-        <NavLinks>
-          <NavLink to="/" active={location.pathname === '/' ? 1 : 0}>
-            Home
-          </NavLink>
-          
-          <DropdownContainer onClick={(e) => e.stopPropagation()}>
-            <DropdownTrigger 
-              active={location.pathname.includes('/services') ? 1 : 0}
-              isOpen={openDropdown === 'services'}
-              onClick={() => toggleDropdown('services')}
-            >
-              Services
-              <svg 
-                width="12" 
-                height="8" 
-                viewBox="0 0 12 8" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path 
-                  d="M1.41 0.295L6 4.875L10.59 0.295L12 1.705L6 7.705L0 1.705L1.41 0.295Z" 
-                  fill="currentColor"
-                />
-              </svg>
-            </DropdownTrigger>
-            
+        </LogoContainer>
+
+        <NavMenu>
+          <NavItem
+            onMouseEnter={() => setServicesDropdown(true)}
+            onMouseLeave={() => setServicesDropdown(false)}
+          >
+            <NavButton onClick={() => setServicesDropdown(!servicesDropdown)}>
+              Services {servicesDropdown ? <FaChevronUp /> : <FaChevronDown />}
+            </NavButton>
+
             <AnimatePresence>
-              {openDropdown === 'services' && (
+              {servicesDropdown && (
                 <DropdownMenu
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <DropdownLink 
-                    to="/services" 
-                    active={location.pathname === '/services' ? 1 : 0}
-                  >
-                    All Services
-                  </DropdownLink>
-                  
-                  {services.map((service, index) => (
-                    <DropdownLink 
-                      key={index}
-                      to={service.path}
-                      active={location.pathname === service.path ? 1 : 0}
-                    >
-                      {service.name}
-                    </DropdownLink>
-                  ))}
+                  <DropdownItem to="/services/ppc-advertising">PPC Advertising</DropdownItem>
+                  <DropdownItem to="/services/seo">Search Engine Optimization</DropdownItem>
+                  <DropdownItem to="/services/social-media-marketing">Social Media Marketing</DropdownItem>
+                  <DropdownItem to="/services/conversion-rate-optimization">Conversion Rate Optimization</DropdownItem>
+                  <DropdownItem to="/services/email-marketing">Email Marketing</DropdownItem>
+                  <DropdownItem to="/services/content-marketing">Content Marketing</DropdownItem>
+                  <DropdownItem to="/services">All Services</DropdownItem>
                 </DropdownMenu>
               )}
             </AnimatePresence>
-          </DropdownContainer>
-          
-          <DropdownContainer onClick={(e) => e.stopPropagation()}>
-            <DropdownTrigger 
-              active={location.pathname.includes('/industries') ? 1 : 0}
-              isOpen={openDropdown === 'industries'}
-              onClick={() => toggleDropdown('industries')}
-            >
-              Industries
-              <svg 
-                width="12" 
-                height="8" 
-                viewBox="0 0 12 8" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path 
-                  d="M1.41 0.295L6 4.875L10.59 0.295L12 1.705L6 7.705L0 1.705L1.41 0.295Z" 
-                  fill="currentColor"
-                />
-              </svg>
-            </DropdownTrigger>
-            
+          </NavItem>
+
+          <NavItem
+            onMouseEnter={() => setIndustriesDropdown(true)}
+            onMouseLeave={() => setIndustriesDropdown(false)}
+          >
+            <NavButton onClick={() => setIndustriesDropdown(!industriesDropdown)}>
+              Industries {industriesDropdown ? <FaChevronUp /> : <FaChevronDown />}
+            </NavButton>
+
             <AnimatePresence>
-              {openDropdown === 'industries' && (
-                <DropdownMenu
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  style={{ width: '250px' }}
-                >
-                  <DropdownLink 
-                    to="/industries" 
-                    active={location.pathname === '/industries' ? 1 : 0}
-                  >
-                    All Industries
-                  </DropdownLink>
-                  
-                  {industries.map((industry, index) => (
-                    <DropdownLink 
-                      key={index}
-                      to={industry.path}
-                      active={location.pathname === industry.path ? 1 : 0}
-                    >
-                      {industry.name}
-                    </DropdownLink>
-                  ))}
-                </DropdownMenu>
-              )}
-            </AnimatePresence>
-          </DropdownContainer>
-          
-          <NavLink to="/about" active={location.pathname === '/about' ? 1 : 0}>
-            About
-          </NavLink>
-          
-          <DropdownContainer onClick={(e) => e.stopPropagation()}>
-            <DropdownTrigger 
-              active={location.pathname.includes('/blog') || location.pathname.includes('/case-studies') || location.pathname.includes('/testimonials') ? 1 : 0}
-              isOpen={openDropdown === 'resources'}
-              onClick={() => toggleDropdown('resources')}
-            >
-              Resources
-              <svg 
-                width="12" 
-                height="8" 
-                viewBox="0 0 12 8" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path 
-                  d="M1.41 0.295L6 4.875L10.59 0.295L12 1.705L6 7.705L0 1.705L1.41 0.295Z" 
-                  fill="currentColor"
-                />
-              </svg>
-            </DropdownTrigger>
-            
-            <AnimatePresence>
-              {openDropdown === 'resources' && (
+              {industriesDropdown && (
                 <DropdownMenu
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {resources.map((resource, index) => (
-                    <DropdownLink 
-                      key={index}
-                      to={resource.path}
-                      active={location.pathname === resource.path ? 1 : 0}
-                    >
-                      {resource.name}
-                    </DropdownLink>
-                  ))}
+                  <DropdownItem to="/industries/saas">SaaS</DropdownItem>
+                  <DropdownItem to="/industries/b2b">B2B</DropdownItem>
+                  <DropdownItem to="/industries/ecommerce">E-Commerce</DropdownItem>
+                  <DropdownItem to="/industries/real-estate">Real Estate</DropdownItem>
+                  <DropdownItem to="/industries/fashion-luxury">Fashion & Luxury</DropdownItem>
+                  <DropdownItem to="/industries/healthcare">Healthcare</DropdownItem>
+                  <DropdownItem to="/industries/entertainment">OTT & Entertainment</DropdownItem>
+                  <DropdownItem to="/industries/coaching">Coaching & Consulting</DropdownItem>
+                  <DropdownItem to="/industries">All Industries</DropdownItem>
                 </DropdownMenu>
               )}
             </AnimatePresence>
-          </DropdownContainer>
-          
-          <NavLink to="/contact" active={location.pathname === '/contact' ? 1 : 0}>
-            Contact
-          </NavLink>
-          
-          <ThemeToggler onClick={toggleTheme}>
+          </NavItem>
+
+          <NavItem
+            onMouseEnter={() => setResourcesDropdown(true)}
+            onMouseLeave={() => setResourcesDropdown(false)}
+          >
+            <NavButton onClick={() => setResourcesDropdown(!resourcesDropdown)}>
+              Resources {resourcesDropdown ? <FaChevronUp /> : <FaChevronDown />}
+            </NavButton>
+
+            <AnimatePresence>
+              {resourcesDropdown && (
+                <DropdownMenu
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <DropdownItem to="/case-studies">Case Studies</DropdownItem>
+                  <DropdownItem to="/blog">Blog</DropdownItem>
+                  <DropdownItem to="/testimonials">Testimonials</DropdownItem>
+                  <DropdownItem to="/results">Results</DropdownItem>
+                </DropdownMenu>
+              )}
+            </AnimatePresence>
+          </NavItem>
+
+          <NavItem>
+            <NavLinkStyled to="/about">About</NavLinkStyled>
+          </NavItem>
+
+          <ContactButton to="/contact">Contact Us</ContactButton>
+
+          <ThemeToggle onClick={toggleTheme}>
             {theme === 'light' ? <FaMoon /> : <FaSun />}
-          </ThemeToggler>
-          
-          <CallToAction to="/contact">
-            Free Strategy Call
-          </CallToAction>
-        </NavLinks>
-        
-        <MobileMenuButton onClick={() => setMobileMenuOpen(true)}>
-          <FaBars />
-        </MobileMenuButton>
-        
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <MobileMenu
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3 }}
-            >
-              <MobileMenuHeader>
-                <Logo to="/">
-                  Lead<span>wisee</span>
-                </Logo>
-                
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <ThemeToggler onClick={toggleTheme}>
-                    {theme === 'light' ? <FaMoon /> : <FaSun />}
-                  </ThemeToggler>
-                  
-                  <MobileMenuButton onClick={() => setMobileMenuOpen(false)}>
-                    <FaTimes />
-                  </MobileMenuButton>
-                </div>
-              </MobileMenuHeader>
-              
-              <MobileNavLinks>
-                <MobileNavLink to="/" active={location.pathname === '/' ? 1 : 0}>
-                  Home
-                </MobileNavLink>
-                
-                <MobileNavLink 
-                  as="div" 
-                  onClick={() => toggleDropdown('mobileServices')}
-                  active={location.pathname.includes('/services') ? 1 : 0}
-                >
-                  Services
-                  <span style={{ float: 'right' }}>
-                    {openDropdown === 'mobileServices' ? '-' : '+'}
-                  </span>
-                </MobileNavLink>
-                
-                {openDropdown === 'mobileServices' && (
-                  <>
-                    <MobileDropdownLink 
-                      to="/services" 
-                      active={location.pathname === '/services' ? 1 : 0}
-                    >
-                      All Services
-                    </MobileDropdownLink>
-                    
-                    {services.map((service, index) => (
-                      <MobileDropdownLink 
-                        key={index}
-                        to={service.path}
-                        active={location.pathname === service.path ? 1 : 0}
-                      >
-                        {service.name}
-                      </MobileDropdownLink>
-                    ))}
-                  </>
+          </ThemeToggle>
+        </NavMenu>
+
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <ThemeToggle onClick={toggleTheme} style={{ marginRight: '1rem', display: 'none', '@media screen and (max-width: 968px)': { display: 'block' } }}>
+            {theme === 'light' ? <FaMoon /> : <FaSun />}
+          </ThemeToggle>
+
+          <MobileMenuButton onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </MobileMenuButton>
+        </div>
+      </Container>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <MobileMenu
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+          >
+            <MobileNavItem>
+              <MobileNavButton onClick={() => setMobileServicesDropdown(!mobileServicesDropdown)}>
+                Services {mobileServicesDropdown ? <FaChevronUp /> : <FaChevronDown />}
+              </MobileNavButton>
+
+              <AnimatePresence>
+                {mobileServicesDropdown && (
+                  <MobileDropdown
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <MobileDropdownItem to="/services/ppc-advertising">PPC Advertising</MobileDropdownItem>
+                    <MobileDropdownItem to="/services/seo">Search Engine Optimization</MobileDropdownItem>
+                    <MobileDropdownItem to="/services/social-media-marketing">Social Media Marketing</MobileDropdownItem>
+                    <MobileDropdownItem to="/services/conversion-rate-optimization">Conversion Rate Optimization</MobileDropdownItem>
+                    <MobileDropdownItem to="/services/email-marketing">Email Marketing</MobileDropdownItem>
+                    <MobileDropdownItem to="/services/content-marketing">Content Marketing</MobileDropdownItem>
+                    <MobileDropdownItem to="/services">All Services</MobileDropdownItem>
+                  </MobileDropdown>
                 )}
-                
-                <MobileNavLink 
-                  as="div" 
-                  onClick={() => toggleDropdown('mobileIndustries')}
-                  active={location.pathname.includes('/industries') ? 1 : 0}
-                >
-                  Industries
-                  <span style={{ float: 'right' }}>
-                    {openDropdown === 'mobileIndustries' ? '-' : '+'}
-                  </span>
-                </MobileNavLink>
-                
-                {openDropdown === 'mobileIndustries' && (
-                  <>
-                    <MobileDropdownLink 
-                      to="/industries" 
-                      active={location.pathname === '/industries' ? 1 : 0}
-                    >
-                      All Industries
-                    </MobileDropdownLink>
-                    
-                    {industries.map((industry, index) => (
-                      <MobileDropdownLink 
-                        key={index}
-                        to={industry.path}
-                        active={location.pathname === industry.path ? 1 : 0}
-                      >
-                        {industry.name}
-                      </MobileDropdownLink>
-                    ))}
-                  </>
+              </AnimatePresence>
+            </MobileNavItem>
+
+            <MobileNavItem>
+              <MobileNavButton onClick={() => setMobileIndustriesDropdown(!mobileIndustriesDropdown)}>
+                Industries {mobileIndustriesDropdown ? <FaChevronUp /> : <FaChevronDown />}
+              </MobileNavButton>
+
+              <AnimatePresence>
+                {mobileIndustriesDropdown && (
+                  <MobileDropdown
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <MobileDropdownItem to="/industries/saas">SaaS</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries/b2b">B2B</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries/ecommerce">E-Commerce</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries/real-estate">Real Estate</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries/fashion-luxury">Fashion & Luxury</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries/healthcare">Healthcare</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries/entertainment">OTT & Entertainment</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries/coaching">Coaching & Consulting</MobileDropdownItem>
+                    <MobileDropdownItem to="/industries">All Industries</MobileDropdownItem>
+                  </MobileDropdown>
                 )}
-                
-                <MobileNavLink to="/about" active={location.pathname === '/about' ? 1 : 0}>
-                  About
-                </MobileNavLink>
-                
-                <MobileNavLink 
-                  as="div" 
-                  onClick={() => toggleDropdown('mobileResources')}
-                  active={location.pathname.includes('/blog') || location.pathname.includes('/case-studies') || location.pathname.includes('/testimonials') ? 1 : 0}
-                >
-                  Resources
-                  <span style={{ float: 'right' }}>
-                    {openDropdown === 'mobileResources' ? '-' : '+'}
-                  </span>
-                </MobileNavLink>
-                
-                {openDropdown === 'mobileResources' && (
-                  <>
-                    {resources.map((resource, index) => (
-                      <MobileDropdownLink 
-                        key={index}
-                        to={resource.path}
-                        active={location.pathname === resource.path ? 1 : 0}
-                      >
-                        {resource.name}
-                      </MobileDropdownLink>
-                    ))}
-                  </>
+              </AnimatePresence>
+            </MobileNavItem>
+
+            <MobileNavItem>
+              <MobileNavButton onClick={() => setMobileResourcesDropdown(!mobileResourcesDropdown)}>
+                Resources {mobileResourcesDropdown ? <FaChevronUp /> : <FaChevronDown />}
+              </MobileNavButton>
+
+              <AnimatePresence>
+                {mobileResourcesDropdown && (
+                  <MobileDropdown
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <MobileDropdownItem to="/case-studies">Case Studies</MobileDropdownItem>
+                    <MobileDropdownItem to="/blog">Blog</MobileDropdownItem>
+                    <MobileDropdownItem to="/testimonials">Testimonials</MobileDropdownItem>
+                    <MobileDropdownItem to="/results">Results</MobileDropdownItem>
+                  </MobileDropdown>
                 )}
-                
-                <MobileNavLink to="/contact" active={location.pathname === '/contact' ? 1 : 0}>
-                  Contact
-                </MobileNavLink>
-                
-                <MobileNavLink 
-                  to="/contact" 
-                  style={{ 
-                    background: theme === 'light' ? '#1E3A8A' : '#3B82F6', 
-                    color: 'white',
-                    textAlign: 'center',
-                    marginTop: '1rem',
-                    borderRadius: '0.25rem'
-                  }}
-                >
-                  Free Strategy Call
-                </MobileNavLink>
-              </MobileNavLinks>
-            </MobileMenu>
-          )}
-        </AnimatePresence>
-      </NavInner>
-    </NavContainer>
+              </AnimatePresence>
+            </MobileNavItem>
+
+            <MobileNavItem>
+              <MobileLinkStyled to="/about">About</MobileLinkStyled>
+            </MobileNavItem>
+
+            <MobileContactButton to="/contact">Contact Us</MobileContactButton>
+          </MobileMenu>
+        )}
+      </AnimatePresence>
+    </Nav>
   );
 };
 

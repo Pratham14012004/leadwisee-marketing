@@ -25,6 +25,7 @@ import BlogPost from './pages/BlogPost';
 import CaseStudies from './pages/CaseStudies';
 import CaseStudyDetail from './pages/CaseStudyDetail';
 import Testimonials from './pages/Testimonials';
+import Results from './pages/Results';
 import NotFound from './pages/NotFound';
 import {
   B2BMarketingPage,
@@ -121,6 +122,7 @@ export default function App() {
                 <Route path="/case-studies" element={<CaseStudies />} />
                 <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
                 <Route path="/testimonials" element={<Testimonials />} />
+                <Route path="/results" element={<Results />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AnimatePresence>

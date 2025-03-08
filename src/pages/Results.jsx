@@ -3,11 +3,10 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
-import { FaChartLine, FaArrowRight, FaUsers, FaShoppingCart, FaHandshake, FaChartBar } from "react-icons/fa";
+import { FaChartLine, FaSearchDollar, FaStar, FaUsers, FaChartBar, FaArrowCircleUp } from "react-icons/fa";
 
 import SectionHeading from "../components/common/SectionHeading";
 import Button from "../components/common/Button";
-import TestimonialSlider from "../components/sections/TestimonialSlider";
 import ContactForm from "../components/common/ContactForm";
 
 const ResultsContainer = styled.div`
@@ -17,29 +16,28 @@ const ResultsContainer = styled.div`
 `;
 
 const HeroSection = styled.section`
-  background-color: ${(props) => props.theme.colors.bgAlt};
-  padding: 6rem 0;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+  padding: 4rem 0;
+  background-color: ${(props) => props.theme.colors.bgAlt};
 `;
 
-const StatCardsSection = styled.section`
+const MetricsSection = styled.section`
   margin: 5rem 0;
 `;
 
-const StatCardsGrid = styled.div`
+const MetricsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
 `;
 
-const StatCard = styled(motion.div)`
+const MetricCard = styled(motion.div)`
   background-color: ${(props) => props.theme.colors.bgAlt};
-  border-radius: 12px;
   padding: 2rem;
+  border-radius: 12px;
   text-align: center;
-  border-top: 4px solid ${(props) => props.theme.colors.primary};
   transition: all 0.3s ease;
   
   &:hover {
@@ -47,240 +45,443 @@ const StatCard = styled(motion.div)`
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
   
-  .stat-icon {
+  .icon {
     font-size: 2.5rem;
     color: ${(props) => props.theme.colors.primary};
     margin-bottom: 1.5rem;
   }
   
-  .stat-value {
+  .metric-value {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    background: linear-gradient(to right, ${(props) => props.theme.colors.primary}, #8a4baf);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: ${(props) => props.theme.colors.primary};
   }
   
-  .stat-label {
-    font-size: 1.2rem;
-    font-weight: 500;
+  .metric-label {
+    font-size: 1.1rem;
+    line-height: 1.4;
     margin-bottom: 1rem;
   }
   
-  .stat-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: ${(props) => props.theme.colors.textSecondary};
+  .metric-description {
+    font-size: 0.9rem;
+    opacity: 0.8;
   }
 `;
 
-const CaseStudiesSection = styled.section`
+const IndustrySection = styled.section`
   margin: 5rem 0;
 `;
 
-const CaseStudyCard = styled(motion.div)`
-  background-color: ${(props) => props.theme.colors.bgAlt};
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 3rem;
+const IndustryGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .case-study-image {
-    height: 300px;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    @media (max-width: 768px) {
-      height: 200px;
-    }
-  }
-  
-  .case-study-content {
-    padding: 2rem;
-    
-    .industry {
-      display: inline-block;
-      background-color: rgba(0, 0, 0, 0.05);
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-    
-    h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    
-    p {
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-    
-    .results-list {
-      margin-bottom: 1.5rem;
-      
-      h4 {
-        font-size: 1.2rem;
-        margin-bottom: 0.8rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        
-        svg {
-          margin-right: 0.5rem;
-          color: ${(props) => props.theme.colors.primary};
-        }
-      }
-      
-      ul {
-        padding-left: 1.5rem;
-        
-        li {
-          margin-bottom: 0.5rem;
-          line-height: 1.6;
-        }
-      }
-    }
-  }
-`;
-
-const IndustryPerformanceSection = styled.section`
-  margin: 5rem 0;
-`;
-
-const PerformanceGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
 `;
 
-const IndustryCard = styled(motion.div)`
+const IndustryCard = styled.div`
   background-color: ${(props) => props.theme.colors.bgAlt};
   border-radius: 12px;
-  padding: 2rem;
+  overflow: hidden;
   
-  .industry-name {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
+  .industry-header {
+    background-color: ${(props) => props.theme.colors.primary};
+    padding: 1.5rem;
+    color: white;
     
-    svg {
-      margin-right: 0.8rem;
-      color: ${(props) => props.theme.colors.primary};
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
     }
   }
   
-  .metrics {
-    margin-bottom: 1.5rem;
+  .industry-content {
+    padding: 1.5rem;
     
-    .metric {
-      margin-bottom: 1.2rem;
+    .stat-group {
+      margin-bottom: 1.5rem;
       
-      .metric-label {
-        display: flex;
-        justify-content: space-between;
+      h4 {
+        font-size: 1.1rem;
         margin-bottom: 0.5rem;
-        font-weight: 500;
+        font-weight: 600;
       }
       
-      .progress-bar {
-        height: 8px;
-        background-color: rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
-        overflow: hidden;
+      .stat {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
         
-        .progress {
-          height: 100%;
-          background: linear-gradient(to right, ${(props) => props.theme.colors.primary}, #8a4baf);
+        .stat-icon {
+          color: ${(props) => props.theme.colors.primary};
+          margin-right: 0.5rem;
+        }
+        
+        .stat-text {
+          font-size: 1rem;
         }
       }
     }
   }
+`;
+
+const ChartSection = styled.section`
+  margin: 5rem 0;
+`;
+
+const ChartContainer = styled.div`
+  background-color: ${(props) => props.theme.colors.bgAlt};
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 3rem;
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 1.5rem;
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+
+        .legend-color {
+          width: 15px;
+          height: 15px;
+          border-radius: 3px;
+          margin-right: 0.5rem;
+
+          &.before {
+            background-color: #ccc;
+          }
+
+          &.after {
+            background-color: ${(props) => props.theme.colors.primary};
+          }
+        }
+
+        .legend-text {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  .chart-visualization {
+    display: flex;
+    height: 300px;
+    align-items: flex-end;
+    gap: 7%;
+    padding: 0 2rem;
+
+    .chart-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      .bars {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        height: 230px;
+        align-items: flex-end;
+
+        .bar {
+          flex: 1;
+          border-radius: 6px 6px 0 0;
+          position: relative;
+
+          &.before {
+            background-color: #ccc;
+          }
+
+          &.after {
+            background-color: ${(props) => props.theme.colors.primary};
+          }
+
+          .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .column-label {
+        font-size: 1rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+    }
+  }
+`;
+
+const TestimonialSection = styled.section`
+  margin: 5rem 0;
+`;
+
+const TestimonialGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+`;
+
+const TestimonialCard = styled(motion.div)`
+  background-color: ${(props) => props.theme.colors.bgAlt};
+  padding: 2rem;
+  border-radius: 12px;
   
-  .average-improvement {
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-align: center;
+  .testimonial-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+    
+    &:before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -0.5rem;
+      font-size: 2rem;
+      color: ${(props) => props.theme.colors.primary};
+    }
+  }
+  
+  .client-info {
+    display: flex;
+    align-items: center;
+    
+    .client-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 1rem;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .client-details {
+      .client-name {
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+      
+      .client-position {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+    }
+  }
+  
+  .results {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+    
+    .result-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      
+      svg {
+        color: ${(props) => props.theme.colors.primary};
+        margin-right: 0.5rem;
+        flex-shrink: 0;
+      }
+    }
   }
 `;
 
 const CtaSection = styled.section`
   background-color: ${(props) => props.theme.colors.bgAlt};
-  padding: 5rem 1.5rem;
+  padding: 4rem 0;
   text-align: center;
   margin: 5rem 0;
   
   .container {
     max-width: 800px;
     margin: 0 auto;
+    padding: 0 1.5rem;
   }
   
   h2 {
-    margin-bottom: 1.5rem;
     font-size: 2.5rem;
-    font-weight: 700;
+    margin-bottom: 1.5rem;
+    
+    span {
+      color: ${(props) => props.theme.colors.primary};
+    }
   }
   
   p {
     margin-bottom: 2rem;
     font-size: 1.1rem;
-    opacity: 0.9;
   }
 `;
 
 const ContactSection = styled.section`
-  margin: 5rem 0;
+  max-width: 900px;
+  margin: 5rem auto;
 `;
 
-// Mock data for testimonials
-const testimonials = [
-  {
-    quote:
-      "Leadwisee's performance marketing strategies have transformed our business. We've seen a 215% increase in qualified leads and a 42% reduction in cost per acquisition.",
-    name: "Michael Johnson",
-    position: "CEO",
-    company: "TechSolutions Inc.",
-  },
-  {
-    quote:
-      "Working with Leadwisee has been game-changing for our e-commerce business. Their data-driven approach helped us scale revenue by over 300% while maintaining profitability.",
-    name: "Sarah Thompson",
-    position: "Marketing Director",
-    company: "StyleHouse Retail",
-  },
-  {
-    quote:
-      "The ROI we've seen from Leadwisee's campaigns has exceeded our expectations. They've helped us achieve consistent growth month after month.",
-    name: "David Chen",
-    position: "Founder",
-    company: "Ascend SaaS",
-  },
-];
-
 const Results = () => {
-  // Scroll to top on component mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Key metrics data
+  const metrics = [
+    {
+      icon: <FaChartLine />,
+      value: "215%",
+      label: "Average ROI",
+      description: "Return on investment across all client campaigns (2023 data)",
+    },
+    {
+      icon: <FaSearchDollar />,
+      value: "42%",
+      label: "Lower CPA",
+      description: "Average reduction in cost per acquisition after optimization",
+    },
+    {
+      icon: <FaStar />,
+      value: "98%",
+      label: "Client Retention",
+      description: "Percentage of clients who continue to work with us past the initial term",
+    },
+    {
+      icon: <FaUsers />,
+      value: "6.4M",
+      label: "Leads Generated",
+      description: "Total leads generated for clients in the last 24 months",
+    },
+    {
+      icon: <FaChartBar />,
+      value: "68%",
+      label: "Conversion Increase",
+      description: "Average improvement in conversion rates after optimization",
+    },
+    {
+      icon: <FaArrowCircleUp />,
+      value: "$47M+",
+      label: "Additional Revenue",
+      description: "Incremental revenue generated for clients in 2023",
+    },
+  ];
+
+  // Industry results data
+  const industryResults = [
+    {
+      name: "SaaS & Technology",
+      stats: [
+        { text: "187% increase in qualified demo requests" },
+        { text: "42% reduction in customer acquisition cost" },
+        { text: "68% improvement in trial-to-paid conversion" },
+        { text: "215% growth in MRR from marketing channels" },
+      ],
+    },
+    {
+      name: "E-Commerce",
+      stats: [
+        { text: "214% increase in ROAS (Return on Ad Spend)" },
+        { text: "47% improvement in conversion rate" },
+        { text: "32% higher average order value" },
+        { text: "156% growth in repeat purchase rate" },
+      ],
+    },
+    {
+      name: "B2B Services",
+      stats: [
+        { text: "324% increase in marketing qualified leads" },
+        { text: "62% reduction in cost per qualified opportunity" },
+        { text: "78% growth in pipeline value from digital channels" },
+        { text: "43% shorter sales cycles" },
+      ],
+    },
+  ];
+
+  // Chart data
+  const chartData = [
+    {
+      label: "Conversion Rate",
+      before: 1.7,
+      after: 4.8,
+    },
+    {
+      label: "ROI",
+      before: 120,
+      after: 315,
+    },
+    {
+      label: "CPA",
+      before: 75,
+      after: 32,
+    },
+    {
+      label: "Engagement",
+      before: 28,
+      after: 63,
+    },
+  ];
+
+  // Testimonial data
+  const testimonials = [
+    {
+      text: "Leadwisee transformed our marketing performance. Their data-driven approach increased our qualified leads by 187% while reducing our cost per acquisition by nearly half.",
+      name: "Michael Anderson",
+      position: "CEO, TechSolutions Inc.",
+      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2570&q=80",
+      results: [
+        "187% increase in qualified leads",
+        "45% reduction in cost per acquisition",
+        "$1.8M additional annual revenue",
+      ],
+    },
+    {
+      text: "Working with Leadwisee has been a game-changer for our e-commerce business. Their strategic approach and constant optimization have doubled our ROAS and significantly increased our average order value.",
+      name: "Sarah Johnson",
+      position: "Marketing Director, ModernRetail",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2576&q=80",
+      results: [
+        "214% increase in ROAS",
+        "32% higher average order value",
+        "47% improvement in conversion rate",
+      ],
+    },
+    {
+      text: "The Leadwisee team understands our industry and has delivered remarkable results. Their account-based marketing strategy has connected us with perfect-fit enterprise clients and dramatically improved our sales efficiency.",
+      name: "David Wong",
+      position: "Founder, GrowthSaaS",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80",
+      results: [
+        "324% increase in enterprise leads",
+        "62% reduction in cost per opportunity",
+        "43% shorter sales cycles",
+      ],
+    },
+  ];
 
   return (
     <>
@@ -288,365 +489,194 @@ const Results = () => {
         <title>Our Results | Leadwisee Performance Marketing Agency</title>
         <meta
           name="description"
-          content="See the proven results we've delivered for our clients across industries. Discover how our data-driven marketing strategies can help your business grow."
+          content="See the measurable results we've achieved for clients across industries. Leadwisee delivers data-driven marketing performance that drives growth."
         />
       </Helmet>
 
       <HeroSection>
-        <div className="container">
-          <SectionHeading
-            subtitle="Measurable Impact"
-            title="Proven <span>Results</span> That Drive Business Growth"
-            description="Our performance marketing strategies deliver real, measurable results that help our clients outperform their competition and achieve sustainable growth."
-            centered
-          />
-        </div>
+        <SectionHeading
+          subtitle="Client Success Metrics"
+          title="Measurable <span>Results</span> Across Industries"
+          description="We're proud of the real, measurable improvements we've achieved for our clients. Our performance marketing approach delivers quantifiable business growth."
+          centered
+        />
       </HeroSection>
 
       <ResultsContainer>
-        <StatCardsSection>
+        <MetricsSection>
           <SectionHeading
-            subtitle="By The Numbers"
-            title="Our <span>Performance</span> Metrics"
-            description="These results represent the average improvements we've achieved for our clients across all industries."
+            subtitle="Performance Indicators"
+            title="Key <span>Metrics</span> That Drive Growth"
+            description="These performance metrics demonstrate our impact across all client campaigns. Every number represents real business growth for our clients."
           />
 
-          <StatCardsGrid>
-            <StatCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="stat-icon">
-                <FaChartLine />
-              </div>
-              <div className="stat-value">175%</div>
-              <div className="stat-label">Increase in Qualified Leads</div>
-              <div className="stat-description">
-                Average increase in qualified lead generation across all client campaigns
-              </div>
-            </StatCard>
+          <MetricsGrid>
+            {metrics.map((metric, index) => (
+              <MetricCard
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="icon">{metric.icon}</div>
+                <div className="metric-value">{metric.value}</div>
+                <div className="metric-label">{metric.label}</div>
+                <div className="metric-description">{metric.description}</div>
+              </MetricCard>
+            ))}
+          </MetricsGrid>
+        </MetricsSection>
 
-            <StatCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="stat-icon">
-                <FaShoppingCart />
-              </div>
-              <div className="stat-value">32%</div>
-              <div className="stat-label">Higher Conversion Rates</div>
-              <div className="stat-description">
-                Improved website and landing page conversion rates for our clients
-              </div>
-            </StatCard>
-
-            <StatCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="stat-icon">
-                <FaChartBar />
-              </div>
-              <div className="stat-value">43%</div>
-              <div className="stat-label">Reduction in CPA</div>
-              <div className="stat-description">
-                Average decrease in cost per acquisition through optimized campaigns
-              </div>
-            </StatCard>
-
-            <StatCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="stat-icon">
-                <FaHandshake />
-              </div>
-              <div className="stat-value">97%</div>
-              <div className="stat-label">Client Retention Rate</div>
-              <div className="stat-description">
-                Percentage of clients who continue to partner with us after the initial campaign
-              </div>
-            </StatCard>
-          </StatCardsGrid>
-        </StatCardsSection>
-
-        <CaseStudiesSection>
+        <IndustrySection>
           <SectionHeading
-            subtitle="Success Stories"
-            title="Featured <span>Case Studies</span>"
-            description="Real results from real clients. Discover how our data-driven strategies have helped businesses like yours achieve remarkable growth."
+            subtitle="Industry Breakdowns"
+            title="Results By <span>Industry</span>"
+            description="Our specialized industry expertise delivers tailored results for different business types. Here's how we've helped clients across key industries."
           />
 
-          <CaseStudyCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="case-study-image">
-              <img
-                src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                alt="SaaS Lead Generation Case Study"
-              />
-            </div>
-            <div className="case-study-content">
-              <div className="industry">SaaS</div>
-              <h3>Enterprise SaaS Lead Generation</h3>
-              <p>
-                We helped a B2B SaaS platform streamline their lead generation efforts and improve the quality of leads coming through their pipeline.
-              </p>
-              <div className="results-list">
-                <h4>
-                  <FaChartLine /> Results
-                </h4>
-                <ul>
-                  <li>187% increase in qualified demo bookings</li>
-                  <li>42% reduction in cost per acquisition</li>
-                  <li>$1.2M in new pipeline value generated</li>
-                  <li>Increased lead-to-demo conversion rate from 14% to 31%</li>
-                </ul>
-              </div>
-              <Button
-                to="/case-studies/saas-lead-generation"
-                variant="text"
-                rightIcon={<FaArrowRight />}
-              >
-                Read Full Case Study
-              </Button>
-            </div>
-          </CaseStudyCard>
+          <IndustryGrid>
+            {industryResults.map((industry, index) => (
+              <IndustryCard key={index}>
+                <div className="industry-header">
+                  <h3>{industry.name}</h3>
+                </div>
+                <div className="industry-content">
+                  <div className="stat-group">
+                    <h4>Key Performance Improvements:</h4>
+                    {industry.stats.map((stat, i) => (
+                      <div className="stat" key={i}>
+                        <FaChartLine className="stat-icon" />
+                        <div className="stat-text">{stat.text}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <Button
+                    to={`/industries/${industry.name.toLowerCase().replace(/[&\s]+/g, "-")}`}
+                    variant="secondary"
+                    size="small"
+                  >
+                    View Industry Page
+                  </Button>
+                </div>
+              </IndustryCard>
+            ))}
+          </IndustryGrid>
+        </IndustrySection>
 
-          <CaseStudyCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="case-study-content">
-              <div className="industry">E-Commerce</div>
-              <h3>Scaling E-Commerce Revenue</h3>
-              <p>
-                We developed a comprehensive digital marketing strategy for a D2C e-commerce brand looking to scale their online revenue profitably.
-              </p>
-              <div className="results-list">
-                <h4>
-                  <FaChartLine /> Results
-                </h4>
-                <ul>
-                  <li>215% increase in monthly revenue</li>
-                  <li>47% improvement in ROAS (from 1.8x to 3.2x)</li>
-                  <li>32% higher average order value</li>
-                  <li>70% increase in repeat purchase rate</li>
-                </ul>
-              </div>
-              <Button
-                to="/case-studies/ecommerce-revenue-growth"
-                variant="text"
-                rightIcon={<FaArrowRight />}
-              >
-                Read Full Case Study
-              </Button>
-            </div>
-            <div className="case-study-image">
-              <img
-                src="https://images.unsplash.com/photo-1522204605090-c9a2c7c8dfe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"
-                alt="E-Commerce Revenue Growth Case Study"
-              />
-            </div>
-          </CaseStudyCard>
-
-          <CaseStudyCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="case-study-image">
-              <img
-                src="https://images.unsplash.com/photo-1565402170291-8491f14678db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                alt="Luxury Real Estate Marketing Case Study"
-              />
-            </div>
-            <div className="case-study-content">
-              <div className="industry">Real Estate</div>
-              <h3>Luxury Real Estate Marketing</h3>
-              <p>
-                We implemented a targeted digital strategy for a luxury real estate brokerage to generate high-quality leads for properties over $1M.
-              </p>
-              <div className="results-list">
-                <h4>
-                  <FaChartLine /> Results
-                </h4>
-                <ul>
-                  <li>156% increase in qualified property inquiries</li>
-                  <li>42% more seller valuation requests</li>
-                  <li>$14.5M in additional sales volume</li>
-                  <li>Reduced cost per qualified lead from $420 to $175</li>
-                </ul>
-              </div>
-              <Button
-                to="/case-studies/real-estate-lead-generation"
-                variant="text"
-                rightIcon={<FaArrowRight />}
-              >
-                Read Full Case Study
-              </Button>
-            </div>
-          </CaseStudyCard>
-        </CaseStudiesSection>
-
-        <IndustryPerformanceSection>
+        <ChartSection>
           <SectionHeading
-            subtitle="Industry Insights"
-            title="Performance <span>By Industry</span>"
-            description="Our marketing strategies are tailored to each industry's unique challenges and opportunities, consistently delivering superior results."
+            subtitle="Performance Visualization"
+            title="Before & After <span>Working With Us</span>"
+            description="See the dramatic improvements our clients experience after implementing our performance marketing strategies."
+            centered
           />
 
-          <PerformanceGrid>
-            <IndustryCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="industry-name">
-                <FaUsers /> SaaS
-              </div>
-              <div className="metrics">
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Lead Generation</span>
-                    <span>+187%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "87%" }}></div>
-                  </div>
+          <ChartContainer>
+            <div className="chart-header">
+              <h3>Average Performance Metrics</h3>
+              <div className="chart-legend">
+                <div className="legend-item">
+                  <div className="legend-color before"></div>
+                  <div className="legend-text">Before Leadwisee</div>
                 </div>
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Demo Bookings</span>
-                    <span>+145%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "75%" }}></div>
-                  </div>
-                </div>
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Cost Per Acquisition</span>
-                    <span>-42%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "62%" }}></div>
-                  </div>
+                <div className="legend-item">
+                  <div className="legend-color after"></div>
+                  <div className="legend-text">After Leadwisee</div>
                 </div>
               </div>
-              <div className="average-improvement">
-                Average Performance Improvement: 152%
-              </div>
-            </IndustryCard>
+            </div>
+            <div className="chart-visualization">
+              {chartData.map((item, index) => (
+                <div className="chart-column" key={index}>
+                  <div className="bars">
+                    <div
+                      className="bar before"
+                      style={{
+                        height: `${
+                          item.label === "CPA"
+                            ? (item.before / 100) * 100
+                            : (item.before / 400) * 100
+                        }%`,
+                      }}
+                    >
+                      <div className="bar-value">
+                        {item.label === "CPA" || item.label === "ROI"
+                          ? "$" + item.before
+                          : item.before + "%"}
+                      </div>
+                    </div>
+                    <div
+                      className="bar after"
+                      style={{
+                        height: `${
+                          item.label === "CPA"
+                            ? (item.after / 100) * 100
+                            : (item.after / 400) * 100
+                        }%`,
+                      }}
+                    >
+                      <div className="bar-value">
+                        {item.label === "CPA" || item.label === "ROI"
+                          ? "$" + item.after
+                          : item.after + "%"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="column-label">{item.label}</div>
+                </div>
+              ))}
+            </div>
+          </ChartContainer>
+        </ChartSection>
 
-            <IndustryCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="industry-name">
-                <FaShoppingCart /> E-Commerce
-              </div>
-              <div className="metrics">
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Revenue Growth</span>
-                    <span>+215%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "95%" }}></div>
-                  </div>
-                </div>
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>ROAS</span>
-                    <span>+78%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "78%" }}></div>
-                  </div>
-                </div>
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Average Order Value</span>
-                    <span>+32%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "52%" }}></div>
-                  </div>
-                </div>
-              </div>
-              <div className="average-improvement">
-                Average Performance Improvement: 167%
-              </div>
-            </IndustryCard>
+        <TestimonialSection>
+          <SectionHeading
+            subtitle="Client Success Stories"
+            title="Real <span>Results</span> From Our Clients"
+            description="Don't just take our word for it. Hear directly from businesses that have transformed their results with Leadwisee."
+          />
 
-            <IndustryCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="industry-name">
-                <FaHandshake /> Real Estate
-              </div>
-              <div className="metrics">
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Qualified Leads</span>
-                    <span>+156%</span>
+          <TestimonialGrid>
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCard
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="testimonial-text">{testimonial.text}</div>
+                <div className="client-info">
+                  <div className="client-image">
+                    <img src={testimonial.image} alt={testimonial.name} />
                   </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "76%" }}></div>
-                  </div>
-                </div>
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Cost Per Lead</span>
-                    <span>-58%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "68%" }}></div>
+                  <div className="client-details">
+                    <div className="client-name">{testimonial.name}</div>
+                    <div className="client-position">{testimonial.position}</div>
                   </div>
                 </div>
-                <div className="metric">
-                  <div className="metric-label">
-                    <span>Conversion Rate</span>
-                    <span>+135%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress" style={{ width: "65%" }}></div>
-                  </div>
+                <div className="results">
+                  {testimonial.results.map((result, i) => (
+                    <div className="result-item" key={i}>
+                      <FaChartLine />
+                      <div>{result}</div>
+                    </div>
+                  ))}
                 </div>
-              </div>
-              <div className="average-improvement">
-                Average Performance Improvement: 143%
-              </div>
-            </IndustryCard>
-          </PerformanceGrid>
-        </IndustryPerformanceSection>
+              </TestimonialCard>
+            ))}
+          </TestimonialGrid>
+        </TestimonialSection>
 
         <CtaSection>
           <div className="container">
-            <h2>Ready to Achieve Similar Results?</h2>
+            <h2>
+              Ready for <span>Similar Results</span>?
+            </h2>
             <p>
-              Let's discuss how our data-driven marketing strategies can help your business grow. Schedule a free consultation with our team today.
+              Let's discuss how our performance marketing strategies can drive
+              real, measurable growth for your business.
             </p>
             <Button to="/contact" variant="primary" size="large">
               Get Your Free Consultation
@@ -654,22 +684,11 @@ const Results = () => {
           </div>
         </CtaSection>
 
-        <section>
-          <SectionHeading
-            subtitle="Client Success"
-            title="What Our <span>Clients Say</span>"
-            description="Don't just take our word for it. Hear from our satisfied clients about the results we've delivered."
-            centered
-          />
-
-          <TestimonialSlider testimonials={testimonials} />
-        </section>
-
         <ContactSection>
           <SectionHeading
-            subtitle="Let's Talk Results"
-            title="Ready to <span>Grow</span> Your Business?"
-            description="Contact us today to discuss your marketing goals and learn how we can help you achieve them."
+            subtitle="Let's Connect"
+            title="Ready to <span>Transform</span> Your Marketing Performance?"
+            description="Fill out the form below to discuss your goals and learn how we can help you achieve similar results."
             centered
           />
 

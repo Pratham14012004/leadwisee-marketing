@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -28,11 +27,11 @@ const IndustriesGrid = styled.div`
   grid-template-columns: 1fr;
   gap: 2rem;
   margin-bottom: 4rem;
-  
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   @media (min-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -44,11 +43,11 @@ const IndustryCard = styled(Card)`
   height: 100%;
   position: relative;
   overflow: hidden;
-  
+
   &:hover .card-bg {
     transform: scale(1.05);
   }
-  
+
   .card-bg {
     position: absolute;
     top: 0;
@@ -63,7 +62,7 @@ const IndustryCard = styled(Card)`
     transition: transform 0.5s ease;
     opacity: 0.15;
   }
-  
+
   .card-content {
     position: relative;
     z-index: 1;
@@ -72,12 +71,12 @@ const IndustryCard = styled(Card)`
     flex-direction: column;
     height: 100%;
   }
-  
+
   h3 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
   }
-  
+
   p {
     margin-bottom: 1.5rem;
     color: ${props => props.theme.textLight};
@@ -91,11 +90,11 @@ const CTASection = styled.div`
   border-radius: 1rem;
   text-align: center;
   margin: 4rem 0;
-  
+
   h2 {
     margin-bottom: 1.5rem;
   }
-  
+
   p {
     max-width: 700px;
     margin: 0 auto 2rem;
@@ -117,42 +116,47 @@ const Industries = () => {
   // Industry data
   const industries = [
     {
-      id: 'b2b-saas',
-      title: 'B2B SaaS',
-      description: 'Specialized marketing strategies for Software-as-a-Service companies, focusing on lead generation and customer acquisition.',
-    },
-    {
-      id: 'ecommerce',
-      title: 'E-commerce',
-      description: 'Data-driven e-commerce marketing solutions that increase traffic, conversions, and average order value.',
-    },
-    {
-      id: 'retail',
-      title: 'Retail',
-      description: 'Omnichannel marketing strategies that bridge the gap between online and offline retail experiences.',
+      id: 'saas',
+      title: 'SaaS',
+      description: 'Performance-driven growth marketing strategies for B2B and B2C SaaS companies.',
     },
     {
       id: 'real-estate',
       title: 'Real Estate',
-      description: 'Targeted digital marketing for real estate professionals, generating qualified leads for properties.',
+      description: 'High-performance marketing campaigns that sell properties faster and attract qualified leads.',
     },
     {
-      id: 'fashion',
-      title: 'Fashion',
-      description: 'Creative marketing solutions for fashion brands that build brand identity and drive conversions.',
+      id: 'b2b',
+      title: 'B2B',
+      description: 'Account-based marketing and lead generation strategies for business-to-business companies.',
+    },
+    {
+      id: 'ecommerce',
+      title: 'E-Commerce',
+      description: 'Conversion-focused digital marketing for online retailers and D2C brands.',
     },
     {
       id: 'healthcare',
       title: 'Healthcare',
-      description: 'Compliant healthcare marketing strategies that establish trust and generate patient inquiries.',
+      description: 'HIPAA-compliant patient acquisition and digital marketing for medical practices.',
     },
     {
-      id: 'ott',
-      title: 'OTT & Entertainment',
-      description: 'Engaging marketing campaigns for streaming services and entertainment companies to grow subscribers.',
+      id: 'retail',
+      title: 'Retail',
+      description: 'Omnichannel marketing strategies that bridge digital and in-store experiences.',
     },
     {
-      id: 'coaching-consulting',
+      id: 'fashion-luxury',
+      title: 'Fashion & Luxury',
+      description: 'Premium digital marketing for luxury brands and fashion retailers.',
+    },
+    {
+      id: 'entertainment',
+      title: 'Entertainment & OTT',
+      description: 'Subscriber acquisition and retention strategies for streaming and media companies.',
+    },
+    {
+      id: 'coaching',
       title: 'Coaching & Consulting',
       description: 'Lead generation strategies for coaches and consultants to attract high-value clients.',
     },
@@ -169,7 +173,7 @@ const Industries = () => {
         <title>Industries We Serve | Leadwisee - Performance Marketing Agency</title>
         <meta name="description" content="Discover our specialized marketing solutions for various industries including B2B SaaS, E-commerce, Healthcare, Real Estate, and more." />
       </Helmet>
-      
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -185,7 +189,7 @@ const Industries = () => {
             We understand that each industry has unique challenges and opportunities. Our specialized marketing strategies are tailored to the specific needs of your industry.
           </p>
         </IndustriesHero>
-        
+
         <IndustriesContainer>
           <IndustriesGrid>
             {industries.map((industry) => (
@@ -213,7 +217,7 @@ const Industries = () => {
               </IndustryCard>
             ))}
           </IndustriesGrid>
-          
+
           <CTASection>
             <h2>Don't See Your Industry?</h2>
             <p>
@@ -223,7 +227,7 @@ const Industries = () => {
               Get in Touch
             </Button>
           </CTASection>
-          
+
           <FormSection>
             <ContactForm 
               heading="Ready to Dominate Your Industry?"

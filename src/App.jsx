@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
@@ -27,19 +26,29 @@ import CaseStudies from './pages/CaseStudies';
 import CaseStudyDetail from './pages/CaseStudyDetail';
 import Testimonials from './pages/Testimonials';
 import NotFound from './pages/NotFound';
+import {
+  B2BMarketingPage,
+  ECommerceMarketingPage,
+  RetailMarketingPage,
+  FashionLuxuryMarketingPage,
+  HealthcareMarketingPage,
+  EntertainmentMarketingPage,
+  CoachingMarketingPage,
+  InteriorDesignMarketingPage
+} from './pages/IndustryPages'; // Added industry pages
 
 import './App.css';
 
 export default function App() {
   // State for theme toggle
   const [theme, setTheme] = useState('light');
-  
+
   // Function to toggle theme
   const toggleTheme = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
     localStorage.setItem('preferredTheme', theme === 'light' ? 'dark' : 'light');
   };
-  
+
   // Load saved theme preference on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('preferredTheme');
@@ -80,9 +89,9 @@ export default function App() {
               `}
             </script>
           </Helmet>
-          
+
           <Navbar theme={theme} toggleTheme={toggleTheme} />
-          
+
           <main>
             <AnimatePresence mode="wait">
               <Routes>
@@ -92,6 +101,14 @@ export default function App() {
                 <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route path="/industries" element={<Industries />} />
                 <Route path="/industries/:slug" element={<IndustryDetail />} />
+                <Route path="/industries/b2b" element={<B2BMarketingPage />} />
+                <Route path="/industries/ecommerce" element={<ECommerceMarketingPage />} />
+                <Route path="/industries/retail" element={<RetailMarketingPage />} />
+                <Route path="/industries/fashion-luxury" element={<FashionLuxuryMarketingPage />} />
+                <Route path="/industries/healthcare" element={<HealthcareMarketingPage />} />
+                <Route path="/industries/entertainment" element={<EntertainmentMarketingPage />} />
+                <Route path="/industries/coaching" element={<CoachingMarketingPage />} />
+                <Route path="/industries/interior-design" element={<InteriorDesignMarketingPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
@@ -102,7 +119,7 @@ export default function App() {
               </Routes>
             </AnimatePresence>
           </main>
-          
+
           <Footer />
           <CookieConsent />
         </div>

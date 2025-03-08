@@ -1,0 +1,86 @@
+I need a complete review and enhancement of my Leadwisee performance marketing agency website. Please analyze the existing structure and implement all remaining functionalities to create a cohesive, high-converting website. This should be a comprehensive implementation that ties everything together.
+
+OVERALL WEBSITE COMPLETION REQUIREMENTS:
+
+1. SITE-WIDE FUNCTIONALITY:
+   - Implement a unified navigation system across all pages
+   - Create a consistent header with logo and navigation menu
+   - Develop a standardized footer with all required elements (logo, social media, services links, about/blog/team/case studies links, contact info)
+   - Add cookie consent banner
+   - Implement site-wide search functionality
+   - Create 404 and thank-you pages
+   - Set up proper routes using React Router
+   - Add loading states and animations
+   - Implement responsive design for all screen sizes
+   - Add dark/light mode toggle
+
+2. HOMEPAGE COMPLETION:
+   - Finalize hero section with main value proposition
+   - Complete "Why Choose Leadwisee" section
+   - Implement services preview grid
+   - Create industries served carousel/grid
+   - Add results showcase with metrics
+   - Implement testimonials slider
+   - Add resources preview section
+   - Finalize CTA section with contact form
+
+3. SERVICES SECTION COMPLETION:
+   - Create main services overview page
+   - Implement individual service pages for:
+     * Paid Search (PPC)
+     * Social Media Marketing
+     * E-commerce Marketing
+   - Add relevant case studies to each service page
+   - Include service-specific FAQs
+   - Implement service comparison features
+
+4. RESOURCES SECTION COMPLETION:
+   - Create blog listing page with filtering/search
+   - Implement case studies gallery with filtering by industry/service
+   - Develop testimonials showcase page
+   - Add pagination for all listing pages
+   - Create resource download functionality
+   - Implement newsletter signup
+
+5. ABOUT SECTION COMPLETION:
+   - Finalize company story and mission page
+   - Create team member profiles
+   - Add company values and philosophy
+   - Implement timeline of company history
+   - Add partner/client logos section
+
+6. CONTACT FUNCTIONALITY:
+   - Complete contact page with form validation
+   - Implement Google Maps integration
+   - Add contact information display
+   - Create callback request functionality
+   - Implement form submission handling and API integration
+   - Add success/error messaging
+
+7. SEO & PERFORMANCE OPTIMIZATION:
+   - Implement proper meta tags across all pages
+   - Add schema markup for business information
+   - Optimize image loading and compression
+   - Implement code splitting for performance
+   - Add browser caching headers
+   - Create XML sitemap
+   - Implement analytics tracking
+
+8. CROSS-PAGE INTEGRATION:
+   - Ensure consistent styling across all pages
+   - Implement cross-linking between related content
+   - Add breadcrumb navigation on all pages
+   - Create persistent CTA elements
+   - Implement related content suggestions
+
+TECHNICAL SPECIFICATIONS:
+- Use React.js best practices for component structure
+- Implement proper state management
+- Ensure all forms capture leads effectively
+- Create responsive layouts that work on all devices
+- Optimize for page speed and performance
+- Follow accessibility guidelines
+- Implement SEO best practices throughout
+- Ensure browser compatibility
+
+Please complete all unfinished aspects of the website, ensuring everything works together cohesively and all pages link properly to create a seamless user experience. The final product should be a complete, production-ready website that effectively communicates Leadwisee's value proposition and generates high-quality leads.

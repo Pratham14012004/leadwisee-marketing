@@ -1,10 +1,17 @@
-
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet';
-import { FaCalendarAlt, FaUser, FaTag, FaFacebook, FaTwitter, FaLinkedin, FaArrowLeft } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
+import {
+  FaCalendarAlt,
+  FaUser,
+  FaTag,
+  FaFacebook,
+  FaTwitter,
+  FaLinkedin,
+  FaArrowLeft,
+} from "react-icons/fa";
 
 const BlogPostContainer = styled.div`
   max-width: 800px;
@@ -19,7 +26,7 @@ const BlogPostHero = styled.div`
 const BlogPostImage = styled.div`
   width: 100%;
   height: 400px;
-  background-image: ${props => `url(${props.image})`};
+  background-image: ${(props) => `url(${props.image})`};
   background-size: cover;
   background-position: center;
   border-radius: 0.5rem;
@@ -30,14 +37,14 @@ const BackLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: ${props => props.theme.textLight};
+  color: ${(props) => props.theme.textLight};
   text-decoration: none;
   margin-bottom: 1.5rem;
   transition: color 0.3s ease;
   font-size: 0.9375rem;
-  
+
   &:hover {
-    color: ${props => props.theme.primary};
+    color: ${(props) => props.theme.primary};
   }
 `;
 
@@ -52,47 +59,47 @@ const BlogMeta = styled.div`
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 2rem;
-  color: ${props => props.theme.textLight};
+  color: ${(props) => props.theme.textLight};
   font-size: 0.9375rem;
-  
+
   div {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-  
+
   a {
-    color: ${props => props.theme.textLight};
+    color: ${(props) => props.theme.textLight};
     text-decoration: none;
     transition: color 0.3s ease;
-    
+
     &:hover {
-      color: ${props => props.theme.primary};
+      color: ${(props) => props.theme.primary};
     }
   }
 `;
 
 const BlogCategory = styled.span`
-  background-color: ${props => {
+  background-color: ${(props) => {
     const category = props.category.toLowerCase();
-    if (category === 'ppc') return 'rgba(var(--primary-rgb), 0.1)';
-    if (category === 'social media') return 'rgba(59, 89, 152, 0.1)';
-    if (category === 'seo') return 'rgba(76, 175, 80, 0.1)';
-    if (category === 'e-commerce') return 'rgba(245, 124, 0, 0.1)';
-    if (category === 'content') return 'rgba(156, 39, 176, 0.1)';
-    return 'rgba(var(--primary-rgb), 0.1)';
+    if (category === "ppc") return "rgba(var(--primary-rgb), 0.1)";
+    if (category === "social media") return "rgba(59, 89, 152, 0.1)";
+    if (category === "seo") return "rgba(76, 175, 80, 0.1)";
+    if (category === "e-commerce") return "rgba(245, 124, 0, 0.1)";
+    if (category === "content") return "rgba(156, 39, 176, 0.1)";
+    return "rgba(var(--primary-rgb), 0.1)";
   }};
-  
-  color: ${props => {
+
+  color: ${(props) => {
     const category = props.category.toLowerCase();
-    if (category === 'ppc') return 'var(--primary-color)';
-    if (category === 'social media') return '#3b5998';
-    if (category === 'seo') return '#4CAF50';
-    if (category === 'e-commerce') return '#F57C00';
-    if (category === 'content') return '#9C27B0';
-    return 'var(--primary-color)';
+    if (category === "ppc") return "var(--primary-color)";
+    if (category === "social media") return "#3b5998";
+    if (category === "seo") return "#4CAF50";
+    if (category === "e-commerce") return "#F57C00";
+    if (category === "content") return "#9C27B0";
+    return "var(--primary-color)";
   }};
-  
+
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.75rem;
@@ -101,58 +108,59 @@ const BlogCategory = styled.span`
 
 const BlogContent = styled.div`
   line-height: 1.8;
-  color: ${props => props.theme.text};
-  
+  color: ${(props) => props.theme.text};
+
   p {
     margin-bottom: 1.5rem;
   }
-  
+
   h2 {
     font-size: 1.75rem;
     margin: 2.5rem 0 1.25rem;
   }
-  
+
   h3 {
     font-size: 1.5rem;
     margin: 2.25rem 0 1.25rem;
   }
-  
-  ul, ol {
+
+  ul,
+  ol {
     margin: 1.5rem 0;
     padding-left: 1.5rem;
-    
+
     li {
       margin-bottom: 0.75rem;
     }
   }
-  
+
   blockquote {
-    border-left: 4px solid ${props => props.theme.primary};
+    border-left: 4px solid ${(props) => props.theme.primary};
     padding-left: 1.5rem;
     margin: 2rem 0;
     font-style: italic;
-    color: ${props => props.theme.textLight};
+    color: ${(props) => props.theme.textLight};
   }
-  
+
   a {
-    color: ${props => props.theme.primary};
+    color: ${(props) => props.theme.primary};
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.3s ease;
-    
+
     &:hover {
-      border-color: ${props => props.theme.primary};
+      border-color: ${(props) => props.theme.primary};
     }
   }
-  
+
   img {
     max-width: 100%;
     border-radius: 0.5rem;
     margin: 2rem 0;
   }
-  
+
   code {
-    background: ${props => props.theme.backgroundAlt};
+    background: ${(props) => props.theme.backgroundAlt};
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
     font-size: 0.875rem;
@@ -162,8 +170,8 @@ const BlogContent = styled.div`
 const ShareSection = styled.div`
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 1px solid ${props => props.theme.border};
-  
+  border-top: 1px solid ${(props) => props.theme.border};
+
   h4 {
     margin-bottom: 1rem;
   }
@@ -172,7 +180,7 @@ const ShareSection = styled.div`
 const ShareButtons = styled.div`
   display: flex;
   gap: 1rem;
-  
+
   a {
     display: flex;
     align-items: center;
@@ -182,19 +190,19 @@ const ShareButtons = styled.div`
     border-radius: 50%;
     color: white;
     transition: opacity 0.3s ease;
-    
+
     &:hover {
       opacity: 0.8;
     }
-    
+
     &.facebook {
       background-color: #3b5998;
     }
-    
+
     &.twitter {
       background-color: #1da1f2;
     }
-    
+
     &.linkedin {
       background-color: #0077b5;
     }
@@ -203,7 +211,7 @@ const ShareButtons = styled.div`
 
 const RelatedArticles = styled.div`
   margin-top: 4rem;
-  
+
   h3 {
     margin-bottom: 1.5rem;
   }
@@ -213,7 +221,7 @@ const RelatedGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -223,37 +231,37 @@ const RelatedCard = styled(Link)`
   display: flex;
   gap: 1rem;
   text-decoration: none;
-  color: ${props => props.theme.text};
+  color: ${(props) => props.theme.text};
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
-    
+
     h4 {
-      color: ${props => props.theme.primary};
+      color: ${(props) => props.theme.primary};
     }
   }
-  
+
   .image {
     width: 100px;
     height: 70px;
     flex-shrink: 0;
-    background-image: ${props => `url(${props.image})`};
+    background-image: ${(props) => `url(${props.image})`};
     background-size: cover;
     background-position: center;
     border-radius: 0.25rem;
   }
-  
+
   .content {
     h4 {
       font-size: 1rem;
       margin-bottom: 0.5rem;
       transition: color 0.3s ease;
     }
-    
+
     .meta {
       font-size: 0.8125rem;
-      color: ${props => props.theme.textLight};
+      color: ${(props) => props.theme.textLight};
     }
   }
 `;
@@ -261,14 +269,14 @@ const RelatedCard = styled(Link)`
 const NotFound = styled.div`
   text-align: center;
   padding: 5rem 1rem;
-  
+
   h2 {
     margin-bottom: 1rem;
   }
-  
+
   p {
     margin-bottom: 2rem;
-    color: ${props => props.theme.textLight};
+    color: ${(props) => props.theme.textLight};
   }
 `;
 
@@ -276,18 +284,19 @@ const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [relatedPosts, setRelatedPosts] = useState([]);
-  
+
   // Mock blog post data
   const blogPosts = [
     {
-      id: 'google-ads-optimization-tips',
-      title: '10 Google Ads Optimization Tips for Higher ROI',
-      excerpt: 'Learn how to optimize your Google Ads campaigns to maximize return on investment and reduce wasted ad spend.',
-      category: 'PPC',
-      author: 'Alex Johnson',
-      date: 'June 15, 2023',
-      image: 'https://source.unsplash.com/random/1200x600/?google,advertising',
-      slug: 'google-ads-optimization-tips',
+      id: "google-ads-optimization-tips",
+      title: "10 Google Ads Optimization Tips for Higher ROI",
+      excerpt:
+        "Learn how to optimize your Google Ads campaigns to maximize return on investment and reduce wasted ad spend.",
+      category: "PPC",
+      author: "Alex Johnson",
+      date: "June 15, 2023",
+      image: "https://source.unsplash.com/random/1200x600/?google,advertising",
+      slug: "google-ads-optimization-tips",
       content: `
         <p>Google Ads remains one of the most effective digital marketing channels for businesses of all sizes. However, without proper optimization, it's easy to waste budget on underperforming campaigns. In this article, we'll share 10 proven optimization techniques to improve your Google Ads performance and maximize ROI.</p>
 
@@ -374,71 +383,77 @@ const BlogPost = () => {
         <p>Implementing these optimization techniques will help you improve the performance of your Google Ads campaigns and achieve a higher return on investment. Remember that optimization is an ongoing process – continually test, learn, and refine your approach based on performance data.</p>
 
         <p>By focusing on relevance, quality, and data-driven decision making, you can create Google Ads campaigns that consistently deliver results for your business.</p>
-      `
+      `,
     },
     {
-      id: 'social-media-trends-2023',
-      title: 'Social Media Trends to Watch in 2023',
-      excerpt: 'Stay ahead of the curve with these emerging social media trends that will shape marketing strategies in 2023 and beyond.',
-      category: 'Social Media',
-      author: 'Sarah Miller',
-      date: 'May 28, 2023',
-      image: 'https://source.unsplash.com/random/1200x600/?social,media',
-      slug: 'social-media-trends-2023',
-      content: `<p>Placeholder content for Social Media Trends article...</p>`
+      id: "social-media-trends-2023",
+      title: "Social Media Trends to Watch in 2023",
+      excerpt:
+        "Stay ahead of the curve with these emerging social media trends that will shape marketing strategies in 2023 and beyond.",
+      category: "Social Media",
+      author: "Sarah Miller",
+      date: "May 28, 2023",
+      image: "https://source.unsplash.com/random/1200x600/?social,media",
+      slug: "social-media-trends-2023",
+      content: `<p>Placeholder content for Social Media Trends article...</p>`,
     },
     {
-      id: 'ecommerce-conversion-rate-optimization',
-      title: 'E-commerce Conversion Rate Optimization Strategies',
-      excerpt: 'Discover proven strategies to increase your e-commerce conversion rates and boost sales without increasing traffic.',
-      category: 'E-commerce',
-      author: 'Michael Chen',
-      date: 'May 12, 2023',
-      image: 'https://source.unsplash.com/random/1200x600/?ecommerce,shopping',
-      slug: 'ecommerce-conversion-rate-optimization',
-      content: `<p>Placeholder content for E-commerce CRO article...</p>`
+      id: "ecommerce-conversion-rate-optimization",
+      title: "E-commerce Conversion Rate Optimization Strategies",
+      excerpt:
+        "Discover proven strategies to increase your e-commerce conversion rates and boost sales without increasing traffic.",
+      category: "E-commerce",
+      author: "Michael Chen",
+      date: "May 12, 2023",
+      image: "https://source.unsplash.com/random/1200x600/?ecommerce,shopping",
+      slug: "ecommerce-conversion-rate-optimization",
+      content: `<p>Placeholder content for E-commerce CRO article...</p>`,
     },
     {
-      id: 'navigating-google-algorithm-updates',
-      title: 'How to Navigate Google's Algorithm Updates',
-      excerpt: 'Learn how to adapt your SEO strategy to stay ahead of Google's frequent algorithm updates and maintain your rankings.',
-      category: 'SEO',
-      author: 'David Wilson',
-      date: 'April 30, 2023',
-      image: 'https://source.unsplash.com/random/1200x600/?seo,google',
-      slug: 'navigating-google-algorithm-updates',
-      content: `<p>Placeholder content for Google Algorithm Updates article...</p>`
+      id: "navigating-google-algorithm-updates",
+      title: "How to Navigate Google's Algorithm Updates",
+      excerpt:
+        "Learn how to adapt your SEO strategy to stay ahead of Google's frequent algorithm updates and maintain your rankings.",
+      category: "SEO",
+      author: "David Wilson",
+      date: "April 30, 2023",
+      image: "https://source.unsplash.com/random/1200x600/?seo,google",
+      slug: "navigating-google-algorithm-updates",
+      content: `<p>Placeholder content for Google Algorithm Updates article...</p>`,
     },
     {
-      id: 'measuring-content-marketing-roi',
-      title: 'Measuring Content Marketing ROI: A Complete Guide',
-      excerpt: 'Discover effective methods to measure and prove the ROI of your content marketing efforts to stakeholders.',
-      category: 'Content',
-      author: 'Emma Thompson',
-      date: 'April 18, 2023',
-      image: 'https://source.unsplash.com/random/1200x600/?content,marketing',
-      slug: 'measuring-content-marketing-roi',
-      content: `<p>Placeholder content for Content Marketing ROI article...</p>`
-    }
+      id: "measuring-content-marketing-roi",
+      title: "Measuring Content Marketing ROI: A Complete Guide",
+      excerpt:
+        "Discover effective methods to measure and prove the ROI of your content marketing efforts to stakeholders.",
+      category: "Content",
+      author: "Emma Thompson",
+      date: "April 18, 2023",
+      image: "https://source.unsplash.com/random/1200x600/?content,marketing",
+      slug: "measuring-content-marketing-roi",
+      content: `<p>Placeholder content for Content Marketing ROI article...</p>`,
+    },
   ];
-  
+
   useEffect(() => {
     // In a real application, you would fetch this data from an API
-    const currentPost = blogPosts.find(post => post.slug === slug);
-    
+    const currentPost = blogPosts.find((post) => post.slug === slug);
+
     if (currentPost) {
       setPost(currentPost);
-      
+
       // Find related posts from the same category
       const related = blogPosts
-        .filter(p => p.category === currentPost.category && p.id !== currentPost.id)
+        .filter(
+          (p) => p.category === currentPost.category && p.id !== currentPost.id,
+        )
         .slice(0, 2);
-      
+
       setRelatedPosts(related);
       window.scrollTo(0, 0);
     }
   }, [slug]);
-  
+
   if (!post) {
     return (
       <NotFound>
@@ -455,16 +470,16 @@ const BlogPost = () => {
   const getShareUrl = (platform) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(post.title);
-    
+
     switch (platform) {
-      case 'facebook':
+      case "facebook":
         return `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-      case 'twitter':
+      case "twitter":
         return `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-      case 'linkedin':
+      case "linkedin":
         return `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
       default:
-        return '#';
+        return "#";
     }
   };
 
@@ -474,7 +489,7 @@ const BlogPost = () => {
         <title>{post.title} | Leadwisee Blog</title>
         <meta name="description" content={post.excerpt} />
       </Helmet>
-      
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -485,57 +500,59 @@ const BlogPost = () => {
             <BackLink to="/blog">
               <FaArrowLeft /> Back to Blog
             </BackLink>
-            
+
             <BlogPostImage image={post.image} />
-            
+
             <BlogTitle>{post.title}</BlogTitle>
-            
+
             <BlogMeta>
               <div>
                 <FaCalendarAlt />
                 <span>{post.date}</span>
               </div>
-              
+
               <div>
                 <FaUser />
                 <span>{post.author}</span>
               </div>
-              
+
               <div>
                 <FaTag />
-                <BlogCategory category={post.category}>{post.category}</BlogCategory>
+                <BlogCategory category={post.category}>
+                  {post.category}
+                </BlogCategory>
               </div>
             </BlogMeta>
           </BlogPostHero>
-          
+
           <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
-          
+
           <ShareSection>
             <h4>Share this article</h4>
             <ShareButtons>
-              <a 
-                href={getShareUrl('facebook')} 
-                target="_blank" 
+              <a
+                href={getShareUrl("facebook")}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="facebook"
                 aria-label="Share on Facebook"
               >
                 <FaFacebook />
               </a>
-              
-              <a 
-                href={getShareUrl('twitter')} 
-                target="_blank" 
+
+              <a
+                href={getShareUrl("twitter")}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="twitter"
                 aria-label="Share on Twitter"
               >
                 <FaTwitter />
               </a>
-              
-              <a 
-                href={getShareUrl('linkedin')} 
-                target="_blank" 
+
+              <a
+                href={getShareUrl("linkedin")}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="linkedin"
                 aria-label="Share on LinkedIn"
@@ -544,14 +561,14 @@ const BlogPost = () => {
               </a>
             </ShareButtons>
           </ShareSection>
-          
+
           {relatedPosts.length > 0 && (
             <RelatedArticles>
               <h3>Related Articles</h3>
               <RelatedGrid>
-                {relatedPosts.map(relatedPost => (
-                  <RelatedCard 
-                    key={relatedPost.id} 
+                {relatedPosts.map((relatedPost) => (
+                  <RelatedCard
+                    key={relatedPost.id}
                     to={`/blog/${relatedPost.slug}`}
                     image={relatedPost.image}
                   >

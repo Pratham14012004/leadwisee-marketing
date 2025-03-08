@@ -273,3 +273,167 @@ const Button = ({
 };
 
 export default Button;
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const StyledButton = styled(motion.button)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${({ size }) => 
+    size === "large" ? "1rem 2rem" : 
+    size === "small" ? "0.5rem 1rem" : 
+    "0.75rem 1.5rem"};
+  font-size: ${({ size }) => 
+    size === "large" ? "1.1rem" : 
+    size === "small" ? "0.9rem" : 
+    "1rem"};
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  
+  ${({ variant, theme }) => {
+    if (variant === "primary") {
+      return `
+        background-color: ${theme.colors.primary};
+        color: white;
+        
+        &:hover {
+          background-color: ${theme.colors.primaryDark};
+          transform: translateY(-2px);
+        }
+      `;
+    } else if (variant === "secondary") {
+      return `
+        background-color: ${theme.colors.secondary};
+        color: white;
+        
+        &:hover {
+          background-color: ${theme.colors.secondaryDark};
+          transform: translateY(-2px);
+        }
+      `;
+    } else if (variant === "outline") {
+      return `
+        background-color: transparent;
+        color: ${theme.colors.primary};
+        border: 2px solid ${theme.colors.primary};
+        
+        &:hover {
+          background-color: ${theme.colors.primary};
+          color: white;
+          transform: translateY(-2px);
+        }
+      `;
+    } else if (variant === "text") {
+      return `
+        background-color: transparent;
+        color: ${theme.colors.primary};
+        padding-left: 0;
+        padding-right: 0;
+        
+        &:hover {
+          color: ${theme.colors.primaryDark};
+          transform: translateX(3px);
+        }
+      `;
+    }
+  }}
+  
+  .icon-left {
+    margin-right: 0.5rem;
+  }
+  
+  .icon-right {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover .icon-right {
+    transform: translateX(3px);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+`;
+
+const Button = ({ 
+  children, 
+  variant = "primary", 
+  size = "medium", 
+  to, 
+  href, 
+  leftIcon, 
+  rightIcon, 
+  onClick, 
+  disabled = false,
+  type = "button",
+  ...props 
+}) => {
+  // If "to" prop is provided, return a Link component from react-router
+  if (to) {
+    return (
+      <StyledButton 
+        as={Link} 
+        to={to} 
+        variant={variant} 
+        size={size} 
+        whileTap={{ scale: 0.98 }}
+        disabled={disabled}
+        {...props}
+      >
+        {leftIcon && <span className="icon-left">{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className="icon-right">{rightIcon}</span>}
+      </StyledButton>
+    );
+  }
+  
+  // If "href" prop is provided, return an anchor tag
+  if (href) {
+    return (
+      <StyledButton 
+        as="a" 
+        href={href} 
+        variant={variant} 
+        size={size}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileTap={{ scale: 0.98 }}
+        disabled={disabled}
+        {...props}
+      >
+        {leftIcon && <span className="icon-left">{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className="icon-right">{rightIcon}</span>}
+      </StyledButton>
+    );
+  }
+  
+  // Otherwise, return a regular button
+  return (
+    <StyledButton 
+      variant={variant} 
+      size={size} 
+      onClick={onClick} 
+      whileTap={{ scale: 0.98 }}
+      disabled={disabled}
+      type={type}
+      {...props}
+    >
+      {leftIcon && <span className="icon-left">{leftIcon}</span>}
+      {children}
+      {rightIcon && <span className="icon-right">{rightIcon}</span>}
+    </StyledButton>
+  );
+};
+
+export default Button;

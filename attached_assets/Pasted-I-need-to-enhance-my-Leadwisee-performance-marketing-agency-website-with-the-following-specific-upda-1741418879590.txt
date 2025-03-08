@@ -1,0 +1,61 @@
+I need to enhance my Leadwisee performance marketing agency website with the following specific updates:
+
+1. NAVIGATION BAR MODIFICATIONS:
+   - Modify the Industries dropdown in the navigation bar to separate B2B and SaaS as distinct options
+   - Ensure all industry options are properly linked to their respective pages
+   - Include clickable links for: SaaS, Real Estate, Fashion, OTT, Coaching & Consulting industries
+   - Make the dropdown menu mobile-responsive
+
+2. CONTENT DEVELOPMENT FOR REMAINING INDUSTRY PAGES:
+   Please create comprehensive, SEO-optimized content for the following industry pages that are currently missing content:
+
+   a) FASHION MARKETING PAGE:
+   - Create a page titled "Fashion & Luxury Marketing Agency | Performance-Driven Strategies"
+   - Include sections on social media marketing for fashion brands, influencer partnerships, e-commerce optimization for fashion retailers
+   - Highlight how we help fashion brands increase online sales and brand recognition
+   - Include relevant fashion industry metrics and case study examples (placeholders are fine)
+
+   b) OTT MARKETING PAGE:
+   - Create a page titled "OTT & Entertainment Marketing Agency | Subscriber Acquisition Experts"
+   - Include sections on subscriber acquisition strategies, content promotion, audience retention
+   - Focus on how we help streaming platforms and entertainment companies grow their user base
+   - Highlight video marketing capabilities and audience targeting expertise
+
+   c) COACHING & CONSULTING MARKETING PAGE:
+   - Create a page titled "Marketing Agency for Coaches & Consultants | High-Ticket Client Acquisition"
+   - Include sections on lead generation for coaching businesses, webinar marketing, and funnel optimization
+   - Focus on how we help coaches and consultants attract premium clients
+   - Highlight our approach to marketing high-ticket offers and services
+
+3. ABOUT PAGE CONTENT:
+   - Create a comprehensive About page with the following sections:
+     a) Company story and mission (focus on how Leadwisee started and our dedication to performance marketing)
+     b) Our approach to performance marketing (data-driven, results-focused methodology)
+     c) Team section with placeholder profiles for key roles (CEO, Marketing Director, etc.)
+     d) Company values and what sets us apart from other agencies
+     e) Timeline of company milestones (can use placeholder dates/achievements)
+     f) Client testimonials section (can use placeholder testimonials)
+     g) Contact CTA at the bottom
+
+4. CASE STUDIES PAGE IN RESOURCES SECTION:
+   - Create a case studies page with:
+     a) Filtering system by industry and service type
+     b) At least 4 placeholder case studies (1 each for: SaaS, E-commerce, Real Estate, and Healthcare)
+     c) Each case study should include:
+        - Client overview (fictional company is fine)
+        - Challenge they faced
+        - Solution we implemented
+        - Results achieved (with metrics)
+        - Visual representation of improvement (graphs/charts)
+        - Client testimonial
+     d) Case study cards on the main page that link to individual case study pages
+
+5. TECHNICAL REQUIREMENTS:
+   - Ensure all new pages maintain consistent styling with existing pages
+   - Implement proper SEO elements (meta titles, descriptions, header tags)
+   - Make all pages fully responsive for mobile devices
+   - Optimize images for fast loading
+   - Include contact forms at the bottom of each page
+   - Ensure smooth navigation between all pages
+
+Please provide the complete React components for these updates, ensuring all content is professional, engaging, and optimized for both users and search engines. The navigation bar update is particularly important to clearly separate B2B and SaaS as distinct options.

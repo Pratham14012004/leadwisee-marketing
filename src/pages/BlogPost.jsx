@@ -1,395 +1,520 @@
+
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FaCalendarAlt, FaUser, FaTag, FaClock, FaFacebookF, FaTwitter, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
+import { FaCalendarAlt, FaUser, FaTag, FaClock, FaFacebookF, FaTwitter, FaLinkedinIn, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
-// Styled components
-const PageWrapper = styled.div`
-  padding-top: 100px;
-`;
+import SectionHeading from '../components/common/SectionHeading';
 
-const BlogContainer = styled.div`
-  max-width: 800px;
+const BlogPostContainer = styled.div`
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 80px 20px;
+  padding: 3rem 1.5rem 5rem;
 `;
 
 const BlogPostHeader = styled.div`
-  margin-bottom: 40px;
-
-  .category {
-    display: inline-block;
-    padding: 5px 15px;
-    background: ${props => props.theme.colors.primaryLight};
-    color: ${props => props.theme.colors.primary};
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-
+  text-align: center;
+  margin-bottom: 3rem;
+  
   h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    
     @media (max-width: 768px) {
-      font-size: 2rem;
+      font-size: 2.2rem;
     }
   }
-`;
-
-const FeaturedImage = styled.img`
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 30px;
-`;
-
-const MetaInfo = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-  font-size: 0.9rem;
-  color: ${props => props.theme.colors.textMuted};
-
-  .meta-item {
+  
+  .meta {
     display: flex;
-    align-items: center;
-    margin-right: 20px;
-    margin-bottom: 10px;
-
-    svg {
-      margin-right: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    color: ${props => props.theme.colors.textSecondary};
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      
+      svg {
+        margin-right: 0.5rem;
+        color: ${props => props.theme.colors.primary};
+      }
+    }
+  }
+  
+  .featured-image {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    @media (max-width: 768px) {
+      height: 300px;
     }
   }
 `;
 
 const BlogContent = styled.div`
-  font-size: 1.1rem;
-  line-height: 1.8;
-
-  p {
-    margin-bottom: 25px;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 40px 0 20px;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 30px 0 15px;
-  }
-
-  ul, ol {
-    margin: 20px 0;
-    padding-left: 20px;
-
-    li {
-      margin-bottom: 10px;
-    }
-  }
-
-  blockquote {
-    border-left: 4px solid ${props => props.theme.colors.primary};
-    padding: 15px 20px;
-    margin: 30px 0;
-    background: ${props => props.theme.colors.backgroundAlt};
-    font-style: italic;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 30px 0;
-  }
-
-  code {
-    background: ${props => props.theme.colors.backgroundAlt};
-    padding: 3px 5px;
-    border-radius: 4px;
-    font-family: monospace;
-  }
-
-  pre {
-    background: ${props => props.theme.colors.textDark};
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 30px 0;
-
-    code {
-      background: transparent;
-    }
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: 2fr 1fr;
   }
 `;
 
-const ShareSection = styled.div`
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 1px solid ${props => props.theme.colors.border};
-
-  h4 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
+const MainContent = styled.div`
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
   }
-
-  .share-buttons {
-    display: flex;
-
-    a {
+  
+  h2 {
+    font-size: 2rem;
+    margin: 3rem 0 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.6rem;
+    margin: 2.5rem 0 1.25rem;
+  }
+  
+  ul, ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+    
+    li {
+      margin-bottom: 0.8rem;
+      line-height: 1.7;
+    }
+  }
+  
+  blockquote {
+    border-left: 4px solid ${props => props.theme.colors.primary};
+    padding: 1rem 2rem;
+    margin: 2rem 0;
+    background-color: ${props => props.theme.colors.bgAlt};
+    font-style: italic;
+    
+    p {
+      margin-bottom: 0;
+    }
+  }
+  
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+  
+  .article-share {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid ${props => props.theme.colors.border};
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .share-buttons {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 15px;
-      background: ${props => props.theme.colors.backgroundAlt};
-      color: ${props => props.theme.colors.text};
-      transition: all 0.3s ease;
-
-      &:hover {
-        background: ${props => props.theme.colors.primary};
-        color: white;
+      gap: 1rem;
+      
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: ${props => props.theme.colors.bgAlt};
+        color: ${props => props.theme.colors.text};
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background-color: ${props => props.theme.colors.primary};
+          color: white;
+        }
       }
     }
   }
 `;
 
-const RelatedPosts = styled.div`
-  margin-top: 80px;
-
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-
-  .related-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
-  }
-`;
-
-const RelatedPostCard = styled(Link)`
-  display: block;
-  background: ${props => props.theme.colors.cardBg};
-  border-radius: 8px;
-  overflow: hidden;
-  text-decoration: none;
-  color: ${props => props.theme.colors.text};
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  }
-
-  img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-
-  .content {
-    padding: 15px;
-
-    h4 {
+const PostNavigation = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid ${props => props.theme.colors.border};
+  
+  .nav-item {
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+    
+    &.next {
+      text-align: right;
+    }
+    
+    .label {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: ${props => props.theme.colors.textSecondary};
+      margin-bottom: 0.5rem;
+      
+      svg {
+        margin: 0 0.5rem;
+      }
+    }
+    
+    .title {
       font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-
-    .date {
-      font-size: 0.85rem;
-      color: ${props => props.theme.colors.textMuted};
+      font-weight: 600;
+      color: ${props => props.theme.colors.text};
     }
   }
 `;
 
-const AuthorSection = styled.div`
-  margin-top: 50px;
-  padding: 30px;
-  border-radius: 10px;
-  background: ${props => props.theme.colors.backgroundAlt};
-  display: flex;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-
-  .author-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
-
-    @media (max-width: 768px) {
-      margin-bottom: 20px;
-    }
-  }
-
-  .author-info {
-    flex: 1;
-
-    h4 {
+const Sidebar = styled.div`
+  .sidebar-section {
+    background-color: ${props => props.theme.colors.bgAlt};
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    
+    h3 {
       font-size: 1.3rem;
-      margin-bottom: 10px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.75rem;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background-color: ${props => props.theme.colors.primary};
+      }
     }
-
+  }
+  
+  .author-bio {
+    text-align: center;
+    
+    .author-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1.5rem;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .author-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .author-role {
+      color: ${props => props.theme.colors.primary};
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
     p {
       font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+  }
+  
+  .table-of-contents {
+    ul {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        margin-bottom: 0.8rem;
+        
+        a {
+          color: ${props => props.theme.colors.text};
+          text-decoration: none;
+          transition: color 0.3s ease;
+          display: flex;
+          align-items: center;
+          
+          &:hover {
+            color: ${props => props.theme.colors.primary};
+          }
+          
+          &:before {
+            content: '•';
+            color: ${props => props.theme.colors.primary};
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  
+  .related-posts {
+    .post-item {
+      display: flex;
+      margin-bottom: 1.5rem;
+      
+      .post-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+        margin-right: 1rem;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      
+      .post-info {
+        .post-title {
+          font-weight: 600;
+          margin-bottom: 0.4rem;
+          line-height: 1.4;
+          
+          a {
+            color: ${props => props.theme.colors.text};
+            text-decoration: none;
+            transition: color 0.3s ease;
+            
+            &:hover {
+              color: ${props => props.theme.colors.primary};
+            }
+          }
+        }
+        
+        .post-date {
+          font-size: 0.9rem;
+          color: ${props => props.theme.colors.textSecondary};
+        }
+      }
     }
   }
 `;
 
 const BlogPost = () => {
   const { slug } = useParams();
-
-  // Scroll to top on component mount
+  
+  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]);
-
+  }, []);
+  
   // Sample blog post data (in a real app, this would come from an API or CMS)
   const post = {
-    id: 1,
-    title: "The Ultimate Guide to Performance Marketing in 2023",
-    slug: "ultimate-guide-performance-marketing-2023",
-    category: "Performance Marketing",
-    date: "June 15, 2023",
+    title: "7 Proven Strategies to Increase Your Google Ads Quality Score",
+    date: "August 15, 2023",
     author: {
       name: "Sarah Johnson",
-      role: "Chief Marketing Officer",
-      bio: "Sarah brings 15+ years of digital marketing expertise, having previously led marketing at several Fortune 500 companies.",
-      image: "https://source.unsplash.com/random/200x200/?portrait,woman"
+      role: "PPC Specialist",
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80",
+      bio: "Sarah has 8+ years of experience in digital marketing with a focus on PPC campaign optimization. She specializes in helping businesses improve their ad performance and ROI."
     },
+    category: "PPC Advertising",
     readTime: "8 min read",
-    image: "https://source.unsplash.com/random/1200x800/?marketing,digital",
-    content: `
-      <p>Performance marketing has evolved significantly over the past decade, transforming from a niche digital marketing approach to a must-have strategy for businesses of all sizes. Unlike traditional marketing methods that focus on impressions and brand awareness, performance marketing is all about measurable results: leads, conversions, and revenue.</p>
-
-      <h2>What is Performance Marketing?</h2>
-
-      <p>Performance marketing is a comprehensive approach to digital marketing where advertisers pay only when specific actions are completed, such as a sale, lead, or click. This focus on measurable outcomes makes it particularly attractive to businesses looking to maximize their marketing ROI.</p>
-
-      <p>The key differentiator of performance marketing is its data-driven nature. Every campaign, ad, and strategy is meticulously tracked and optimized based on performance metrics, allowing marketers to make informed decisions about where to allocate their budgets for maximum impact.</p>
-
-      <h2>Key Performance Marketing Channels in 2023</h2>
-
-      <h3>1. Search Engine Marketing (SEM)</h3>
-
-      <p>Google Ads and Bing Ads continue to be powerhouse channels for performance marketers. With the ability to target users based on their search intent, SEM allows businesses to capture high-intent traffic at the moment users are actively looking for their products or services.</p>
-
-      <p>In 2023, we're seeing a significant shift towards automation and AI-driven bidding strategies. Google's Smart Bidding and similar technologies are becoming increasingly sophisticated, allowing marketers to optimize for specific business outcomes rather than just clicks or conversions.</p>
-
-      <h3>2. Social Media Advertising</h3>
-
-      <p>Platforms like Facebook, Instagram, LinkedIn, and TikTok offer robust advertising options with precise targeting capabilities. The interactive nature of social media also allows for engaging ad formats that can drive higher conversion rates.</p>
-
-      <p>Video content is dominating social media advertising in 2023, with short-form videos showing particularly high engagement rates. Additionally, social commerce features are making it easier than ever to convert users directly within social platforms.</p>
-
-      <h3>3. Affiliate Marketing</h3>
-
-      <p>Affiliate marketing remains a cornerstone of performance marketing strategies. By partnering with influencers and content creators who promote products to their audiences, brands can tap into established trust relationships and reach highly engaged audiences.</p>
-
-      <p>The affiliate marketing landscape is becoming more sophisticated, with many brands moving beyond simple commission structures to more complex attribution models that reward affiliates for their role in the customer journey, even if they weren't the last touch before conversion.</p>
-
-      <h2>Emerging Trends in Performance Marketing</h2>
-
-      <h3>1. First-Party Data Prioritization</h3>
-
-      <p>With the phasing out of third-party cookies and increasing privacy regulations, performance marketers are shifting their focus to collecting and leveraging first-party data. Building direct relationships with customers and capturing their consent for data usage is becoming essential for effective targeting and personalization.</p>
-
-      <h3>2. AI and Machine Learning Integration</h3>
-
-      <p>Artificial intelligence is revolutionizing performance marketing by enabling more sophisticated audience targeting, predictive analytics, and automated optimization. AI-powered tools can analyze vast amounts of data to identify patterns and opportunities that human marketers might miss.</p>
-
-      <h3>3. Cross-Channel Attribution</h3>
-
-      <p>As consumer journeys become increasingly complex and span multiple devices and platforms, accurate attribution is more challenging and more important than ever. Advanced attribution models that consider the entire customer journey, rather than just the last click, are becoming standard for sophisticated performance marketers.</p>
-
-      <blockquote>
-        "The best performance marketing strategies don't just focus on immediate conversions, but consider the entire customer lifecycle, from acquisition to retention and advocacy."
-      </blockquote>
-
-      <h2>Measuring Performance Marketing Success</h2>
-
-      <p>While specific KPIs will vary depending on your business goals, some essential metrics for measuring performance marketing success include:</p>
-
-      <ul>
-        <li><strong>Return on Ad Spend (ROAS)</strong>: The revenue generated for every dollar spent on advertising.</li>
-        <li><strong>Customer Acquisition Cost (CAC)</strong>: The total cost of acquiring a new customer, including all marketing and sales expenses.</li>
-        <li><strong>Lifetime Value (LTV)</strong>: The total revenue a business can expect from a single customer account throughout their relationship.</li>
-        <li><strong>Conversion Rate</strong>: The percentage of users who take the desired action, such as making a purchase or filling out a form.</li>
-        <li><strong>Cost Per Acquisition (CPA)</strong>: The cost of acquiring a conversion, which could be a sale, lead, or other desired action.</li>
-      </ul>
-
-      <h2>Building a Successful Performance Marketing Strategy</h2>
-
-      <ol>
-        <li><strong>Define Clear Objectives</strong>: Start by establishing specific, measurable goals that align with your business objectives.</li>
-        <li><strong>Understand Your Audience</strong>: Develop detailed buyer personas and use data to understand your audience's preferences, behaviors, and pain points.</li>
-        <li><strong>Select the Right Channels</strong>: Choose marketing channels based on where your target audience spends their time and which platforms best support your goals.</li>
-        <li><strong>Create Compelling Content</strong>: Develop high-quality, relevant content that resonates with your audience and drives them to take action.</li>
-        <li><strong>Implement Robust Tracking</strong>: Set up comprehensive tracking to measure performance across all channels and touchpoints.</li>
-        <li><strong>Continuously Test and Optimize</strong>: Use A/B testing and data analysis to refine your campaigns and improve results over time.</li>
-        <li><strong>Scale What Works</strong>: Once you've identified successful strategies, increase investment in those areas while continuing to test new approaches.</li>
-      </ol>
-
-      <h2>Conclusion</h2>
-
-      <p>Performance marketing continues to evolve, offering businesses powerful ways to connect with customers while ensuring a strong return on investment. By staying abreast of emerging trends, leveraging data effectively, and maintaining a focus on measurable outcomes, marketers can develop performance marketing strategies that drive significant business growth in 2023 and beyond.</p>
-
-      <p>The most successful performance marketers will be those who can balance the science of data-driven optimization with the art of creating compelling campaigns that resonate with their target audience on a human level.</p>
-    `,
-    tags: ["Performance Marketing", "Digital Strategy", "ROI", "Marketing Analytics"]
-  };
-
-  // Related posts data
-  const relatedPosts = [
-    {
-      id: 2,
-      title: "5 PPC Strategies That Deliver Results in 2023",
-      slug: "ppc-strategies-results-2023",
-      date: "May 28, 2023",
-      image: "https://source.unsplash.com/random/400x300/?advertising"
+    featuredImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    content: `<p>Quality Score is one of the most important metrics in Google Ads, directly impacting your ad positions, cost-per-click, and overall campaign performance. In this comprehensive guide, we'll explore proven strategies to boost your Quality Score and improve your PPC results.</p>
+    
+    <h2>What is Quality Score and Why Does it Matter?</h2>
+    
+    <p>Quality Score is Google's rating of the quality and relevance of your keywords, ads, and landing pages. It's measured on a scale from 1-10, with 10 being the highest. A high Quality Score can lead to:</p>
+    
+    <ul>
+      <li>Lower cost-per-click (CPC)</li>
+      <li>Better ad positions</li>
+      <li>Higher ad visibility</li>
+      <li>Improved return on investment</li>
+    </ul>
+    
+    <p>According to Google, accounts with above-average Quality Scores typically pay 50% less per conversion compared to those with below-average scores. This significant cost difference makes Quality Score optimization essential for campaign success.</p>
+    
+    <h2>7 Effective Strategies to Improve Your Quality Score</h2>
+    
+    <h3>1. Structure Your Account for Relevance</h3>
+    
+    <p>The foundation of a good Quality Score is a well-structured Google Ads account. Create tightly themed ad groups with a limited number of closely related keywords (ideally 10-15 per ad group). This organization allows you to craft highly relevant ad copy that specifically addresses the searcher's intent.</p>
+    
+    <blockquote>
+      <p>Pro Tip: Consider using single keyword ad groups (SKAGs) for your highest-value or highest-volume keywords to maximize relevance and control.</p>
+    </blockquote>
+    
+    <h3>2. Focus on Keyword Relevance</h3>
+    
+    <p>Choose keywords that are directly relevant to your products or services. Regularly review your search term reports to identify irrelevant searches that are triggering your ads, and add these as negative keywords. This prevents wasting budget on traffic that won't convert while improving your click-through rate.</p>
+    
+    <p>Additionally, use appropriate match types to control when your ads appear. While broad match can help discover new keyword opportunities, using too many broad match keywords without proper negative keyword management can hurt your Quality Score.</p>
+    
+    <h3>3. Write Compelling, Relevant Ad Copy</h3>
+    
+    <p>Your ad text should directly reflect the keywords in your ad group and clearly communicate your value proposition. Include your main keyword in your headlines and descriptions to improve relevance. With Google's responsive search ads, you can test multiple headlines and descriptions to determine which combinations perform best.</p>
+    
+    <p>Key elements of high-performing ad copy include:</p>
+    
+    <ul>
+      <li>Inclusion of target keywords in headlines</li>
+      <li>Clear unique selling propositions</li>
+      <li>Strong call-to-action</li>
+      <li>Addressing customer pain points</li>
+      <li>Highlighting special offers or promotions</li>
+    </ul>
+    
+    <h3>4. Create Dedicated, Relevant Landing Pages</h3>
+    
+    <p>Landing page experience is a crucial component of Quality Score. Your landing pages should be closely aligned with both your ads and keywords. If someone searches for "blue running shoes" and clicks on an ad for blue running shoes, they should be taken to a page featuring blue running shoes—not a general athletic footwear category page.</p>
+    
+    <p>Important landing page factors include:</p>
+    
+    <ul>
+      <li>Relevant content that matches search intent</li>
+      <li>Fast load times (under 3 seconds ideally)</li>
+      <li>Mobile responsiveness</li>
+      <li>Easy navigation and clear calls-to-action</li>
+      <li>Minimal form fields and friction points</li>
+    </ul>
+    
+    <h3>5. Improve Click-Through Rates (CTR)</h3>
+    
+    <p>CTR is one of the strongest indicators of ad relevance and directly impacts Quality Score. A high CTR signals to Google that your ad is relevant to users searching for that keyword. To improve CTR:</p>
+    
+    <ul>
+      <li>Test different ad messaging and value propositions</li>
+      <li>Utilize all available ad extensions (sitelinks, callouts, structured snippets, etc.)</li>
+      <li>Include prices, promotions, and exclusive offers when appropriate</li>
+      <li>Address your audience directly and solve their problems</li>
+    </ul>
+    
+    <h3>6. Implement Ad Extensions</h3>
+    
+    <p>Ad extensions improve the visibility and utility of your ads, which can lead to higher CTRs and better Quality Scores. They provide additional information and give your ads more real estate on the search results page. Important extensions to implement include:</p>
+    
+    <ul>
+      <li>Sitelink extensions</li>
+      <li>Callout extensions</li>
+      <li>Structured snippet extensions</li>
+      <li>Call extensions</li>
+      <li>Location extensions</li>
+      <li>Price extensions</li>
+    </ul>
+    
+    <h3>7. Monitor and Optimize Regularly</h3>
+    
+    <p>Quality Score improvement is an ongoing process. Regularly review your Quality Score data at the keyword level to identify areas for improvement. Google provides component scores for expected CTR, ad relevance, and landing page experience, making it easier to determine where to focus your optimization efforts.</p>
+    
+    <p>Set up a recurring schedule to:</p>
+    
+    <ul>
+      <li>Review search term reports and update negative keywords</li>
+      <li>Test new ad variations</li>
+      <li>Optimize landing pages</li>
+      <li>Pause or optimize underperforming keywords</li>
+      <li>Monitor competitor ads and positioning</li>
+    </ul>
+    
+    <h2>Measuring the Impact of Your Quality Score Improvements</h2>
+    
+    <p>As you implement these strategies, track their impact on your campaign performance. Look beyond just the Quality Score itself to metrics like:</p>
+    
+    <ul>
+      <li>Average CPC</li>
+      <li>Impression share</li>
+      <li>Average position</li>
+      <li>Conversion rates</li>
+      <li>Cost per conversion</li>
+    </ul>
+    
+    <p>These metrics will help you quantify the business impact of your Quality Score improvements. In most cases, you should see lower costs and better results as your Quality Score increases.</p>
+    
+    <h2>Conclusion</h2>
+    
+    <p>Improving your Google Ads Quality Score requires a systematic approach focused on relevance across your account structure, keywords, ad copy, and landing pages. By implementing these seven strategies, you can enhance your campaign performance while reducing your advertising costs.</p>
+    
+    <p>Remember that Quality Score optimization isn't a one-time task but an ongoing process. Consistently monitor your performance, test new approaches, and refine your campaigns based on the data. Over time, these efforts will lead to more efficient and effective Google Ads campaigns.</p>`,
+    tableOfContents: [
+      "What is Quality Score and Why Does it Matter?",
+      "7 Effective Strategies to Improve Your Quality Score",
+      "Structure Your Account for Relevance",
+      "Focus on Keyword Relevance",
+      "Write Compelling, Relevant Ad Copy",
+      "Create Dedicated, Relevant Landing Pages",
+      "Improve Click-Through Rates (CTR)",
+      "Implement Ad Extensions",
+      "Monitor and Optimize Regularly",
+      "Measuring the Impact of Your Quality Score Improvements",
+      "Conclusion"
+    ],
+    relatedPosts: [
+      {
+        title: "Google Ads Automation: When to Trust the Machines and When to Take Control",
+        date: "July 28, 2023",
+        image: "https://images.unsplash.com/photo-1535378620166-273708d44e4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80",
+        slug: "google-ads-automation"
+      },
+      {
+        title: "The Ultimate Guide to Google Ads Budget Optimization",
+        date: "June 15, 2023",
+        image: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2090&q=80",
+        slug: "google-ads-budget-optimization"
+      },
+      {
+        title: "Advanced Match Type Strategies in a Post-Exact Match World",
+        date: "May 10, 2023",
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        slug: "advanced-match-type-strategies"
+      }
+    ],
+    previousPost: {
+      title: "Facebook Ads vs. Google Ads: Which Platform Is Right For Your Business?",
+      slug: "facebook-ads-vs-google-ads"
     },
-    {
-      id: 3,
-      title: "How to Measure Marketing ROI Effectively",
-      slug: "measure-marketing-roi-effectively",
-      date: "June 5, 2023",
-      image: "https://source.unsplash.com/random/400x300/?analytics"
-    },
-    {
-      id: 4,
-      title: "The Future of Social Media Marketing",
-      slug: "future-social-media-marketing",
-      date: "June 10, 2023",
-      image: "https://source.unsplash.com/random/400x300/?socialmedia"
+    nextPost: {
+      title: "How to Create an Effective B2B Content Marketing Strategy",
+      slug: "b2b-content-marketing-strategy"
     }
-  ];
-
+  };
+  
   return (
     <>
       <Helmet>
         <title>{post.title} | Leadwisee Blog</title>
-        <meta
-          name="description"
-          content={post.content.substring(0, 155).replace(/<[^>]*>/g, '')}
+        <meta 
+          name="description" 
+          content="Learn proven strategies to improve your Google Ads Quality Score and enhance your PPC campaign performance."
         />
       </Helmet>
 
@@ -399,94 +524,121 @@ const BlogPost = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <PageWrapper>
-          <BlogContainer>
-            <BlogPostHeader>
-              <span className="category">{post.category}</span>
-              <h1>{post.title}</h1>
-
-              <MetaInfo>
-                <div className="meta-item">
-                  <FaCalendarAlt />
-                  <span>{post.date}</span>
-                </div>
-                <div className="meta-item">
-                  <FaUser />
-                  <span>{post.author.name}</span>
-                </div>
-                <div className="meta-item">
-                  <FaClock />
-                  <span>{post.readTime}</span>
-                </div>
-              </MetaInfo>
-            </BlogPostHeader>
-
-            <FeaturedImage 
-              src={post.image} 
-              alt={post.title} 
-            />
-
-            <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
-
-            <MetaInfo style={{ marginTop: '30px' }}>
-              {post.tags.map((tag, index) => (
-                <div key={index} className="meta-item">
-                  <FaTag />
-                  <span>{tag}</span>
-                </div>
-              ))}
-            </MetaInfo>
-
-            <ShareSection>
-              <h4>Share this post</h4>
-              <div className="share-buttons">
-                <a href="#" aria-label="Share on Facebook">
-                  <FaFacebookF />
-                </a>
-                <a href="#" aria-label="Share on Twitter">
-                  <FaTwitter />
-                </a>
-                <a href="#" aria-label="Share on LinkedIn">
-                  <FaLinkedinIn />
-                </a>
-                <a href="#" aria-label="Share via Email">
-                  <FaEnvelope />
-                </a>
+        <BlogPostContainer>
+          <BlogPostHeader>
+            <h1>{post.title}</h1>
+            
+            <div className="meta">
+              <div className="meta-item">
+                <FaCalendarAlt />
+                <span>{post.date}</span>
               </div>
-            </ShareSection>
-
-            <AuthorSection>
-              <img 
-                className="author-image" 
-                src={post.author.image} 
-                alt={post.author.name} 
-              />
-              <div className="author-info">
-                <h4>{post.author.name}</h4>
-                <p>{post.author.role}</p>
+              <div className="meta-item">
+                <FaUser />
+                <span>{post.author.name}</span>
+              </div>
+              <div className="meta-item">
+                <FaTag />
+                <span>{post.category}</span>
+              </div>
+              <div className="meta-item">
+                <FaClock />
+                <span>{post.readTime}</span>
+              </div>
+            </div>
+            
+            <div className="featured-image">
+              <img src={post.featuredImage} alt={post.title} />
+            </div>
+          </BlogPostHeader>
+          
+          <BlogContent>
+            <MainContent>
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              
+              <div className="article-share">
+                <h3>Share This Article</h3>
+                <div className="share-buttons">
+                  <a href="#" aria-label="Share on Facebook">
+                    <FaFacebookF />
+                  </a>
+                  <a href="#" aria-label="Share on Twitter">
+                    <FaTwitter />
+                  </a>
+                  <a href="#" aria-label="Share on LinkedIn">
+                    <FaLinkedinIn />
+                  </a>
+                </div>
+              </div>
+              
+              <PostNavigation>
+                <Link to={`/blog/${post.previousPost.slug}`} className="nav-item prev">
+                  <div className="label">
+                    <FaArrowLeft /> Previous Article
+                  </div>
+                  <div className="title">{post.previousPost.title}</div>
+                </Link>
+                
+                <Link to={`/blog/${post.nextPost.slug}`} className="nav-item next">
+                  <div className="label">
+                    Next Article <FaArrowRight />
+                  </div>
+                  <div className="title">{post.nextPost.title}</div>
+                </Link>
+              </PostNavigation>
+            </MainContent>
+            
+            <Sidebar>
+              <div className="sidebar-section author-bio">
+                <div className="author-image">
+                  <img src={post.author.image} alt={post.author.name} />
+                </div>
+                <div className="author-name">{post.author.name}</div>
+                <div className="author-role">{post.author.role}</div>
                 <p>{post.author.bio}</p>
               </div>
-            </AuthorSection>
-
-            <RelatedPosts>
-              <h3>You might also like</h3>
-              <div className="related-posts-grid">
-                {relatedPosts.map((relatedPost) => (
-                  <RelatedPostCard key={relatedPost.id} to={`/blog/${relatedPost.slug}`}>
-                    <img 
-                      src={relatedPost.image} 
-                      alt={relatedPost.title} 
-                    />
-                    <div className="content">
-                      <h4>{relatedPost.title}</h4>
-                      <span className="date">{relatedPost.date}</span>
+              
+              <div className="sidebar-section table-of-contents">
+                <h3>Table of Contents</h3>
+                <ul>
+                  {post.tableOfContents.map((item, index) => (
+                    <li key={index}>
+                      <a href="#">{item}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="sidebar-section related-posts">
+                <h3>Related Articles</h3>
+                {post.relatedPosts.map((relatedPost, index) => (
+                  <div className="post-item" key={index}>
+                    <div className="post-image">
+                      <img src={relatedPost.image} alt={relatedPost.title} />
                     </div>
-                  </RelatedPostCard>
+                    <div className="post-info">
+                      <div className="post-title">
+                        <Link to={`/blog/${relatedPost.slug}`}>{relatedPost.title}</Link>
+                      </div>
+                      <div className="post-date">{relatedPost.date}</div>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </RelatedPosts>
-          </BlogContainer>
-        </PageWrapper>
+            </Sidebar>
+          </BlogContent>
+          
+          <div style={{ marginTop: "6rem" }}>
+            <SectionHeading
+              subtitle="More Resources"
+              title="Explore Our <span>Latest Articles</span>"
+              description="Discover more insights and strategies to improve your digital marketing performance"
+              centered
+            />
+            
+            {/* You could include a list of additional blog posts here */}
+          </div>
+        </BlogPostContainer>
       </motion.div>
     </>
   );

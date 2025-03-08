@@ -1,0 +1,84 @@
+I need a complete React JS website codebase for my performance marketing agency called "Leadwisee." Please create a modern, responsive website with the following specifications:
+
+PROJECT SCOPE:
+- A professional performance marketing agency website
+- Focused on conversion optimization and modern design
+- Mobile-first approach
+- Fast-loading and SEO-optimized
+
+TECH STACK:
+- React JS as the core framework
+- React Router for navigation
+- Styled Components or Tailwind CSS for styling
+- React Helmet for SEO
+- React Hook Form for form handling
+- Framer Motion for animations
+- React Icons for icon library
+
+PAGES TO INCLUDE:
+1. Homepage with:
+   - Hero section with main value proposition and CTA
+   - Services overview (PPC, Social Media, E-commerce)
+   - Industries we serve section
+   - Results showcase with metrics
+   - Testimonial section
+   - Resources preview
+   - Final CTA section
+
+2. Services pages:
+   - Main services overview page
+   - Individual pages for: PPC, Social Media Marketing, E-commerce
+   - Each with methodology, benefits, and case study examples
+
+3. Industries pages:
+   - Overview page of all industries
+   - Individual pages for: B2B SAAS, Ecommerce, Retail, Real Estate, Fashion, Healthcare, OTT, Coaching & Consulting, Interior Design
+   - Each with specific challenges and solutions
+
+4. About page:
+   - Company story
+   - Team section
+   - Values and mission
+
+5. Contact page:
+   - Strategy call booking form
+   - Contact information display
+   - Map integration
+
+6. Resources section:
+   - Blog page with articles listing
+   - Case studies page with filtering
+   - Testimonials page with client feedback
+
+COMPONENTS NEEDED:
+- Navigation bar with dropdown menus
+- Footer with multiple sections (as specified)
+- CTA buttons and consultation forms
+- Testimonial carousel
+- Case study cards
+- Services and industries cards
+- Blog post cards
+- Social media links
+- Performance metrics visualizations
+- Mobile menu for responsive design
+
+SPECIFIC FEATURES:
+- Dark/light mode toggle
+- Filtering system for case studies and blog posts
+- Form validation for contact forms
+- Smooth page transitions
+- Lazy loading of images
+- Responsive design breakpoints for all screen sizes
+- Cookie consent banner
+- Schema markup implementation
+
+DESIGN ELEMENTS:
+- Brand colors: primarily blue with white background and strategic accent colors
+- Modern, clean typography
+- Data visualization components
+- Professional imagery
+- Animated counters for metrics
+- Loading animations
+- Hover effects for interactive elements
+
+Please provide the complete React project structure with all necessary components, pages, and styling. Include detailed comments throughout the code for future maintenance. The final output should be a fully functional codebase that can be deployed with minimal additional configuration.

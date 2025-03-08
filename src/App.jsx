@@ -35,7 +35,7 @@ import {
   EntertainmentMarketingPage,
   CoachingMarketingPage,
   InteriorDesignMarketingPage
-} from './pages/IndustryPages'; // Added industry pages
+} from './pages/IndustryPages';
 
 import './App.css';
 
@@ -100,8 +100,11 @@ export default function App() {
                 <Route path="/services" element={<Services />} />
                 <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route path="/industries" element={<Industries />} />
+                
+                {/* Industry Routes */}
                 <Route path="/industries/:slug" element={<IndustryDetail />} />
                 <Route path="/industries/b2b" element={<B2BMarketingPage />} />
+                <Route path="/industries/saas" element={<IndustryDetail />} />
                 <Route path="/industries/ecommerce" element={<ECommerceMarketingPage />} />
                 <Route path="/industries/retail" element={<RetailMarketingPage />} />
                 <Route path="/industries/fashion-luxury" element={<FashionLuxuryMarketingPage />} />
@@ -109,6 +112,9 @@ export default function App() {
                 <Route path="/industries/entertainment" element={<EntertainmentMarketingPage />} />
                 <Route path="/industries/coaching" element={<CoachingMarketingPage />} />
                 <Route path="/industries/interior-design" element={<InteriorDesignMarketingPage />} />
+                <Route path="/industries/real-estate" element={<IndustryDetail />} />
+                
+                {/* Other Routes */}
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />

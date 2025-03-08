@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import IndustryTemplate from "./IndustryTemplate";
@@ -162,7 +161,8 @@ export const B2BMarketingPage = () => {
     ],
     faqs: [
       {
-        question: "How long does it typically take to see results from B2B marketing campaigns?",
+        question:
+          "How long does it typically take to see results from B2B marketing campaigns?",
         answer:
           "B2B marketing typically has longer sales cycles than B2C, with results developing over time. Initial engagement metrics can be seen within the first month, while lead generation improvements are typically visible within 2-3 months. For ABM campaigns targeting enterprise clients, meaningful pipeline impact may take 3-6 months. We set clear KPIs for each stage of the process and provide transparent reporting on both leading and lagging indicators.",
       },
@@ -187,7 +187,10 @@ export const B2BMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />
@@ -353,7 +356,8 @@ export const ECommerceMarketingPage = () => {
     ],
     faqs: [
       {
-        question: "How do you measure success for e-commerce marketing campaigns?",
+        question:
+          "How do you measure success for e-commerce marketing campaigns?",
         answer:
           "We focus on return on ad spend (ROAS), cost per acquisition (CPA), and customer lifetime value as primary metrics. Beyond these, we track product-level performance, new vs. returning customer revenue, average order value, and conversion rates by traffic source. Our reporting connects all marketing activities to revenue impact, giving you clear visibility into ROI for each channel and tactic.",
       },
@@ -378,7 +382,10 @@ export const ECommerceMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />
@@ -446,7 +453,7 @@ export const RetailMarketingPage = () => {
           "Identify and eliminate friction points between channels to create seamless transitions",
           "Implement consistent messaging and branding across digital and physical environments",
           "Develop retargeting strategies that reconnect with store visitors online",
-          "Create digital-to-store and store-to-digital conversion paths"
+          "Create digital-to-store and store-to-digital conversion paths",
           "Develop channel-specific strategies that leverage each platform's unique strengths",
           "Create cohesive measurement frameworks to track cross-channel performance",
         ],
@@ -547,7 +554,8 @@ export const RetailMarketingPage = () => {
     ],
     faqs: [
       {
-        question: "How do you measure the impact of digital marketing on in-store sales?",
+        question:
+          "How do you measure the impact of digital marketing on in-store sales?",
         answer:
           "We implement several attribution methods including promotional code tracking, post-purchase surveys, location-based conversion tracking, CRM integration, and controlled geo-experiments. For larger retailers, we can also implement more advanced solutions like matched panel studies and multi-touch attribution models that incorporate both online engagement and in-store transaction data.",
       },
@@ -572,7 +580,10 @@ export const RetailMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />
@@ -740,7 +751,8 @@ export const FashionLuxuryMarketingPage = () => {
     ],
     faqs: [
       {
-        question: "How do you maintain brand exclusivity while driving sales growth?",
+        question:
+          "How do you maintain brand exclusivity while driving sales growth?",
         answer:
           "We carefully balance reach and exclusivity through selective targeting, premium creative assets, and controlled messaging. Our approach focuses on reaching the right audiences rather than mass exposure, using sophisticated targeting parameters that identify users with luxury purchasing behaviors. We also implement tiered content strategies where some assets are widely available while others are exclusive to specific customer segments, maintaining brand mystique while driving business results.",
       },
@@ -750,7 +762,8 @@ export const FashionLuxuryMarketingPage = () => {
           "For luxury brands, success extends beyond immediate transactions to include brand equity metrics. We track traditional performance indicators like ROAS and conversion rates, but also monitor brand perception metrics, engagement quality, time spent with content, returning visitor rates, and customer lifetime value. For social campaigns, we analyze sentiment and the quality of engagement rather than just volume. Our reporting connects these metrics to your specific business objectives, whether building brand awareness or driving direct sales.",
       },
       {
-        question: "How do you select influencers for luxury brand partnerships?",
+        question:
+          "How do you select influencers for luxury brand partnerships?",
         answer:
           "Our influencer selection process is exceptionally thorough for luxury brands. We evaluate potential partners not just on reach but on aesthetic alignment, audience composition, content quality, previous brand associations, and authenticity. We prefer long-term relationships with fewer, carefully selected influencers over numerous one-off collaborations. Each potential partnership undergoes audience analysis to verify follower authenticity and demographic match with your target customers, ensuring genuine influence with your exact desired audience.",
       },
@@ -765,7 +778,10 @@ export const FashionLuxuryMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />
@@ -932,7 +948,8 @@ export const HealthcareMarketingPage = () => {
     ],
     faqs: [
       {
-        question: "How do you maintain HIPAA compliance in healthcare marketing?",
+        question:
+          "How do you maintain HIPAA compliance in healthcare marketing?",
         answer:
           "We implement numerous safeguards including secure form handling with encryption, compliant tracking methods that avoid PHI, privacy-focused remarketing strategies, staff training on HIPAA requirements, secure data storage protocols, and privacy policy development. We also conduct regular compliance audits of all marketing systems and ensure all third-party tools meet healthcare security standards. Our approach balances marketing effectiveness with strict adherence to healthcare privacy regulations.",
       },
@@ -942,7 +959,8 @@ export const HealthcareMarketingPage = () => {
           "We track the patient journey from initial contact through to appointment and procedure completion. Specific metrics include cost per new patient acquisition, lead-to-appointment conversion rate, service line revenue from marketing sources, patient lifetime value, and marketing-influenced referrals. We implement call tracking, form tracking, and EMR/practice management system integration where possible to provide accurate attribution throughout the patient journey.",
       },
       {
-        question: "What marketing strategies work best for healthcare practices?",
+        question:
+          "What marketing strategies work best for healthcare practices?",
         answer:
           "The most effective strategies depend on your specialty and target patient demographics. Generally, we find that a combination of medical SEO for symptom and treatment searches, targeted PPC campaigns, reputation management, educational content marketing, and practice listings management deliver the strongest results. For specialties with aesthetic or elective procedures, social media and display advertising play a larger role. We customize our approach based on your specific practice goals and competitive landscape.",
       },
@@ -957,7 +975,10 @@ export const HealthcareMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />
@@ -969,8 +990,10 @@ export const HealthcareMarketingPage = () => {
 export const EntertainmentMarketingPage = () => {
   const pageData = {
     name: "OTT & Entertainment",
-    title: "OTT & Entertainment Marketing Agency | Subscriber Acquisition Experts",
-    subtitle: "Strategic Digital Marketing for Streaming Platforms & Content Creators",
+    title:
+      "OTT & Entertainment Marketing Agency | Subscriber Acquisition Experts",
+    subtitle:
+      "Strategic Digital Marketing for Streaming Platforms & Content Creators",
     description: `In today's competitive streaming landscape, subscriber acquisition and retention are everything. As a specialized <strong>OTT marketing agency</strong>, Leadwisee helps streaming platforms, content creators, and entertainment companies grow their audiences through strategic digital marketing.<br><br>Our <strong>subscriber acquisition strategies</strong> focus on efficiently reaching and converting your ideal viewers while maximizing lifetime value through improved engagement and retention.`,
     keywords: [
       "OTT marketing agency",
@@ -982,7 +1005,7 @@ export const EntertainmentMarketingPage = () => {
       "video marketing",
       "OTT advertising",
       "entertainment industry marketing",
-      "streaming service growth"
+      "streaming service growth",
     ],
     services: [
       {
@@ -1014,7 +1037,7 @@ export const EntertainmentMarketingPage = () => {
         title: "Social Media & Community Building",
         description:
           "Create engaged fan communities through strategic social media initiatives that drive word-of-mouth and foster loyalty.",
-      }
+      },
     ],
     strategies: [
       {
@@ -1024,10 +1047,10 @@ export const EntertainmentMarketingPage = () => {
           "Create trailer and preview experiences optimized for conversion",
           "Implement strategic paywalls that maximize conversion from free to paid users",
           "Develop content teasers tailored to different audience segments",
-          "Design multi-channel distribution strategies for promotional content"s",
-          "Track engagement metrics to identify high-performing acquisition content"
+          "Design multi-channel distribution strategies for promotional contents",
+          "Track engagement metrics to identify high-performing acquisition content",
         ],
-        why: "Content is your most powerful acquisition tool. Our strategic approach uses your existing content assets to create compelling samples that drive subscription conversions, allowing potential subscribers to experience your value proposition before committing."
+        why: "Content is your most powerful acquisition tool. Our strategic approach uses your existing content assets to create compelling samples that drive subscription conversions, allowing potential subscribers to experience your value proposition before committing.",
       },
       {
         title: "Audience Segmentation & Targeting",
@@ -1036,9 +1059,9 @@ export const EntertainmentMarketingPage = () => {
           "Develop lookalike audiences based on your highest-value subscribers",
           "Create genre and interest-based targeting strategies",
           "Implement advanced demographic and behavioral targeting",
-          "Continuously refine audience segments based on performance data"
+          "Continuously refine audience segments based on performance data",
         ],
-        why: "Entertainment preferences are highly personal. Our sophisticated audience segmentation ensures your marketing reaches people with the highest propensity to subscribe to your specific content offerings, dramatically improving acquisition efficiency."
+        why: "Entertainment preferences are highly personal. Our sophisticated audience segmentation ensures your marketing reaches people with the highest propensity to subscribe to your specific content offerings, dramatically improving acquisition efficiency.",
       },
       {
         title: "Retention & Engagement Optimization",
@@ -1047,42 +1070,42 @@ export const EntertainmentMarketingPage = () => {
           "Create personalized email and push notification programs",
           "Develop retention-focused content calendars highlighting upcoming releases",
           "Launch win-back campaigns for churned or at-risk subscribers",
-          "Analyze viewing data to identify engagement patterns and churn signals"
+          "Analyze viewing data to identify engagement patterns and churn signals",
         ],
-        why: "In the subscription economy, retention is as important as acquisition. Our engagement strategies keep subscribers active and informed about upcoming content they'll love, reducing churn and increasing lifetime value."
-      }
+        why: "In the subscription economy, retention is as important as acquisition. Our engagement strategies keep subscribers active and informed about upcoming content they'll love, reducing churn and increasing lifetime value.",
+      },
     ],
     benefits: [
       {
         title: "Lower Subscriber Acquisition Cost",
         description:
-          "Our targeted approaches and optimization methods typically reduce customer acquisition costs by 30-45% compared to untargeted campaigns."
+          "Our targeted approaches and optimization methods typically reduce customer acquisition costs by 30-45% compared to untargeted campaigns.",
       },
       {
         title: "Increased Subscriber Lifetime Value",
         description:
-          "Our retention strategies extend average subscription length, significantly increasing the return on your acquisition investment."
+          "Our retention strategies extend average subscription length, significantly increasing the return on your acquisition investment.",
       },
       {
         title: "Improved Content ROI",
         description:
-          "By aligning marketing with content strengths, we help you maximize viewership and value from your content investments."
+          "By aligning marketing with content strengths, we help you maximize viewership and value from your content investments.",
       },
       {
         title: "Actionable Audience Insights",
         description:
-          "Our analytics provide valuable data on viewer preferences and behaviors that inform both marketing and content decisions."
+          "Our analytics provide valuable data on viewer preferences and behaviors that inform both marketing and content decisions.",
       },
       {
         title: "Enhanced Brand Positioning",
         description:
-          "Our strategic messaging highlights your platform's unique value proposition in an increasingly crowded streaming landscape."
+          "Our strategic messaging highlights your platform's unique value proposition in an increasingly crowded streaming landscape.",
       },
       {
         title: "Cross-Platform Audience Growth",
         description:
-          "Beyond subscription metrics, we help build integrated audiences across social, email, and other owned channels."
-      }
+          "Beyond subscription metrics, we help build integrated audiences across social, email, and other owned channels.",
+      },
     ],
     caseStudies: [
       {
@@ -1092,8 +1115,8 @@ export const EntertainmentMarketingPage = () => {
         results: [
           "215% increase in monthly subscriber acquisition",
           "47% reduction in customer acquisition cost",
-          "68% improvement in 6-month retention rate"
-        ]
+          "68% improvement in 6-month retention rate",
+        ],
       },
       {
         title: "Entertainment Content Studio",
@@ -1102,38 +1125,44 @@ export const EntertainmentMarketingPage = () => {
         results: [
           "187% increase in premiere weekend viewership",
           "342% growth in social media engagement around content",
-          "86% higher conversion from viewers to followers for future releases"
-        ]
-      }
+          "86% higher conversion from viewers to followers for future releases",
+        ],
+      },
     ],
     testimonials: [
       {
-        quote: "Leadwisee transformed our subscriber acquisition strategy. Their data-driven approach helped us identify and reach the perfect audience for our content, dramatically improving our growth rate while reducing our marketing costs.",
+        quote:
+          "Leadwisee transformed our subscriber acquisition strategy. Their data-driven approach helped us identify and reach the perfect audience for our content, dramatically improving our growth rate while reducing our marketing costs.",
         name: "Daniel Morgan",
         position: "Head of Growth",
-        company: "StreamSelect Entertainment"
+        company: "StreamSelect Entertainment",
       },
       {
-        quote: "What sets Leadwisee apart is their deep understanding of both marketing performance and entertainment audience behavior. They've helped us not just acquire subscribers, but build a community around our content.",
+        quote:
+          "What sets Leadwisee apart is their deep understanding of both marketing performance and entertainment audience behavior. They've helped us not just acquire subscribers, but build a community around our content.",
         name: "Sarah Chen",
         position: "Marketing Director",
-        company: "Spotlight Media Network"
-      }
+        company: "Spotlight Media Network",
+      },
     ],
     faqs: [
       {
         question: "How do you measure success for OTT marketing campaigns?",
-        answer: "We track both acquisition and engagement metrics to provide a complete picture of campaign performance. Key metrics include cost per subscriber acquisition, trial-to-paid conversion rate, viewer retention at 30/60/90 days, content consumption per subscriber, and lifetime value. Our reporting connects marketing activities to both immediate subscription growth and long-term viewer engagement, giving you clear visibility into ROI across different timeframes."
+        answer:
+          "We track both acquisition and engagement metrics to provide a complete picture of campaign performance. Key metrics include cost per subscriber acquisition, trial-to-paid conversion rate, viewer retention at 30/60/90 days, content consumption per subscriber, and lifetime value. Our reporting connects marketing activities to both immediate subscription growth and long-term viewer engagement, giving you clear visibility into ROI across different timeframes.",
       },
       {
-        question: "What digital channels work best for OTT subscriber acquisition?",
-        answer: "The most effective channels depend on your content type and target audience. Generally, we find that a mix of paid social (particularly Facebook, Instagram, and YouTube), search marketing for high-intent queries, connected TV advertising, and content partnerships delivers the strongest results. For certain entertainment categories, platforms like TikTok and Reddit can also be highly effective. We typically recommend a multi-channel strategy with budget allocation based on performance data."
+        question:
+          "What digital channels work best for OTT subscriber acquisition?",
+        answer:
+          "The most effective channels depend on your content type and target audience. Generally, we find that a mix of paid social (particularly Facebook, Instagram, and YouTube), search marketing for high-intent queries, connected TV advertising, and content partnerships delivers the strongest results. For certain entertainment categories, platforms like TikTok and Reddit can also be highly effective. We typically recommend a multi-channel strategy with budget allocation based on performance data.",
       },
       {
         question: "How important is content marketing for streaming platforms?",
-        answer: "Content marketing is essential for streaming services, as your content itself is your primary value proposition. Effective content marketing showcases your programming through trailers, behind-the-scenes features, cast interviews, and clip compilations. These assets help potential subscribers understand what makes your platform unique and worth paying for. Our content marketing strategies focus on highlighting your programming strengths while addressing the specific interests of different audience segments."
-      }
-    ]
+        answer:
+          "Content marketing is essential for streaming services, as your content itself is your primary value proposition. Effective content marketing showcases your programming through trailers, behind-the-scenes features, cast interviews, and clip compilations. These assets help potential subscribers understand what makes your platform unique and worth paying for. Our content marketing strategies focus on highlighting your programming strengths while addressing the specific interests of different audience segments.",
+      },
+    ],
   };
 
   useEffect(() => {
@@ -1144,7 +1173,10 @@ export const EntertainmentMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />
@@ -1156,8 +1188,10 @@ export const EntertainmentMarketingPage = () => {
 export const CoachingMarketingPage = () => {
   const pageData = {
     name: "Coaching & Consulting",
-    title: "Marketing Agency for Coaches & Consultants | High-Ticket Client Acquisition",
-    subtitle: "Strategic Digital Marketing for Coaches, Consultants & Expert Service Providers",
+    title:
+      "Marketing Agency for Coaches & Consultants | High-Ticket Client Acquisition",
+    subtitle:
+      "Strategic Digital Marketing for Coaches, Consultants & Expert Service Providers",
     description: `Growing a coaching or consulting business requires a specialized marketing approach focused on authority building and trust. As a dedicated <strong>marketing agency for coaches and consultants</strong>, Leadwisee helps expert service providers attract premium clients through strategic digital marketing.<br><br>Our <strong>high-ticket client acquisition</strong> strategies position you as the go-to authority in your field while implementing proven systems to convert prospects into high-value clients.`,
     keywords: [
       "coaching marketing agency",
@@ -1169,39 +1203,39 @@ export const CoachingMarketingPage = () => {
       "funnel optimization",
       "authority marketing",
       "coaching business growth",
-      "premium client attraction"
+      "premium client attraction",
     ],
     services: [
       {
         title: "Authority Positioning & Personal Branding",
         description:
-          "Establish yourself as the recognized expert in your field through strategic content, PR, and thought leadership initiatives."
+          "Establish yourself as the recognized expert in your field through strategic content, PR, and thought leadership initiatives.",
       },
       {
         title: "High-Ticket Lead Generation",
         description:
-          "Develop targeted campaigns that attract qualified prospects who are ready to invest in premium coaching or consulting services."
+          "Develop targeted campaigns that attract qualified prospects who are ready to invest in premium coaching or consulting services.",
       },
       {
         title: "Webinar & Event Marketing",
         description:
-          "Create compelling webinar funnels and event marketing campaigns that showcase your expertise and convert attendees to clients."
+          "Create compelling webinar funnels and event marketing campaigns that showcase your expertise and convert attendees to clients.",
       },
       {
         title: "Sales Funnel Development",
         description:
-          "Build strategic marketing funnels that nurture prospects through the decision journey from awareness to application or booking."
+          "Build strategic marketing funnels that nurture prospects through the decision journey from awareness to application or booking.",
       },
       {
         title: "Premium Content Marketing",
         description:
-          "Develop high-value content that demonstrates your expertise and methodologies while generating qualified leads."
+          "Develop high-value content that demonstrates your expertise and methodologies while generating qualified leads.",
       },
       {
         title: "Podcast & Media Strategy",
         description:
-          "Expand your reach and authority through strategic podcast appearances, interviews, and media placements."
-      }
+          "Expand your reach and authority through strategic podcast appearances, interviews, and media placements.",
+      },
     ],
     strategies: [
       {
@@ -1211,9 +1245,9 @@ export const CoachingMarketingPage = () => {
           "Develop signature frameworks and processes that differentiate your approach",
           "Implement strategic guest appearances on relevant podcasts and publications",
           "Build a consistent publishing schedule across owned and earned media channels",
-          "Leverage case studies and client success stories to demonstrate proven results"
+          "Leverage case studies and client success stories to demonstrate proven results",
         ],
-        why: "In the coaching and consulting space, perceived authority directly impacts client acquisition cost and price sensitivity. Our authority building system creates multiple touchpoints that establish unquestionable expertise, allowing you to command premium rates and attract clients who value your specific approach."
+        why: "In the coaching and consulting space, perceived authority directly impacts client acquisition cost and price sensitivity. Our authority building system creates multiple touchpoints that establish unquestionable expertise, allowing you to command premium rates and attract clients who value your specific approach.",
       },
       {
         title: "Webinar & Workshop Funnel System",
@@ -1222,9 +1256,9 @@ export const CoachingMarketingPage = () => {
           "Create high-conversion registration pages and promotional campaigns",
           "Implement automated follow-up sequences for registrants and attendees",
           "Design strategic attendance incentives and participation mechanisms",
-          "Build seamless transition from free value to application or sales conversation"
+          "Build seamless transition from free value to application or sales conversation",
         ],
-        why: "Webinars and workshops are the most effective client acquisition channel for coaches and consultants, converting at 10-15% compared to 1-2% for traditional lead magnets. Our webinar systems provide valuable education while naturally leading prospects to take the next step in your client journey."
+        why: "Webinars and workshops are the most effective client acquisition channel for coaches and consultants, converting at 10-15% compared to 1-2% for traditional lead magnets. Our webinar systems provide valuable education while naturally leading prospects to take the next step in your client journey.",
       },
       {
         title: "Premium Client Qualification System",
@@ -1233,42 +1267,42 @@ export const CoachingMarketingPage = () => {
           "Create application processes that pre-frame the value of your services",
           "Implement automated scheduling systems for qualified prospects",
           "Design discovery call frameworks that maximize conversion",
-          "Build nurturing sequences for prospects who aren't yet ready to commit"
+          "Build nurturing sequences for prospects who aren't yet ready to commit",
         ],
-        why: "High-ticket coaching and consulting requires focusing your time on qualified prospects. Our qualification systems ensure you speak only with prospects who are a good fit for your services, reducing time waste while increasing conversion rates from call to client."
-      }
+        why: "High-ticket coaching and consulting requires focusing your time on qualified prospects. Our qualification systems ensure you speak only with prospects who are a good fit for your services, reducing time waste while increasing conversion rates from call to client.",
+      },
     ],
     benefits: [
       {
         title: "Enhanced Market Positioning",
         description:
-          "Our authority marketing strategies elevate your positioning, allowing you to command premium rates and stand out in a crowded market."
+          "Our authority marketing strategies elevate your positioning, allowing you to command premium rates and stand out in a crowded market.",
       },
       {
         title: "Qualified Lead Generation",
         description:
-          "Our targeted approaches ensure you attract prospects who value your expertise and are willing to invest in premium services."
+          "Our targeted approaches ensure you attract prospects who value your expertise and are willing to invest in premium services.",
       },
       {
         title: "Scalable Client Acquisition",
         description:
-          "We build systematic marketing funnels that deliver consistent results, allowing you to predictably scale your coaching or consulting business."
+          "We build systematic marketing funnels that deliver consistent results, allowing you to predictably scale your coaching or consulting business.",
       },
       {
         title: "Reduced Sales Resistance",
         description:
-          "Our authority positioning and nurturing sequences educate prospects before sales conversations, reducing objections and shortening the sales cycle."
+          "Our authority positioning and nurturing sequences educate prospects before sales conversations, reducing objections and shortening the sales cycle.",
       },
       {
         title: "Higher Client Quality",
         description:
-          "Our qualification processes ensure you work with ideal clients who value your approach and are committed to getting results."
+          "Our qualification processes ensure you work with ideal clients who value your approach and are committed to getting results.",
       },
       {
         title: "Expanded Visibility & Reach",
         description:
-          "Our media and content strategies expand your audience beyond direct advertising, creating organic growth opportunities."
-      }
+          "Our media and content strategies expand your audience beyond direct advertising, creating organic growth opportunities.",
+      },
     ],
     caseStudies: [
       {
@@ -1278,8 +1312,8 @@ export const CoachingMarketingPage = () => {
         results: [
           "187% increase in qualified strategy session bookings",
           "43% higher average client value",
-          "Positioning shift enabling 65% price increase"
-        ]
+          "Positioning shift enabling 65% price increase",
+        ],
       },
       {
         title: "Executive Leadership Coach",
@@ -1288,38 +1322,45 @@ export const CoachingMarketingPage = () => {
         results: [
           "215% growth in high-ticket discovery call requests",
           "68% webinar-to-application conversion rate",
-          "32 media appearances generating premium client inquiries"
-        ]
-      }
+          "32 media appearances generating premium client inquiries",
+        ],
+      },
     ],
     testimonials: [
       {
-        quote: "Working with Leadwisee transformed my coaching business. They helped me build marketing systems that consistently attract ideal clients who value my expertise and are ready to invest in premium programs. Their understanding of high-ticket client acquisition is unmatched.",
+        quote:
+          "Working with Leadwisee transformed my coaching business. They helped me build marketing systems that consistently attract ideal clients who value my expertise and are ready to invest in premium programs. Their understanding of high-ticket client acquisition is unmatched.",
         name: "Jonathan Reid",
         position: "Founder",
-        company: "Scale Method Consulting"
+        company: "Scale Method Consulting",
       },
       {
-        quote: "Leadwisee deeply understands the unique challenges of marketing high-ticket consulting services. They've helped me position my expertise effectively and build a client acquisition system that delivers predictable results month after month.",
+        quote:
+          "Leadwisee deeply understands the unique challenges of marketing high-ticket consulting services. They've helped me position my expertise effectively and build a client acquisition system that delivers predictable results month after month.",
         name: "Rebecca Zhang",
         position: "CEO",
-        company: "Leadership Elevation Academy"
-      }
+        company: "Leadership Elevation Academy",
+      },
     ],
     faqs: [
       {
-        question: "How long does it take to see results from authority marketing?",
-        answer: "Authority marketing yields both short and long-term results. Initial lead generation campaigns typically show results within 30-60 days. More substantial authority positioning effects, including inbound opportunities and price resistance reduction, generally develop over 3-6 months of consistent implementation. We structure our strategies to deliver quick wins while building long-term authority assets that appreciate in value over time, creating an increasingly valuable marketing ecosystem for your business."
+        question:
+          "How long does it take to see results from authority marketing?",
+        answer:
+          "Authority marketing yields both short and long-term results. Initial lead generation campaigns typically show results within 30-60 days. More substantial authority positioning effects, including inbound opportunities and price resistance reduction, generally develop over 3-6 months of consistent implementation. We structure our strategies to deliver quick wins while building long-term authority assets that appreciate in value over time, creating an increasingly valuable marketing ecosystem for your business.",
       },
       {
-        question: "What marketing channels work best for coaches and consultants?",
-        answer: "The most effective channels for coaches and consultants are typically webinars, podcasts (both hosting and guest appearances), strategic content marketing, and targeted social media (particularly LinkedIn for B2B consultants). However, the ideal channel mix depends on your specific audience and expertise area. We develop custom channel strategies based on where your ideal clients spend time, your personal strengths as a communicator, and the complexity of your service offerings."
+        question:
+          "What marketing channels work best for coaches and consultants?",
+        answer:
+          "The most effective channels for coaches and consultants are typically webinars, podcasts (both hosting and guest appearances), strategic content marketing, and targeted social media (particularly LinkedIn for B2B consultants). However, the ideal channel mix depends on your specific audience and expertise area. We develop custom channel strategies based on where your ideal clients spend time, your personal strengths as a communicator, and the complexity of your service offerings.",
       },
       {
         question: "How do you measure ROI for coaching/consulting marketing?",
-        answer: "We track metrics throughout the client acquisition journey, including lead generation cost, application/call booking rate, call-to-client conversion rate, average client value, and client acquisition cost. Beyond these direct metrics, we also monitor authority indicators like media mentions, speaking invitations, and inbound partnership opportunities. Our reporting connects all marketing activities to both immediate client acquisition and long-term business asset development."
-      }
-    ]
+        answer:
+          "We track metrics throughout the client acquisition journey, including lead generation cost, application/call booking rate, call-to-client conversion rate, average client value, and client acquisition cost. Beyond these direct metrics, we also monitor authority indicators like media mentions, speaking invitations, and inbound partnership opportunities. Our reporting connects all marketing activities to both immediate client acquisition and long-term business asset development.",
+      },
+    ],
   };
 
   useEffect(() => {
@@ -1330,7 +1371,10 @@ export const CoachingMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />
@@ -1343,7 +1387,8 @@ export const InteriorDesignMarketingPage = () => {
   const pageData = {
     name: "Interior Design",
     title: "Interior Design Marketing Agency | Visual-First Client Acquisition",
-    subtitle: "Specialized Digital Marketing for Interior Designers & Home Professionals",
+    subtitle:
+      "Specialized Digital Marketing for Interior Designers & Home Professionals",
     description: `In the visually-driven world of interior design, your marketing must be as beautiful as your work. As a specialized <strong>interior design marketing agency</strong>, Leadwisee helps design professionals showcase their portfolio and attract ideal clients through strategic digital marketing.<br><br>Our <strong>design business growth</strong> strategies leverage visual platforms and targeted campaigns to reach clients seeking your specific design aesthetic and services.`,
     keywords: [
       "interior design marketing",
@@ -1355,39 +1400,39 @@ export const InteriorDesignMarketingPage = () => {
       "design SEO",
       "interior designer social media",
       "Houzz marketing",
-      "visual marketing strategy"
+      "visual marketing strategy",
     ],
     services: [
       {
         title: "Visual Platform Optimization",
         description:
-          "Maximize your presence on visual-first platforms like Instagram, Pinterest, and Houzz to showcase your design work to targeted audiences."
+          "Maximize your presence on visual-first platforms like Instagram, Pinterest, and Houzz to showcase your design work to targeted audiences.",
       },
       {
         title: "Portfolio Website Development",
         description:
-          "Create stunning, conversion-optimized websites that showcase your design aesthetic and make it easy for prospective clients to inquire."
+          "Create stunning, conversion-optimized websites that showcase your design aesthetic and make it easy for prospective clients to inquire.",
       },
       {
         title: "Design Project Marketing",
         description:
-          "Develop comprehensive marketing campaigns around completed projects to maximize exposure and generate new client inquiries."
+          "Develop comprehensive marketing campaigns around completed projects to maximize exposure and generate new client inquiries.",
       },
       {
         title: "Interior Design SEO",
         description:
-          "Improve organic visibility for lucrative design-related searches with specialized SEO for interior design businesses."
+          "Improve organic visibility for lucrative design-related searches with specialized SEO for interior design businesses.",
       },
       {
         title: "Email & Nurture Campaigns",
         description:
-          "Build relationships with prospects through sophisticated email campaigns showcasing your expertise and latest projects."
+          "Build relationships with prospects through sophisticated email campaigns showcasing your expertise and latest projects.",
       },
       {
         title: "Paid Advertising for Designers",
         description:
-          "Implement targeted advertising campaigns that reach affluent homeowners and businesses actively seeking design services."
-      }
+          "Implement targeted advertising campaigns that reach affluent homeowners and businesses actively seeking design services.",
+      },
     ],
     strategies: [
       {
@@ -1397,9 +1442,9 @@ export const InteriorDesignMarketingPage = () => {
           "Create multi-platform visual narratives for completed projects",
           "Implement before-and-after content series that demonstrate transformation",
           "Design strategic process content that educates clients on your approach",
-          "Build content calendars that maintain consistent visual presence"ce"
+          "Build content calendars that maintain consistent visual presencece",
         ],
-        why: "Interior design is inherently visual, and prospective clients make decisions based largely on whether your aesthetic matches their vision. Our visual storytelling approach showcases your design philosophy and execution, attracting clients who already appreciate your specific style."
+        why: "Interior design is inherently visual, and prospective clients make decisions based largely on whether your aesthetic matches their vision. Our visual storytelling approach showcases your design philosophy and execution, attracting clients who already appreciate your specific style.",
       },
       {
         title: "Design Authority Positioning",
@@ -1408,9 +1453,9 @@ export const InteriorDesignMarketingPage = () => {
           "Create content series addressing common design challenges and solutions",
           "Implement strategic PR and media outreach for broader visibility",
           "Secure features in design publications and platforms",
-          "Build authority through strategic collaborations and partnerships"
+          "Build authority through strategic collaborations and partnerships",
         ],
-        why: "Clients choose interior designers they trust and view as experts. Our authority positioning strategies establish your credibility and showcase your unique perspective, differentiating you from competitors and justifying premium rates for your services."
+        why: "Clients choose interior designers they trust and view as experts. Our authority positioning strategies establish your credibility and showcase your unique perspective, differentiating you from competitors and justifying premium rates for your services.",
       },
       {
         title: "Ideal Client Acquisition System",
@@ -1419,43 +1464,43 @@ export const InteriorDesignMarketingPage = () => {
           "Create lead magnets that appeal to your ideal client profile",
           "Implement qualification processes that identify the best-fit prospects",
           "Design consultation booking systems that streamline the inquiry process",
-          "Implement follow-up sequences that nurture leads through the sales process"s",
-          "Build nurturing sequences that move prospects toward project commitment"
+          "Implement follow-up sequences that nurture leads through the sales processs",
+          "Build nurturing sequences that move prospects toward project commitment",
         ],
-        why: "The most successful design businesses work with clients who value their expertise and have appropriate budgets. Our acquisition systems attract and identify ideal clients while filtering out poor fits, ensuring you focus your time on the most promising opportunities."
-      }
+        why: "The most successful design businesses work with clients who value their expertise and have appropriate budgets. Our acquisition systems attract and identify ideal clients while filtering out poor fits, ensuring you focus your time on the most promising opportunities.",
+      },
     ],
     benefits: [
       {
         title: "Enhanced Visual Branding",
         description:
-          "Our visual marketing strategies ensure your online presence reflects the quality and aesthetic of your design work."
+          "Our visual marketing strategies ensure your online presence reflects the quality and aesthetic of your design work.",
       },
       {
         title: "Qualified Project Inquiries",
         description:
-          "Our targeting approaches generate inquiries from clients who appreciate your style and have appropriate budgets for your services."
+          "Our targeting approaches generate inquiries from clients who appreciate your style and have appropriate budgets for your services.",
       },
       {
         title: "Expanded Design Visibility",
         description:
-          "Our multi-platform strategies increase your exposure across both mainstream and design-specific platforms and publications."
+          "Our multi-platform strategies increase your exposure across both mainstream and design-specific platforms and publications.",
       },
       {
         title: "Higher Project Values",
         description:
-          "Our positioning and qualification processes naturally lead to higher-value projects and better client relationships."
+          "Our positioning and qualification processes naturally lead to higher-value projects and better client relationships.",
       },
       {
         title: "Consistent Lead Generation",
         description:
-          "Our marketing systems create predictable inquiry flow, allowing you to plan your design business growth with confidence."
+          "Our marketing systems create predictable inquiry flow, allowing you to plan your design business growth with confidence.",
       },
       {
         title: "Distinctive Market Positioning",
         description:
-          "Our branding strategies highlight what makes your design approach unique, helping you stand out in a crowded market."
-      }
+          "Our branding strategies highlight what makes your design approach unique, helping you stand out in a crowded market.",
+      },
     ],
     caseStudies: [
       {
@@ -1465,8 +1510,8 @@ export const InteriorDesignMarketingPage = () => {
         results: [
           "215% increase in qualified design consultation requests",
           "62% higher average project value",
-          "Featured in 8 major design publications through strategic PR"
-        ]
+          "Featured in 8 major design publications through strategic PR",
+        ],
       },
       {
         title: "Commercial Design Firm",
@@ -1475,38 +1520,43 @@ export const InteriorDesignMarketingPage = () => {
         results: [
           "187% growth in commercial project inquiries",
           "43% increase in website portfolio engagement",
-          "12 new enterprise clients attributed to digital marketing"
-        ]
-      }
+          "12 new enterprise clients attributed to digital marketing",
+        ],
+      },
     ],
     testimonials: [
       {
-        quote: "Leadwisee transformed how we market our design services. Their visual-first approach ensures our online presence matches the quality of our work, and their lead generation strategies have connected us with ideal clients who truly value our design expertise.",
+        quote:
+          "Leadwisee transformed how we market our design services. Their visual-first approach ensures our online presence matches the quality of our work, and their lead generation strategies have connected us with ideal clients who truly value our design expertise.",
         name: "Alexandra Chen",
         position: "Principal Designer",
-        company: "Harmony Interior Design"
+        company: "Harmony Interior Design",
       },
       {
-        quote: "Working with Leadwisee has been instrumental in growing our design firm. They understand the unique challenges of marketing creative services and have helped us build a brand that attracts exactly the type of clients we want to work with.",
+        quote:
+          "Working with Leadwisee has been instrumental in growing our design firm. They understand the unique challenges of marketing creative services and have helped us build a brand that attracts exactly the type of clients we want to work with.",
         name: "Michael Torres",
         position: "Founder",
-        company: "Concept Design Studio"
-      }
+        company: "Concept Design Studio",
+      },
     ],
     faqs: [
       {
         question: "Which social platforms work best for interior designers?",
-        answer: "The most effective platforms for interior designers are typically Instagram, Pinterest, and Houzz, as these visual-first networks naturally showcase design work. Instagram is excellent for building your brand and connecting with potential clients, Pinterest drives significant long-term traffic through search-like discovery, and Houzz specifically targets homeowners actively planning design projects. We typically recommend focusing on 2-3 platforms where you can maintain consistent quality rather than spreading efforts too thin across many networks."
+        answer:
+          "The most effective platforms for interior designers are typically Instagram, Pinterest, and Houzz, as these visual-first networks naturally showcase design work. Instagram is excellent for building your brand and connecting with potential clients, Pinterest drives significant long-term traffic through search-like discovery, and Houzz specifically targets homeowners actively planning design projects. We typically recommend focusing on 2-3 platforms where you can maintain consistent quality rather than spreading efforts too thin across many networks.",
       },
       {
         question: "How do you measure ROI for interior design marketing?",
-        answer: "We track both lead generation metrics and project quality indicators. Key metrics include consultation request volume, consultation-to-project conversion rate, average project value, client acquisition cost, and lifetime client value (including referrals). For social and portfolio content, we analyze engagement patterns to understand which design styles and project types generate the most interest, helping refine both marketing and business development strategies."
+        answer:
+          "We track both lead generation metrics and project quality indicators. Key metrics include consultation request volume, consultation-to-project conversion rate, average project value, client acquisition cost, and lifetime client value (including referrals). For social and portfolio content, we analyze engagement patterns to understand which design styles and project types generate the most interest, helping refine both marketing and business development strategies.",
       },
       {
         question: "How important is SEO for interior designers?",
-        answer: "SEO is extremely valuable for interior designers, particularly local SEO for design firms serving specific geographic areas. Many potential clients begin their designer search with queries like 'interior designer [city]' or '[style] interior designer near me.' Our SEO strategies focus on ranking for these high-intent searches as well as inspirational terms related to your design specialty. We implement proper schema markup, portfolio optimization, and local citation building to improve visibility for qualified prospects actively seeking design services."
-      }
-    ]
+        answer:
+          "SEO is extremely valuable for interior designers, particularly local SEO for design firms serving specific geographic areas. Many potential clients begin their designer search with queries like 'interior designer [city]' or '[style] interior designer near me.' Our SEO strategies focus on ranking for these high-intent searches as well as inspirational terms related to your design specialty. We implement proper schema markup, portfolio optimization, and local citation building to improve visibility for qualified prospects actively seeking design services.",
+      },
+    ],
   };
 
   useEffect(() => {
@@ -1517,7 +1567,10 @@ export const InteriorDesignMarketingPage = () => {
     <>
       <Helmet>
         <title>{pageData.title} | Leadwisee</title>
-        <meta name="description" content={pageData.description.replace(/<[^>]*>/g, '')} />
+        <meta
+          name="description"
+          content={pageData.description.replace(/<[^>]*>/g, "")}
+        />
         <meta name="keywords" content={pageData.keywords.join(", ")} />
       </Helmet>
       <IndustryTemplate industry={pageData} />

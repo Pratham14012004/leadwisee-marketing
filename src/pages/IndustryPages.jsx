@@ -445,6 +445,8 @@ export const RetailMarketingPage = () => {
           "Map the complete customer experience across all online and offline touchpoints",
           "Identify and eliminate friction points between channels to create seamless transitions",
           "Implement consistent messaging and branding across digital and physical environments",
+          "Develop retargeting strategies that reconnect with store visitors online",
+          "Create digital-to-store and store-to-digital conversion paths"
           "Develop channel-specific strategies that leverage each platform's unique strengths",
           "Create cohesive measurement frameworks to track cross-channel performance",
         ],
@@ -1022,6 +1024,7 @@ export const EntertainmentMarketingPage = () => {
           "Create trailer and preview experiences optimized for conversion",
           "Implement strategic paywalls that maximize conversion from free to paid users",
           "Develop content teasers tailored to different audience segments",
+          "Design multi-channel distribution strategies for promotional content"s",
           "Track engagement metrics to identify high-performing acquisition content"
         ],
         why: "Content is your most powerful acquisition tool. Our strategic approach uses your existing content assets to create compelling samples that drive subscription conversions, allowing potential subscribers to experience your value proposition before committing."
@@ -1394,7 +1397,7 @@ export const InteriorDesignMarketingPage = () => {
           "Create multi-platform visual narratives for completed projects",
           "Implement before-and-after content series that demonstrate transformation",
           "Design strategic process content that educates clients on your approach",
-          "Build content calendars that maintain consistent visual presence"
+          "Build content calendars that maintain consistent visual presence"ce"
         ],
         why: "Interior design is inherently visual, and prospective clients make decisions based largely on whether your aesthetic matches their vision. Our visual storytelling approach showcases your design philosophy and execution, attracting clients who already appreciate your specific style."
       },
@@ -1416,6 +1419,7 @@ export const InteriorDesignMarketingPage = () => {
           "Create lead magnets that appeal to your ideal client profile",
           "Implement qualification processes that identify the best-fit prospects",
           "Design consultation booking systems that streamline the inquiry process",
+          "Implement follow-up sequences that nurture leads through the sales process"s",
           "Build nurturing sequences that move prospects toward project commitment"
         ],
         why: "The most successful design businesses work with clients who value their expertise and have appropriate budgets. Our acquisition systems attract and identify ideal clients while filtering out poor fits, ensuring you focus your time on the most promising opportunities."

@@ -95,3 +95,120 @@ const IndustryCard = ({ title, image, link, delay = 0 }) => {
 };
 
 export default IndustryCard;
+import React from "react";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+
+const Card = styled(motion.div)`
+  background-color: ${(props) => props.theme.body};
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const CardImageWrapper = styled.div`
+  width: 100%;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 50%);
+  }
+`;
+
+const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  
+  ${Card}:hover & {
+    transform: scale(1.1);
+  }
+`;
+
+const CardContent = styled.div`
+  padding: 1.5rem;
+  position: relative;
+`;
+
+const CardTitle = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: ${(props) => props.theme.text};
+`;
+
+const CardDescription = styled.p`
+  font-size: 1rem;
+  line-height: 1.6;
+  color: ${(props) => props.theme.textLight};
+  margin-bottom: 1.5rem;
+`;
+
+const CardLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  color: ${(props) => props.theme.primary};
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  
+  svg {
+    margin-left: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover svg {
+    transform: translateX(5px);
+  }
+`;
+
+const IndustryCard = ({ 
+  name, 
+  slug, 
+  description, 
+  image = "https://via.placeholder.com/600x400?text=Industry",
+  delay = 0
+}) => {
+  return (
+    <Card
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay }}
+    >
+      <CardImageWrapper>
+        <CardImage src={image} alt={name} />
+      </CardImageWrapper>
+      <CardContent>
+        <CardTitle>{name}</CardTitle>
+        <CardDescription>
+          {description}
+        </CardDescription>
+        <CardLink to={`/industries/${slug}`}>
+          Learn more <FiArrowRight />
+        </CardLink>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default IndustryCard;

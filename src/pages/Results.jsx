@@ -782,3 +782,553 @@ const Results = () => {
 };
 
 export default Results;
+import React from "react";
+import styled from "styled-components";
+import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
+import { FiBarChart2, FiTrendingUp, FiDollarSign, FiTarget } from "react-icons/fi";
+import FeatureCard from "../components/common/FeatureCard";
+import Button from "../components/common/Button";
+import ContactForm from "../components/common/ContactForm";
+
+const PageContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+`;
+
+const PageHeader = styled.div`
+  text-align: center;
+  margin-bottom: 4rem;
+`;
+
+const Title = styled(motion.h1)`
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  
+  span {
+    color: ${props => props.theme.primary};
+  }
+`;
+
+const Subtitle = styled(motion.p)`
+  font-size: 1.1rem;
+  color: ${props => props.theme.textLight};
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  line-height: 1.6;
+`;
+
+const MetricsSection = styled.section`
+  margin-bottom: 5rem;
+`;
+
+const MetricsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const MetricCard = styled(motion.div)`
+  background-color: ${props => props.theme.body};
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const MetricNumber = styled.h3`
+  font-size: 3rem;
+  font-weight: 700;
+  color: ${props => props.theme.primary};
+  margin-bottom: 0.5rem;
+`;
+
+const MetricLabel = styled.p`
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+`;
+
+const MetricDescription = styled.p`
+  font-size: 0.9rem;
+  color: ${props => props.theme.textLight};
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+const SectionDescription = styled.p`
+  font-size: 1.1rem;
+  color: ${props => props.theme.textLight};
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+  text-align: center;
+`;
+
+const ResultsTable = styled.div`
+  margin-bottom: 5rem;
+  overflow-x: auto;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  
+  th {
+    background-color: ${props => props.theme.backgroundSecondary};
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+  }
+  
+  td {
+    padding: 1rem;
+    border-bottom: 1px solid ${props => props.theme.border};
+  }
+  
+  tr:nth-child(even) {
+    background-color: ${props => props.theme.backgroundSecondary};
+  }
+  
+  tr:hover {
+    background-color: ${props => `rgba(59, 130, 246, 0.05)`};
+  }
+  
+  .positive {
+    color: #10B981;
+    font-weight: 600;
+  }
+`;
+
+const StrategiesSection = styled.section`
+  margin-bottom: 5rem;
+`;
+
+const StrategiesGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const TestimonialsSection = styled.section`
+  margin-bottom: 5rem;
+  background-color: ${props => props.theme.backgroundSecondary};
+  padding: 4rem 0;
+`;
+
+const TestimonialCard = styled.div`
+  background-color: ${props => props.theme.body};
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+`;
+
+const TestimonialQuote = styled.p`
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+`;
+
+const TestimonialAuthor = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const AuthorImage = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const AuthorInfo = styled.div``;
+
+const AuthorName = styled.h4`
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+`;
+
+const AuthorRole = styled.p`
+  font-size: 0.875rem;
+  color: ${props => props.theme.textLight};
+`;
+
+const CTASection = styled.section`
+  background-color: ${props => props.theme.primary};
+  color: white;
+  padding: 4rem 0;
+  border-radius: 12px;
+  margin-bottom: 5rem;
+`;
+
+const CTAContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+`;
+
+const CTATitle = styled.h2`
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+`;
+
+const CTADescription = styled.p`
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  opacity: 0.9;
+`;
+
+const ContactSection = styled.section`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+const ContactInfo = styled.div``;
+
+const ContactTitle = styled.h3`
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+`;
+
+const ContactDescription = styled.p`
+  font-size: 1.1rem;
+  color: ${props => props.theme.textLight};
+  margin-bottom: 2rem;
+  line-height: 1.6;
+`;
+
+const BenefitsList = styled.ul`
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+  
+  li {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    
+    strong {
+      color: ${props => props.theme.primary};
+    }
+  }
+`;
+
+const Results = () => {
+  const metrics = [
+    { 
+      number: "300%", 
+      label: "Average ROI", 
+      description: "Return on ad spend across all client campaigns" 
+    },
+    { 
+      number: "85%", 
+      label: "Conversion Rate Increase", 
+      description: "Average improvement in landing page conversions" 
+    },
+    { 
+      number: "70%", 
+      label: "Cost Per Lead Reduction", 
+      description: "Average reduction in cost per qualified lead" 
+    },
+    { 
+      number: "50%", 
+      label: "Traffic Growth", 
+      description: "Average increase in qualified website traffic" 
+    }
+  ];
+  
+  const campaignResults = [
+    { 
+      client: "E-commerce Brand", 
+      industry: "Fashion", 
+      service: "Paid Social", 
+      budget: "$15,000/mo", 
+      roas: "4.2x", 
+      improvement: "+215%" 
+    },
+    { 
+      client: "SaaS Company", 
+      industry: "B2B Software", 
+      service: "PPC & SEO", 
+      budget: "$25,000/mo", 
+      roas: "3.8x", 
+      improvement: "+180%" 
+    },
+    { 
+      client: "Health Practice", 
+      industry: "Healthcare", 
+      service: "Local Marketing", 
+      budget: "$8,000/mo", 
+      roas: "5.1x", 
+      improvement: "+310%" 
+    },
+    { 
+      client: "Real Estate Agency", 
+      industry: "Real Estate", 
+      service: "PPC & Social", 
+      budget: "$12,000/mo", 
+      roas: "3.5x", 
+      improvement: "+165%" 
+    },
+    { 
+      client: "Online Retailer", 
+      industry: "E-commerce", 
+      service: "Shopping Ads", 
+      budget: "$35,000/mo", 
+      roas: "4.7x", 
+      improvement: "+270%" 
+    }
+  ];
+  
+  return (
+    <>
+      <Helmet>
+        <title>Our Results | Leadwisee Marketing Agency</title>
+        <meta name="description" content="See the real results we've achieved for our clients. Explore case studies, metrics, and testimonials from successful marketing campaigns." />
+      </Helmet>
+      
+      <PageContainer>
+        <PageHeader>
+          <Title
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Our <span>Proven</span> Results
+          </Title>
+          <Subtitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            We don't just promise results—we deliver them. Explore our performance metrics and client success stories to see how we can help your business grow.
+          </Subtitle>
+        </PageHeader>
+        
+        <MetricsSection>
+          <MetricsGrid>
+            {metrics.map((metric, index) => (
+              <MetricCard
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <MetricNumber>{metric.number}</MetricNumber>
+                <MetricLabel>{metric.label}</MetricLabel>
+                <MetricDescription>{metric.description}</MetricDescription>
+              </MetricCard>
+            ))}
+          </MetricsGrid>
+        </MetricsSection>
+        
+        <ResultsTable>
+          <SectionTitle>Campaign Performance</SectionTitle>
+          <SectionDescription>
+            Here are some of our recent campaign results across various industries and marketing services.
+          </SectionDescription>
+          
+          <Table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Industry</th>
+                <th>Service</th>
+                <th>Budget</th>
+                <th>ROAS</th>
+                <th>Improvement</th>
+              </tr>
+            </thead>
+            <tbody>
+              {campaignResults.map((result, index) => (
+                <tr key={index}>
+                  <td>{result.client}</td>
+                  <td>{result.industry}</td>
+                  <td>{result.service}</td>
+                  <td>{result.budget}</td>
+                  <td className="positive">{result.roas}</td>
+                  <td className="positive">{result.improvement}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ResultsTable>
+        
+        <StrategiesSection>
+          <SectionTitle>Our Winning Strategies</SectionTitle>
+          <SectionDescription>
+            Here's how we deliver exceptional results for our clients through proven marketing tactics.
+          </SectionDescription>
+          
+          <StrategiesGrid>
+            <FeatureCard
+              title="Data-Driven Optimization"
+              description="We continuously analyze campaign data to identify optimization opportunities, refine targeting, and improve performance."
+              icon={<FiBarChart2 />}
+              delay={0.1}
+            />
+            <FeatureCard
+              title="Strategic Budget Allocation"
+              description="We distribute budgets based on performance data, focusing spend on the highest-converting channels and campaigns."
+              icon={<FiDollarSign />}
+              delay={0.2}
+            />
+            <FeatureCard
+              title="Conversion Rate Optimization"
+              description="We systematically test and improve landing pages, forms, and checkout processes to maximize conversion rates."
+              icon={<FiTrendingUp />}
+              delay={0.3}
+            />
+            <FeatureCard
+              title="Precision Targeting"
+              description="We identify and target high-value audience segments most likely to convert, reducing wasted ad spend."
+              icon={<FiTarget />}
+              delay={0.4}
+            />
+            <FeatureCard
+              title="Multi-Channel Attribution"
+              description="We implement advanced attribution models to understand the full customer journey and optimize accordingly."
+              icon={<FiBarChart2 />}
+              delay={0.5}
+            />
+            <FeatureCard
+              title="ROI-Focused Reporting"
+              description="Our comprehensive reports focus on business impact and return on investment, not just marketing metrics."
+              icon={<FiDollarSign />}
+              delay={0.6}
+            />
+          </StrategiesGrid>
+        </StrategiesSection>
+        
+        <TestimonialsSection>
+          <div className="container">
+            <SectionTitle>Client Testimonials</SectionTitle>
+            <SectionDescription>
+              Don't just take our word for it. Here's what our clients say about the results we've achieved.
+            </SectionDescription>
+            
+            <TestimonialCard>
+              <TestimonialQuote>
+                "Leadwisee transformed our digital marketing strategy. Within just 3 months, they increased our conversion rate by 95% and reduced our cost per acquisition by 40%. Their data-driven approach and transparent reporting made all the difference."
+              </TestimonialQuote>
+              <TestimonialAuthor>
+                <AuthorImage>
+                  <img src="https://via.placeholder.com/100" alt="John Smith" />
+                </AuthorImage>
+                <AuthorInfo>
+                  <AuthorName>John Smith</AuthorName>
+                  <AuthorRole>Marketing Director, SaaS Company</AuthorRole>
+                </AuthorInfo>
+              </TestimonialAuthor>
+            </TestimonialCard>
+            
+            <TestimonialCard>
+              <TestimonialQuote>
+                "We tried several agencies before finding Leadwisee. Their strategic approach to our e-commerce marketing delivered a 320% ROI and helped us scale our business. They truly understand what drives results in today's competitive landscape."
+              </TestimonialQuote>
+              <TestimonialAuthor>
+                <AuthorImage>
+                  <img src="https://via.placeholder.com/100" alt="Sarah Johnson" />
+                </AuthorImage>
+                <AuthorInfo>
+                  <AuthorName>Sarah Johnson</AuthorName>
+                  <AuthorRole>CEO, E-commerce Brand</AuthorRole>
+                </AuthorInfo>
+              </TestimonialAuthor>
+            </TestimonialCard>
+          </div>
+        </TestimonialsSection>
+        
+        <CTASection>
+          <CTAContainer>
+            <CTATitle>Ready to Achieve These Results?</CTATitle>
+            <CTADescription>
+              Let's discuss how our performance marketing strategies can help you drive significant business growth.
+            </CTADescription>
+            <Button 
+              to="/contact" 
+              variant="secondary" 
+              size="large"
+            >
+              Schedule a Strategy Call
+            </Button>
+          </CTAContainer>
+        </CTASection>
+        
+        <ContactSection>
+          <ContactInfo>
+            <ContactTitle>Let's Talk About Your Growth Goals</ContactTitle>
+            <ContactDescription>
+              Ready to start seeing real results from your marketing efforts? Schedule a free strategy call with our team to discuss your specific goals and challenges.
+            </ContactDescription>
+            
+            <BenefitsList>
+              <li><strong>Free Marketing Audit</strong> - Get a comprehensive review of your current marketing performance</li>
+              <li><strong>Custom Strategy</strong> - Receive a tailored marketing plan designed to meet your specific goals</li>
+              <li><strong>ROI Projection</strong> - See what results you can expect based on our experience with similar businesses</li>
+              <li><strong>No Obligation</strong> - Get valuable insights whether you decide to work with us or not</li>
+            </BenefitsList>
+            
+            <Button 
+              to="/case-studies" 
+              variant="secondary"
+            >
+              See Our Case Studies
+            </Button>
+          </ContactInfo>
+          
+          <ContactForm heading="Get Your Free Strategy Call" />
+        </ContactSection>
+      </PageContainer>
+    </>
+  );
+};
+
+export default Results;

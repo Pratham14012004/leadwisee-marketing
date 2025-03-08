@@ -96,3 +96,84 @@ const NotFound = () => {
 };
 
 export default NotFound;
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FiHome } from "react-icons/fi";
+import Button from "../components/common/Button";
+
+const NotFoundContainer = styled.div`
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+`;
+
+const Content = styled.div`
+  text-align: center;
+  max-width: 600px;
+`;
+
+const ErrorCode = styled.h1`
+  font-size: 8rem;
+  font-weight: 700;
+  color: ${props => props.theme.primary};
+  margin: 0;
+  line-height: 1;
+`;
+
+const Title = styled.h2`
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+`;
+
+const Description = styled.p`
+  font-size: 1.1rem;
+  color: ${props => props.theme.textLight};
+  margin-bottom: 2rem;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  
+  @media (min-width: 480px) {
+    flex-direction: row;
+    justify-content: center;
+  }
+`;
+
+const NotFound = () => {
+  return (
+    <NotFoundContainer>
+      <Content>
+        <ErrorCode>404</ErrorCode>
+        <Title>Page Not Found</Title>
+        <Description>
+          The page you are looking for might have been removed, had its name changed, 
+          or is temporarily unavailable.
+        </Description>
+        <ButtonsContainer>
+          <Button 
+            to="/" 
+            variant="primary"
+            leftIcon={<FiHome />}
+          >
+            Back to Home
+          </Button>
+          <Button 
+            to="/contact" 
+            variant="secondary"
+          >
+            Contact Support
+          </Button>
+        </ButtonsContainer>
+      </Content>
+    </NotFoundContainer>
+  );
+};
+
+export default NotFound;

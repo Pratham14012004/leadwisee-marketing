@@ -465,3 +465,410 @@ const Home = () => {
 };
 
 export default Home;
+import React from "react";
+import styled from "styled-components";
+import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { FiArrowRight, FiCheck } from "react-icons/fi";
+import ContactForm from "../components/common/ContactForm";
+import Button from "../components/common/Button";
+
+const HeroSection = styled.section`
+  padding: 6rem 0;
+  background-color: ${props => props.theme.background};
+`;
+
+const HeroContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
+const HeroContent = styled.div`
+  flex: 1;
+`;
+
+const HeroTitle = styled(motion.h1)`
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  
+  @media (min-width: 768px) {
+    font-size: 3.5rem;
+  }
+  
+  span {
+    color: ${props => props.theme.primary};
+  }
+`;
+
+const HeroSubtitle = styled(motion.p)`
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  color: ${props => props.theme.textLight};
+  line-height: 1.6;
+  max-width: 600px;
+`;
+
+const HeroButtons = styled(motion.div)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+`;
+
+const HeroFormContainer = styled.div`
+  flex: 1;
+  min-width: 300px;
+  
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
+`;
+
+const HeroFormCard = styled(motion.div)`
+  background-color: ${props => props.theme.body};
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+`;
+
+const ServicesSection = styled.section`
+  padding: 5rem 0;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+const SectionSubtitle = styled.p`
+  font-size: 1.125rem;
+  color: ${props => props.theme.textLight};
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+`;
+
+const ResultsSection = styled.section`
+  padding: 5rem 0;
+  background-color: ${props => props.theme.backgroundSecondary};
+`;
+
+const ResultsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const ResultCard = styled(motion.div)`
+  background-color: ${props => props.theme.body};
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+`;
+
+const ResultNumber = styled.h3`
+  font-size: 3rem;
+  font-weight: 700;
+  color: ${props => props.theme.primary};
+  margin-bottom: 1rem;
+`;
+
+const ResultText = styled.p`
+  font-size: 1rem;
+  color: ${props => props.theme.textLight};
+`;
+
+const CTASection = styled.section`
+  padding: 5rem 0;
+  background-color: ${props => props.theme.primary};
+  color: white;
+`;
+
+const CTAContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+`;
+
+const CTATitle = styled.h2`
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+`;
+
+const CTADescription = styled.p`
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  line-height: 1.6;
+`;
+
+const FeatureSection = styled.section`
+  padding: 5rem 0;
+`;
+
+const FeatureGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const FeatureCard = styled.div`
+  padding: 1.5rem;
+`;
+
+const FeatureIcon = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ${props => `rgba(59, 130, 246, 0.1)`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: ${props => props.theme.primary};
+  font-size: 1.25rem;
+`;
+
+const FeatureTitle = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+`;
+
+const FeatureDescription = styled.p`
+  font-size: 1rem;
+  line-height: 1.6;
+  color: ${props => props.theme.textLight};
+`;
+
+const Home = () => {
+  const results = [
+    { number: "300%", text: "Average ROI for clients" },
+    { number: "85%", text: "Increase in conversion rates" },
+    { number: "150+", text: "Happy clients" },
+    { number: "$5M+", text: "Ad spend managed" }
+  ];
+  
+  return (
+    <>
+      <Helmet>
+        <title>Leadwisee | Data-Driven Performance Marketing Agency</title>
+        <meta name="description" content="Leadwisee is a performance marketing agency specializing in PPC, social media, and e-commerce marketing solutions that deliver measurable results." />
+      </Helmet>
+      
+      {/* Hero Section */}
+      <HeroSection>
+        <HeroContainer>
+          <HeroContent>
+            <HeroTitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Drive Growth with <span>Data-Driven</span> Marketing
+            </HeroTitle>
+            <HeroSubtitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              We help businesses achieve measurable results through strategic performance marketing campaigns optimized for conversion.
+            </HeroSubtitle>
+            <HeroButtons
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Button 
+                to="/contact" 
+                variant="primary" 
+                size="large"
+              >
+                Get a Free Strategy
+              </Button>
+              <Button 
+                to="/results" 
+                variant="secondary" 
+                size="large"
+                rightIcon={<FiArrowRight />}
+              >
+                View Our Results
+              </Button>
+            </HeroButtons>
+          </HeroContent>
+          
+          <HeroFormContainer>
+            <HeroFormCard
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <ContactForm heading="Get a Free Marketing Audit" />
+            </HeroFormCard>
+          </HeroFormContainer>
+        </HeroContainer>
+      </HeroSection>
+      
+      {/* Results Section */}
+      <ResultsSection>
+        <div className="container">
+          <SectionTitle>Proven Results</SectionTitle>
+          <SectionSubtitle>
+            Our data-driven approach has helped hundreds of businesses achieve exceptional growth and ROI.
+          </SectionSubtitle>
+          
+          <ResultsGrid>
+            {results.map((result, index) => (
+              <ResultCard
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <ResultNumber>{result.number}</ResultNumber>
+                <ResultText>{result.text}</ResultText>
+              </ResultCard>
+            ))}
+          </ResultsGrid>
+          
+          <div className="text-center">
+            <Button 
+              to="/results" 
+              variant="primary" 
+              size="large"
+              rightIcon={<FiArrowRight />}
+            >
+              View Detailed Results
+            </Button>
+          </div>
+        </div>
+      </ResultsSection>
+      
+      {/* Why Choose Us Section */}
+      <FeatureSection>
+        <div className="container">
+          <SectionTitle>Why Choose Leadwisee</SectionTitle>
+          <SectionSubtitle>
+            We combine strategic thinking, creative solutions, and technical expertise to drive measurable business results.
+          </SectionSubtitle>
+          
+          <FeatureGrid>
+            <FeatureCard>
+              <FeatureIcon>
+                <FiCheck />
+              </FeatureIcon>
+              <FeatureTitle>Data-Driven Approach</FeatureTitle>
+              <FeatureDescription>
+                We leverage analytics and data insights to make informed decisions that maximize your marketing ROI.
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>
+                <FiCheck />
+              </FeatureIcon>
+              <FeatureTitle>Industry Expertise</FeatureTitle>
+              <FeatureDescription>
+                Our team has specialized experience across multiple industries, allowing us to implement proven strategies.
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>
+                <FiCheck />
+              </FeatureIcon>
+              <FeatureTitle>Transparent Reporting</FeatureTitle>
+              <FeatureDescription>
+                Clear, comprehensive reporting keeps you informed about your campaign performance and results.
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>
+                <FiCheck />
+              </FeatureIcon>
+              <FeatureTitle>Growth-Focused Strategy</FeatureTitle>
+              <FeatureDescription>
+                We focus on strategies that drive meaningful business growth, not just vanity metrics.
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>
+                <FiCheck />
+              </FeatureIcon>
+              <FeatureTitle>Continuous Optimization</FeatureTitle>
+              <FeatureDescription>
+                We constantly test and optimize campaigns to improve performance and adapt to market changes.
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>
+                <FiCheck />
+              </FeatureIcon>
+              <FeatureTitle>Dedicated Support</FeatureTitle>
+              <FeatureDescription>
+                Our client-focused approach ensures personalized attention and responsive communication.
+              </FeatureDescription>
+            </FeatureCard>
+          </FeatureGrid>
+        </div>
+      </FeatureSection>
+      
+      {/* CTA Section */}
+      <CTASection>
+        <CTAContainer>
+          <CTATitle>Ready to Transform Your Marketing?</CTATitle>
+          <CTADescription>
+            Let's discuss how our performance marketing strategies can help you achieve your business goals.
+          </CTADescription>
+          <Button 
+            to="/contact" 
+            variant="secondary" 
+            size="large"
+          >
+            Schedule a Free Strategy Call
+          </Button>
+        </CTAContainer>
+      </CTASection>
+    </>
+  );
+};
+
+export default Home;

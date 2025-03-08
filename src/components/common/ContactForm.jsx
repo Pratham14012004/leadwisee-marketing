@@ -309,3 +309,262 @@ const ContactForm = ({
 };
 
 export default ContactForm;
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
+
+const FormContainer = styled.div`
+  margin-top: 3rem;
+`;
+
+const Form = styled.form`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FormGroup = styled.div`
+  &.full-width {
+    grid-column: 1 / -1;
+  }
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text};
+  transition: border-color 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: ${props => props.theme.colors.primary};
+  }
+  
+  &.error {
+    border-color: #e53e3e;
+  }
+`;
+
+const Select = styled.select`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text};
+  transition: border-color 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: ${props => props.theme.colors.primary};
+  }
+  
+  &.error {
+    border-color: #e53e3e;
+  }
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text};
+  resize: vertical;
+  min-height: 150px;
+  transition: border-color 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: ${props => props.theme.colors.primary};
+  }
+  
+  &.error {
+    border-color: #e53e3e;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+`;
+
+const SubmitButton = styled.button`
+  grid-column: 1 / -1;
+  background-color: ${props => props.theme.colors.primary};
+  color: white;
+  font-weight: 600;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.primaryDark};
+  }
+  
+  &:disabled {
+    background-color: ${props => props.theme.colors.disabled};
+    cursor: not-allowed;
+  }
+`;
+
+const SuccessMessage = styled(motion.div)`
+  background-color: #48bb78;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 2rem;
+`;
+
+const ContactForm = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  
+  const onSubmit = (data) => {
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      console.log("Form submitted:", data);
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      
+      // Reset form success message after 5 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 5000);
+    }, 1500);
+  };
+  
+  return (
+    <FormContainer>
+      {!isSubmitted ? (
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormGroup>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input 
+              id="firstName"
+              type="text" 
+              className={errors.firstName ? "error" : ""}
+              {...register("firstName", { required: "First name is required" })}
+            />
+            {errors.firstName && <ErrorMessage>{errors.firstName.message}</ErrorMessage>}
+          </FormGroup>
+          
+          <FormGroup>
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input 
+              id="lastName"
+              type="text"
+              className={errors.lastName ? "error" : ""}
+              {...register("lastName", { required: "Last name is required" })}
+            />
+            {errors.lastName && <ErrorMessage>{errors.lastName.message}</ErrorMessage>}
+          </FormGroup>
+          
+          <FormGroup>
+            <Label htmlFor="email">Email Address</Label>
+            <Input 
+              id="email"
+              type="email"
+              className={errors.email ? "error" : ""}
+              {...register("email", { 
+                required: "Email is required",
+                pattern: { 
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address"
+                }
+              })}
+            />
+            {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+          </FormGroup>
+          
+          <FormGroup>
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input 
+              id="phone"
+              type="tel"
+              {...register("phone")}
+            />
+          </FormGroup>
+          
+          <FormGroup>
+            <Label htmlFor="company">Company Name</Label>
+            <Input 
+              id="company"
+              type="text"
+              {...register("company")}
+            />
+          </FormGroup>
+          
+          <FormGroup>
+            <Label htmlFor="service">Service Interest</Label>
+            <Select id="service" {...register("service")}>
+              <option value="">Select a service</option>
+              <option value="ppc">Pay-Per-Click (PPC) Advertising</option>
+              <option value="seo">Search Engine Optimization (SEO)</option>
+              <option value="social">Social Media Marketing</option>
+              <option value="content">Content Marketing</option>
+              <option value="email">Email Marketing</option>
+              <option value="cro">Conversion Rate Optimization</option>
+              <option value="other">Other</option>
+            </Select>
+          </FormGroup>
+          
+          <FormGroup className="full-width">
+            <Label htmlFor="message">How Can We Help?</Label>
+            <Textarea 
+              id="message"
+              className={errors.message ? "error" : ""}
+              {...register("message", { required: "Please tell us how we can help" })}
+            />
+            {errors.message && <ErrorMessage>{errors.message.message}</ErrorMessage>}
+          </FormGroup>
+          
+          <SubmitButton type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </SubmitButton>
+        </Form>
+      ) : (
+        <SuccessMessage
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Thank you for contacting us! We'll get back to you as soon as possible.
+        </SuccessMessage>
+      )}
+    </FormContainer>
+  );
+};
+
+export default ContactForm;

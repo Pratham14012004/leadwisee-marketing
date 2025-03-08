@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
@@ -11,6 +10,7 @@ import { lightTheme, darkTheme, GlobalStyles } from './styles/theme';
 // Layout Components
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import ScrollToTop from './components/layout/ScrollToTop'; // Import ScrollToTop
 import CookieConsent from './components/common/CookieConsent';
 
 // Pages
@@ -52,6 +52,7 @@ export default function App() {
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
       <Router>
+        <ScrollToTop /> {/* Add ScrollToTop component here */}
         <div className="app">
           <Helmet>
             <title>Leadwisee - Performance Marketing Agency</title>

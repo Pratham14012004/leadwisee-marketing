@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
@@ -29,80 +29,6 @@ import NotFound from './pages/NotFound';
 
 import './App.css';
 
-// Wrapper component to handle scroll behavior
-function AppContent() {
-  const location = useLocation();
-  
-  useEffect(() => {
-    // Immediate scroll
-    window.scrollTo(0, 0);
-    
-    // Backup scroll after a slight delay to handle any animations
-    const timeoutId = setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 50);
-    
-    return () => clearTimeout(timeoutId);
-  }, [location]);
-  
-  return (
-    <div className="app">
-      <Helmet>
-        <title>Leadwisee - Performance Marketing Agency</title>
-        <meta name="description" content="Leadwisee is a performance marketing agency specializing in PPC, Social Media, and E-commerce marketing strategies to drive conversions." />
-        <link rel="canonical" href="https://leadwisee.com" />
-        {/* Schema markup for organization */}
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Leadwisee",
-              "url": "https://leadwisee.com",
-              "logo": "https://leadwisee.com/logo.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+1-123-456-7890",
-                "contactType": "customer service"
-              },
-              "sameAs": [
-                "https://www.facebook.com/leadwisee",
-                "https://www.linkedin.com/company/leadwisee",
-                "https://twitter.com/leadwisee"
-              ]
-            }
-          `}
-        </script>
-      </Helmet>
-      
-      <Navbar theme={location.theme} toggleTheme={location.toggleTheme} />
-      
-      <main>
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
-            <Route path="/industries" element={<Industries />} />
-            <Route path="/industries/:slug" element={<IndustryDetail />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/case-studies" element={<CaseStudies />} />
-            <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AnimatePresence>
-      </main>
-      
-      <Footer />
-      <CookieConsent />
-    </div>
-  );
-}
-
 export default function App() {
   // State for theme toggle
   const [theme, setTheme] = useState('light');
@@ -125,7 +51,60 @@ export default function App() {
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
       <Router>
-        <AppContent theme={theme} toggleTheme={toggleTheme} />
+        <div className="app">
+          <Helmet>
+            <title>Leadwisee - Performance Marketing Agency</title>
+            <meta name="description" content="Leadwisee is a performance marketing agency specializing in PPC, Social Media, and E-commerce marketing strategies to drive conversions." />
+            <link rel="canonical" href="https://leadwisee.com" />
+            {/* Schema markup for organization */}
+            <script type="application/ld+json">
+              {`
+                {
+                  "@context": "https://schema.org",
+                  "@type": "Organization",
+                  "name": "Leadwisee",
+                  "url": "https://leadwisee.com",
+                  "logo": "https://leadwisee.com/logo.png",
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+1-123-456-7890",
+                    "contactType": "customer service"
+                  },
+                  "sameAs": [
+                    "https://www.facebook.com/leadwisee",
+                    "https://www.linkedin.com/company/leadwisee",
+                    "https://twitter.com/leadwisee"
+                  ]
+                }
+              `}
+            </script>
+          </Helmet>
+          
+          <Navbar theme={theme} toggleTheme={toggleTheme} />
+          
+          <main>
+            <AnimatePresence mode="wait">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/services/:slug" element={<ServiceDetail />} />
+                <Route path="/industries" element={<Industries />} />
+                <Route path="/industries/:slug" element={<IndustryDetail />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/case-studies" element={<CaseStudies />} />
+                <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+                <Route path="/testimonials" element={<Testimonials />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AnimatePresence>
+          </main>
+          
+          <Footer />
+          <CookieConsent />
+        </div>
       </Router>
     </ThemeProvider>
   );

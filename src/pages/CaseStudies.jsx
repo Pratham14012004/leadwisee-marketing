@@ -1,489 +1,441 @@
 
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import { FaArrowRight, FaFilter } from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FaArrowRight } from 'react-icons/fa';
 
-import SectionHeading from "../components/common/SectionHeading";
-
-const CaseStudiesContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 5rem;
+// Styled components
+const PageWrapper = styled.div`
+  padding-top: 100px;
 `;
 
-const CaseStudiesHero = styled.div`
+const HeroSection = styled.section`
+  background: ${props => props.theme.colors.gradientBg};
+  padding: 100px 0 80px;
   text-align: center;
-  margin-bottom: 4rem;
-  padding: 3rem 0;
 `;
 
-const FiltersContainer = styled.div`
-  margin-bottom: 2rem;
+const HeroContent = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+`;
+
+const Section = styled.section`
+  padding: 80px 0;
+  background: ${props => props.theme.colors.background};
+`;
+
+const MainTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
   
-  .filter-heading {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    
-    svg {
-      color: ${(props) => props.theme.primary};
-    }
+  span {
+    color: ${props => props.theme.colors.primary};
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
   }
 `;
 
-const FilterTagsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+const Subtitle = styled.p`
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  color: ${props => props.theme.colors.textMuted};
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
 `;
 
-const FilterTag = styled.button`
-  background-color: ${(props) =>
-    props.isActive ? props.theme.primary : props.theme.background};
-  color: ${(props) => (props.isActive ? "white" : props.theme.text)};
-  border: 1px solid
-    ${(props) => (props.isActive ? props.theme.primary : props.theme.border)};
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  font-size: 0.875rem;
+const FilterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  padding: 0 20px;
+`;
+
+const FilterButton = styled.button`
+  padding: 8px 20px;
+  margin: 0 8px 10px;
+  background: ${props => props.active ? props.theme.colors.primary : 'transparent'};
+  color: ${props => props.active ? 'white' : props.theme.colors.text};
+  border: 1px solid ${props => props.active ? props.theme.colors.primary : props.theme.colors.border};
+  border-radius: 30px;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
-
+  
   &:hover {
-    background-color: ${(props) =>
-      props.isActive ? props.theme.primary : props.theme.backgroundHover};
+    background: ${props => props.active ? props.theme.colors.primary : props.theme.colors.backgroundAlt};
   }
 `;
 
-const CaseStudiesGrid = styled.div`
+const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const CaseStudyCard = styled(motion.article)`
-  background: ${(props) => props.theme.background};
-  border-radius: 0.5rem;
+const CaseStudyCard = styled(motion.div)`
+  background: ${props => props.theme.colors.cardBg};
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
-`;
-
-const CaseStudyImage = styled.div`
-  height: 200px;
-  background-image: ${(props) => `url(${props.image})`};
-  background-size: cover;
-  background-position: center;
-  position: relative;
   
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+  .case-study-image {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+    height: 200px;
+    object-fit: cover;
   }
-`;
-
-const CaseStudyIndustryTag = styled.span`
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 1;
-  background-color: ${(props) => props.theme.primary};
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-`;
-
-const CaseStudyServiceTag = styled.span`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: ${(props) => props.theme.text};
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-`;
-
-const CaseStudyContent = styled.div`
-  padding: 1.5rem;
-`;
-
-const CaseStudyTitle = styled.h3`
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-
-  a {
-    color: ${(props) => props.theme.text};
-    text-decoration: none;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: ${(props) => props.theme.primary};
-    }
-  }
-`;
-
-const CaseStudyExcerpt = styled.p`
-  color: ${(props) => props.theme.textLight};
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  font-size: 0.9375rem;
-`;
-
-const ResultsList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-`;
-
-const ResultItem = styled.div`
-  background-color: ${(props) => props.theme.backgroundAlt};
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
   
-  span {
-    color: ${(props) => props.theme.primary};
-    font-weight: 700;
-    margin-right: 0.25rem;
-  }
-`;
-
-const ReadMoreLink = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: ${(props) => props.theme.primary};
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  svg {
-    transition: transform 0.3s ease;
-  }
-
-  &:hover {
-    color: ${(props) => props.theme.primaryDark};
-
-    svg {
-      transform: translateX(3px);
+  .case-study-content {
+    padding: 25px;
+    
+    .badge {
+      display: inline-block;
+      padding: 5px 15px;
+      background: ${props => props.theme.colors.primaryLight};
+      color: ${props => props.theme.colors.primary};
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: ${props => props.theme.colors.textMuted};
+    }
+    
+    .results {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      
+      .result-item {
+        margin-right: 20px;
+        margin-bottom: 10px;
+        
+        .number {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: ${props => props.theme.colors.primary};
+          display: block;
+        }
+        
+        .label {
+          font-size: 0.85rem;
+        }
+      }
+    }
+    
+    .link {
+      display: inline-flex;
+      align-items: center;
+      color: ${props => props.theme.colors.primary};
+      font-weight: 600;
+      text-decoration: none;
+      
+      svg {
+        margin-left: 5px;
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover svg {
+        transform: translateX(5px);
+      }
     }
   }
 `;
 
-const EmptyState = styled.div`
-  text-align: center;
-  padding: 3rem 1rem;
-  grid-column: 1 / -1;
-
-  h3 {
-    margin-bottom: 1rem;
+// Animation variants
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
   }
+};
 
-  p {
-    color: ${(props) => props.theme.textLight};
-    margin-bottom: 1.5rem;
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
   }
-`;
+};
 
 const CaseStudies = () => {
-  const [activeIndustry, setActiveIndustry] = useState("All");
-  const [activeService, setActiveService] = useState("All");
-  const [filteredCaseStudies, setFilteredCaseStudies] = useState([]);
+  // Scroll to top on component mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  // Mock case studies data
+  // Case studies data
   const caseStudiesData = [
     {
-      id: "saas-lead-generation",
-      title: "SaaS Lead Generation Strategy",
-      excerpt: "How we helped a B2B SaaS company increase qualified leads by 187% while reducing cost per acquisition.",
-      industry: "B2B SaaS",
-      service: "PPC Marketing",
-      image: "https://source.unsplash.com/random/600x400/?saas,technology",
-      slug: "saas-lead-generation-strategy",
-      results: [
-        { stat: "187%", label: "Increase in Leads" },
-        { stat: "42%", label: "Lower CPA" },
-        { stat: "3.8x", label: "ROI" }
-      ]
-    },
-    {
-      id: "ecommerce-revenue-growth",
-      title: "Scaling E-commerce Revenue",
-      excerpt: "A comprehensive marketing approach that helped an online retailer achieve 215% YoY revenue growth.",
+      id: 1,
+      title: "PPC Campaign for E-commerce Giant",
+      client: "Fashion Retailer",
       industry: "E-commerce",
-      service: "E-commerce Marketing",
-      image: "https://source.unsplash.com/random/600x400/?ecommerce,shopping",
-      slug: "ecommerce-revenue-growth",
+      service: "PPC Marketing",
+      summary: "Revamped the PPC strategy for a leading fashion retailer to improve ROAS and drive more qualified traffic.",
+      image: "https://source.unsplash.com/random/600x400/?ecommerce,fashion",
       results: [
-        { stat: "215%", label: "Revenue Growth" },
-        { stat: "168%", label: "ROAS" },
-        { stat: "43%", label: "Repeat Purchase Rate" }
+        { number: "214%", label: "Increase in ROAS" },
+        { number: "78%", label: "Increase in Conversion Rate" },
+        { number: "45%", label: "Reduction in CPA" }
       ]
     },
     {
-      id: "real-estate-lead-generation",
-      title: "Property Developer Lead Campaign",
-      excerpt: "Strategic Facebook and Google campaigns that generated high-quality leads for luxury property developments.",
-      industry: "Real Estate",
+      id: 2,
+      title: "SaaS Lead Generation Strategy",
+      client: "HR Software Company",
+      industry: "SaaS",
+      service: "Lead Generation",
+      summary: "Developed a comprehensive lead generation strategy for a B2B SaaS company in the HR tech space.",
+      image: "https://source.unsplash.com/random/600x400/?software,business",
+      results: [
+        { number: "156%", label: "Increase in MQLs" },
+        { number: "32%", label: "Reduction in CAC" },
+        { number: "68%", label: "Increase in Demo Requests" }
+      ]
+    },
+    {
+      id: 3,
+      title: "Social Media Campaign for Restaurant Chain",
+      client: "National Restaurant Brand",
+      industry: "Food & Beverage",
       service: "Social Media Marketing",
-      image: "https://source.unsplash.com/random/600x400/?realestate,property",
-      slug: "real-estate-lead-generation",
+      summary: "Created an engaging social media campaign that significantly increased foot traffic and online orders.",
+      image: "https://source.unsplash.com/random/600x400/?restaurant,food",
       results: [
-        { stat: "126", label: "Qualified Leads/Month" },
-        { stat: "28%", label: "Conversion Rate" },
-        { stat: "$42", label: "Cost Per Lead" }
+        { number: "89%", label: "Increase in Engagement" },
+        { number: "45%", label: "Increase in Store Visits" },
+        { number: "124%", label: "Increase in Online Orders" }
       ]
     },
     {
-      id: "fashion-brand-awareness",
-      title: "Fashion Brand Social Growth",
-      excerpt: "How we helped a fashion brand build brand awareness and drive direct sales through Instagram and TikTok.",
-      industry: "Fashion",
-      service: "Social Media Marketing",
-      image: "https://source.unsplash.com/random/600x400/?fashion,clothing",
-      slug: "fashion-brand-awareness",
-      results: [
-        { stat: "340%", label: "Follower Growth" },
-        { stat: "218%", label: "Engagement Rate" },
-        { stat: "26%", label: "Traffic from Social" }
-      ]
-    },
-    {
-      id: "healthcare-patient-acquisition",
-      title: "Healthcare Patient Acquisition",
-      excerpt: "HIPAA-compliant marketing campaigns that helped a medical practice attract new patients cost-effectively.",
+      id: 4,
+      title: "SEO Strategy for Medical Practice",
+      client: "Multi-Location Healthcare Provider",
       industry: "Healthcare",
-      service: "PPC Marketing",
-      image: "https://source.unsplash.com/random/600x400/?healthcare,medical",
-      slug: "healthcare-patient-acquisition",
+      service: "SEO",
+      summary: "Implemented a local SEO strategy for a healthcare provider with multiple locations across the country.",
+      image: "https://source.unsplash.com/random/600x400/?medical,doctor",
       results: [
-        { stat: "156%", label: "More Appointments" },
-        { stat: "32%", label: "Lower Acquisition Cost" },
-        { stat: "$860K", label: "Revenue Growth" }
+        { number: "215%", label: "Increase in Organic Traffic" },
+        { number: "75%", label: "Increase in Appointment Bookings" },
+        { number: "80%", label: "Increase in Keyword Rankings" }
       ]
     },
     {
-      id: "coaching-program-launch",
-      title: "Online Coaching Program Launch",
-      excerpt: "A comprehensive launch strategy that helped a business coach successfully launch a new online program.",
-      industry: "Coaching & Consulting",
+      id: 5,
+      title: "Email Marketing Automation for Real Estate",
+      client: "Luxury Property Developer",
+      industry: "Real Estate",
+      service: "Email Marketing",
+      summary: "Developed an email marketing automation sequence that nurtured leads through the property buying journey.",
+      image: "https://source.unsplash.com/random/600x400/?realestate,property",
+      results: [
+        { number: "45%", label: "Increase in Email Open Rate" },
+        { number: "67%", label: "Increase in Property Viewings" },
+        { number: "28%", label: "Increase in Sales Conversion" }
+      ]
+    },
+    {
+      id: 6,
+      title: "Conversion Rate Optimization for Finance App",
+      client: "Personal Finance Platform",
+      industry: "Finance",
+      service: "CRO",
+      summary: "Optimized the onboarding flow and key conversion points for a personal finance application.",
+      image: "https://source.unsplash.com/random/600x400/?finance,app",
+      results: [
+        { number: "58%", label: "Increase in Sign-up Completion" },
+        { number: "32%", label: "Reduction in Onboarding Abandonment" },
+        { number: "41%", label: "Increase in Feature Adoption" }
+      ]
+    },
+    {
+      id: 7,
+      title: "B2B Content Marketing Strategy",
+      client: "Enterprise Software Provider",
+      industry: "SaaS",
       service: "Content Marketing",
-      image: "https://source.unsplash.com/random/600x400/?coaching,consulting",
-      slug: "coaching-program-launch",
+      summary: "Created a thought leadership content strategy that positioned the client as an industry leader and drove qualified leads.",
+      image: "https://source.unsplash.com/random/600x400/?business,meeting",
       results: [
-        { stat: "$420K", label: "Launch Revenue" },
-        { stat: "842", label: "Program Enrollments" },
-        { stat: "4.2x", label: "Marketing ROI" }
+        { number: "185%", label: "Increase in Lead Magnet Downloads" },
+        { number: "78%", label: "Increase in Demo Requests from Content" },
+        { number: "42%", label: "Reduction in Sales Cycle Length" }
       ]
     },
     {
-      id: "interior-design-portfolio",
-      title: "Interior Design Client Acquisition",
-      excerpt: "Showcasing an interior designer's portfolio effectively to attract high-value residential projects.",
-      industry: "Interior Design",
-      service: "Website Optimization",
-      image: "https://source.unsplash.com/random/600x400/?interior,design",
-      slug: "interior-design-portfolio",
+      id: 8,
+      title: "E-commerce Remarketing Campaign",
+      client: "Home Goods Retailer",
+      industry: "E-commerce",
+      service: "Remarketing",
+      summary: "Implemented a sophisticated remarketing strategy that significantly improved cart recovery and customer retention.",
+      image: "https://source.unsplash.com/random/600x400/?ecommerce,shopping",
       results: [
-        { stat: "9", label: "New Luxury Projects" },
-        { stat: "$85K", label: "Average Project Value" },
-        { stat: "267%", label: "ROI" }
+        { number: "72%", label: "Increase in Cart Recovery" },
+        { number: "38%", label: "Increase in Customer Lifetime Value" },
+        { number: "65%", label: "Increase in Repeat Purchases" }
       ]
-    },
-    {
-      id: "ott-subscription-growth",
-      title: "OTT Platform Subscription Growth",
-      excerpt: "Data-driven user acquisition strategy that helped a streaming platform scale their subscriber base efficiently.",
-      industry: "OTT",
-      service: "Conversion Optimization",
-      image: "https://source.unsplash.com/random/600x400/?streaming,video",
-      slug: "ott-subscription-growth",
-      results: [
-        { stat: "215K", label: "New Subscribers" },
-        { stat: "64%", label: "Trial Conversion Rate" },
-        { stat: "28%", label: "Lower CAC" }
-      ]
-    },
-    {
-      id: "retail-store-traffic",
-      title: "Driving Retail Store Traffic",
-      excerpt: "Omnichannel campaign that successfully bridged online marketing with offline store visits and sales.",
-      industry: "Retail",
-      service: "PPC Marketing",
-      image: "https://source.unsplash.com/random/600x400/?retail,store",
-      slug: "retail-store-traffic",
-      results: [
-        { stat: "143%", label: "Increase in Store Visits" },
-        { stat: "38%", label: "Growth in Store Revenue" },
-        { stat: "3.2x", label: "ROAS" }
-      ]
-    },
+    }
   ];
-
-  // Extract unique industries and services
-  const industries = ["All", ...new Set(caseStudiesData.map(study => study.industry))];
-  const services = ["All", ...new Set(caseStudiesData.map(study => study.service))];
-
-  // Filter case studies based on selected filters
-  useEffect(() => {
-    const filtered = caseStudiesData.filter(study => {
-      const matchesIndustry = activeIndustry === "All" || study.industry === activeIndustry;
-      const matchesService = activeService === "All" || study.service === activeService;
-      
-      return matchesIndustry && matchesService;
-    });
+  
+  // Filter state
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [filteredCaseStudies, setFilteredCaseStudies] = useState(caseStudiesData);
+  
+  // Get unique industries and services for filters
+  const industries = ['All', ...new Set(caseStudiesData.map(item => item.industry))];
+  const services = ['All', ...new Set(caseStudiesData.map(item => item.service))];
+  
+  // Filter case studies based on selected filter
+  const filterCaseStudies = (filterType, filterValue) => {
+    setActiveFilter(filterValue);
     
-    setFilteredCaseStudies(filtered);
-  }, [activeIndustry, activeService]);
-
+    if (filterValue === 'All') {
+      setFilteredCaseStudies(caseStudiesData);
+    } else if (filterType === 'industry') {
+      setFilteredCaseStudies(caseStudiesData.filter(item => item.industry === filterValue));
+    } else if (filterType === 'service') {
+      setFilteredCaseStudies(caseStudiesData.filter(item => item.service === filterValue));
+    }
+  };
+  
   return (
     <>
       <Helmet>
         <title>Case Studies | Leadwisee - Performance Marketing Agency</title>
         <meta
           name="description"
-          content="Explore our case studies showing how we've helped businesses across various industries achieve measurable marketing results."
+          content="Explore our case studies showcasing how we've helped clients achieve measurable results through performance marketing strategies."
         />
       </Helmet>
-
+      
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        <CaseStudiesHero>
-          <SectionHeading
-            subtitle="Success Stories"
-            title="Our Case Studies"
-            alignment="center"
-          />
-          <p style={{ maxWidth: "700px", margin: "0 auto" }}>
-            Explore our portfolio of successful marketing campaigns and strategies 
-            that have delivered measurable results for our clients across various industries.
-          </p>
-        </CaseStudiesHero>
-
-        <CaseStudiesContainer>
-          <FiltersContainer>
-            <div className="filter-heading">
-              <FaFilter /> Filter by:
-            </div>
-            
-            <div>
-              <h4>Industry</h4>
-              <FilterTagsContainer>
-                {industries.map(industry => (
-                  <FilterTag
-                    key={`industry-${industry}`}
-                    isActive={activeIndustry === industry}
-                    onClick={() => setActiveIndustry(industry)}
+        <PageWrapper>
+          <HeroSection>
+            <HeroContent>
+              <MainTitle>
+                Our <span>Case Studies</span>
+              </MainTitle>
+              <Subtitle>
+                Explore how we've helped businesses across various industries achieve measurable results through data-driven marketing strategies.
+              </Subtitle>
+            </HeroContent>
+          </HeroSection>
+          
+          <Section>
+            <FilterContainer>
+              <div style={{ marginBottom: '20px', width: '100%', textAlign: 'center' }}>
+                <h3 style={{ marginBottom: '10px' }}>Filter by Industry</h3>
+                {industries.map((industry) => (
+                  <FilterButton
+                    key={industry}
+                    active={activeFilter === industry}
+                    onClick={() => filterCaseStudies('industry', industry)}
                   >
                     {industry}
-                  </FilterTag>
+                  </FilterButton>
                 ))}
-              </FilterTagsContainer>
-            </div>
-            
-            <div>
-              <h4>Service</h4>
-              <FilterTagsContainer>
-                {services.map(service => (
-                  <FilterTag
-                    key={`service-${service}`}
-                    isActive={activeService === service}
-                    onClick={() => setActiveService(service)}
+              </div>
+              
+              <div style={{ width: '100%', textAlign: 'center' }}>
+                <h3 style={{ marginBottom: '10px' }}>Filter by Service</h3>
+                {services.map((service) => (
+                  <FilterButton
+                    key={service}
+                    active={activeFilter === service}
+                    onClick={() => filterCaseStudies('service', service)}
                   >
                     {service}
-                  </FilterTag>
+                  </FilterButton>
                 ))}
-              </FilterTagsContainer>
-            </div>
-          </FiltersContainer>
-
-          <CaseStudiesGrid>
-            {filteredCaseStudies.length > 0 ? (
-              filteredCaseStudies.map((study, index) => (
+              </div>
+            </FilterContainer>
+            
+            <Grid 
+              as={motion.div} 
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              {filteredCaseStudies.map((caseStudy) => (
                 <CaseStudyCard
-                  key={study.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  key={caseStudy.id}
+                  variants={fadeInUp}
                 >
-                  <CaseStudyImage image={study.image}>
-                    <CaseStudyIndustryTag>{study.industry}</CaseStudyIndustryTag>
-                    <CaseStudyServiceTag>{study.service}</CaseStudyServiceTag>
-                  </CaseStudyImage>
-                  <CaseStudyContent>
-                    <CaseStudyTitle>
-                      <Link to={`/case-studies/${study.slug}`}>{study.title}</Link>
-                    </CaseStudyTitle>
-                    <CaseStudyExcerpt>{study.excerpt}</CaseStudyExcerpt>
-                    <ResultsList>
-                      {study.results.map((result, i) => (
-                        <ResultItem key={i}>
-                          <span>{result.stat}</span>
-                          {result.label}
-                        </ResultItem>
+                  <img 
+                    className="case-study-image" 
+                    src={caseStudy.image} 
+                    alt={caseStudy.title} 
+                  />
+                  <div className="case-study-content">
+                    <span className="badge">{caseStudy.industry}</span>
+                    <h3>{caseStudy.title}</h3>
+                    <p>{caseStudy.summary}</p>
+                    
+                    <div className="results">
+                      {caseStudy.results.map((result, index) => (
+                        <div key={index} className="result-item">
+                          <span className="number">{result.number}</span>
+                          <span className="label">{result.label}</span>
+                        </div>
                       ))}
-                    </ResultsList>
-                    <ReadMoreLink to={`/case-studies/${study.slug}`}>
+                    </div>
+                    
+                    <Link to={`/case-studies/${caseStudy.id}`} className="link">
                       View Case Study <FaArrowRight />
-                    </ReadMoreLink>
-                  </CaseStudyContent>
+                    </Link>
+                  </div>
                 </CaseStudyCard>
-              ))
-            ) : (
-              <EmptyState>
-                <h3>No case studies found</h3>
-                <p>
-                  Try adjusting your filter criteria to find what you're looking for.
-                </p>
-                <FilterTag
-                  isActive={false}
-                  onClick={() => {
-                    setActiveIndustry("All");
-                    setActiveService("All");
-                  }}
-                >
-                  Clear Filters
-                </FilterTag>
-              </EmptyState>
-            )}
-          </CaseStudiesGrid>
-        </CaseStudiesContainer>
+              ))}
+            </Grid>
+          </Section>
+        </PageWrapper>
       </motion.div>
     </>
   );

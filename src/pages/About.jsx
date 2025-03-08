@@ -1,84 +1,106 @@
 
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
-import { FaCheckCircle, FaUsers, FaLightbulb, FaRocket } from "react-icons/fa";
+import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FaRocket, FaLightbulb, FaUsers, FaCheckCircle } from 'react-icons/fa';
 
-import SectionHeading from "../components/common/SectionHeading";
-
-const AboutContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 5rem;
+// Styled components
+const PageWrapper = styled.div`
+  padding-top: 100px;
 `;
 
 const HeroSection = styled.section`
-  padding: 4rem 0;
+  background: ${props => props.theme.colors.gradientBg};
+  padding: 100px 0 80px;
   text-align: center;
-  background-color: ${(props) => props.theme.backgroundAlt};
 `;
 
-const AboutSection = styled.section`
-  padding: 5rem 0;
+const HeroContent = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
 `;
 
-const AboutGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+const Section = styled.section`
+  padding: 80px 0;
+  background: ${props => props.theme.colors.background};
   
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
+  &:nth-child(even) {
+    background: ${props => props.theme.colors.backgroundAlt};
   }
 `;
 
-const AboutImage = styled.div`
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  height: 100%;
-  min-height: 300px;
+const SectionHeading = styled.h2`
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 50px;
   
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  span {
+    color: ${props => props.theme.colors.primary};
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
   }
 `;
 
-const AboutContent = styled.div`
+const MainTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  
+  span {
+    color: ${props => props.theme.colors.primary};
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  color: ${props => props.theme.colors.textMuted};
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const ContentBlock = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+
   p {
-    margin-bottom: 1.5rem;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
   }
 `;
 
-const ValueSection = styled.section`
-  padding: 5rem 0;
-  background-color: ${(props) => props.theme.backgroundAlt};
-`;
-
-const ValuesGrid = styled.div`
+const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const ValueCard = styled(motion.div)`
-  background-color: ${(props) => props.theme.background};
-  padding: 2rem;
-  border-radius: 0.5rem;
+const TeamMemberCard = styled(motion.div)`
+  background: ${props => props.theme.colors.cardBg};
+  border-radius: 10px;
+  overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   
   &:hover {
@@ -86,91 +108,198 @@ const ValueCard = styled(motion.div)`
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
   
-  svg {
+  .team-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .team-info {
+    padding: 20px;
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+    
+    .position {
+      color: ${props => props.theme.colors.primary};
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  }
+`;
+
+const ValueCard = styled(motion.div)`
+  background: ${props => props.theme.colors.cardBg};
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .icon {
     font-size: 2.5rem;
-    color: ${(props) => props.theme.primary};
-    margin-bottom: 1.5rem;
+    color: ${props => props.theme.colors.primary};
+    margin-bottom: 20px;
   }
   
   h3 {
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
   }
   
   p {
-    color: ${(props) => props.theme.textLight};
-    font-size: 0.9375rem;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 `;
 
-const TeamSection = styled.section`
-  padding: 5rem 0;
-`;
-
-const TeamGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
+const TimelineContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
   
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`;
-
-const TeamCard = styled(motion.div)`
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  
-  .team-image {
-    height: 250px;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: ${props => props.theme.colors.primary};
     
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    @media (max-width: 768px) {
+      left: 30px;
+    }
+  }
+`;
+
+const TimelineItem = styled(motion.div)`
+  position: relative;
+  margin-bottom: 60px;
+  
+  .timeline-content {
+    position: relative;
+    width: calc(50% - 40px);
+    padding: 25px;
+    background: ${props => props.theme.colors.cardBg};
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    
+    &:before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      background: ${props => props.theme.colors.primary};
+      border-radius: 50%;
+    }
+    
+    .date {
+      display: inline-block;
+      padding: 5px 15px;
+      background: ${props => props.theme.colors.primary};
+      color: white;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      width: calc(100% - 70px);
+      margin-left: 70px;
     }
   }
   
-  .team-content {
-    padding: 1.5rem;
-    text-align: center;
-  }
-  
-  h3 {
-    margin-bottom: 0.25rem;
-  }
-  
-  .position {
-    color: ${(props) => props.theme.primary};
-    font-weight: 500;
-    margin-bottom: 1rem;
-  }
-  
-  p {
-    color: ${(props) => props.theme.textLight};
-    margin-bottom: 1.5rem;
-    font-size: 0.9375rem;
-  }
-  
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    
-    a {
-      color: ${(props) => props.theme.textLight};
-      transition: color 0.3s ease;
+  &:nth-child(odd) {
+    .timeline-content {
+      float: right;
       
-      &:hover {
-        color: ${(props) => props.theme.primary};
+      &:before {
+        left: -30px;
+      }
+      
+      @media (max-width: 768px) {
+        float: none;
+        
+        &:before {
+          left: -40px;
+        }
       }
     }
   }
+  
+  &:nth-child(even) {
+    .timeline-content {
+      float: left;
+      
+      &:before {
+        right: -30px;
+      }
+      
+      @media (max-width: 768px) {
+        float: none;
+        margin-left: 70px;
+        
+        &:before {
+          left: -40px;
+          right: auto;
+        }
+      }
+    }
+  }
+  
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 `;
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6
+    }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
 
 const About = () => {
   // Scroll to top on component mount
@@ -178,41 +307,41 @@ const About = () => {
     window.scrollTo(0, 0);
   }, []);
   
-  // Team member data
+  // Team members data
   const teamMembers = [
     {
       id: 1,
-      name: "Alex Johnson",
+      name: "John Smith",
       position: "Founder & CEO",
-      bio: "Alex has over 15 years of experience in digital marketing, previously leading growth at tech startups.",
-      image: "https://source.unsplash.com/random/600x600/?portrait,man,business"
+      bio: "John founded Leadwisee with the vision of creating a marketing agency focused on measurable results and client success.",
+      image: "https://source.unsplash.com/random/600x600/?portrait,man,suit"
     },
     {
       id: 2,
-      name: "Sarah Williams",
-      position: "PPC Director",
-      bio: "Sarah specializes in creating high-ROI Google and Meta ad campaigns that drive measurable results.",
-      image: "https://source.unsplash.com/random/600x600/?portrait,woman,professional"
+      name: "Sarah Johnson",
+      position: "Chief Marketing Officer",
+      bio: "Sarah brings 15+ years of digital marketing expertise, having previously led marketing at several Fortune 500 companies.",
+      image: "https://source.unsplash.com/random/600x600/?portrait,woman,business"
     },
     {
       id: 3,
       name: "David Chen",
-      position: "Social Media Strategist",
-      bio: "David crafts engaging social strategies that build brand awareness and drive meaningful engagement.",
-      image: "https://source.unsplash.com/random/600x600/?portrait,man,creative"
+      position: "Head of PPC",
+      bio: "David specializes in creating high-performing PPC campaigns that deliver consistent ROI for our clients.",
+      image: "https://source.unsplash.com/random/600x600/?portrait,man,asian"
     },
     {
       id: 4,
-      name: "Emily Rodriguez",
-      position: "E-commerce Specialist",
-      bio: "Emily helps online stores scale through optimized campaigns, CRO, and customer journey optimization.",
-      image: "https://source.unsplash.com/random/600x600/?portrait,woman,tech"
+      name: "Emma Rodriguez",
+      position: "Social Media Director",
+      bio: "Emma has a proven track record of building engaging social media strategies that convert followers into customers.",
+      image: "https://source.unsplash.com/random/600x600/?portrait,woman,latina"
     },
     {
       id: 5,
-      name: "Michael Taylor",
-      position: "Data & Analytics Lead",
-      bio: "Michael transforms complex data into actionable insights that drive strategic marketing decisions.",
+      name: "Michael Wilson",
+      position: "Data Analytics Lead",
+      bio: "Michael translates complex data into actionable insights that drive our performance-focused approach.",
       image: "https://source.unsplash.com/random/600x600/?portrait,man,analyst"
     },
     {
@@ -266,120 +395,178 @@ const About = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        <HeroSection>
-          <AboutContainer>
-            <SectionHeading
-              subtitle="Our Story"
-              title="About Leadwisee"
-              alignment="center"
-            />
-            <p style={{ maxWidth: "800px", margin: "0 auto" }}>
-              We're a team of passionate digital marketers dedicated to driving 
-              measurable results and helping businesses achieve sustainable growth 
-              through data-driven marketing strategies.
-            </p>
-          </AboutContainer>
-        </HeroSection>
-        
-        <AboutSection>
-          <AboutContainer>
-            <AboutGrid>
-              <AboutImage>
-                <img 
-                  src="https://source.unsplash.com/random/800x600/?team,marketing" 
-                  alt="Leadwisee Team"
-                />
-              </AboutImage>
-              <AboutContent>
-                <SectionHeading
-                  subtitle="Our Mission"
-                  title="Driving Growth Through Performance Marketing"
-                />
-                <p>
-                  Founded in 2018, Leadwisee was born from a vision to transform 
-                  how businesses approach digital marketing. We saw too many companies 
-                  struggling with marketing efforts that weren't tied to clear, 
-                  measurable outcomes.
-                </p>
-                <p>
-                  Our mission is simple: to help businesses achieve sustainable 
-                  growth through data-driven marketing strategies that deliver 
-                  real, measurable results. We're not just about impressions or 
-                  vanity metrics - we're focused on driving qualified leads, 
-                  conversions, and revenue for our clients.
-                </p>
-                <p>
-                  As a performance marketing agency, we specialize in creating 
-                  campaigns that are optimized for conversion and ROI across paid 
-                  search, social media, and e-commerce channels. Our approach combines 
-                  strategic thinking, creative execution, and rigorous performance 
-                  analysis to ensure every marketing dollar generates maximum return.
-                </p>
-              </AboutContent>
-            </AboutGrid>
-          </AboutContainer>
-        </AboutSection>
-        
-        <ValueSection>
-          <AboutContainer>
-            <SectionHeading
-              subtitle="Our Values"
-              title="What We Stand For"
-              alignment="center"
-            />
-            <ValuesGrid>
-              {values.map((value, index) => (
+        <PageWrapper>
+          <HeroSection>
+            <HeroContent>
+              <MainTitle>
+                About <span>Leadwisee</span>
+              </MainTitle>
+              <Subtitle>
+                We're a performance marketing agency obsessed with delivering measurable results that drive business growth.
+              </Subtitle>
+            </HeroContent>
+          </HeroSection>
+          
+          <Section>
+            <SectionHeading>Our Story</SectionHeading>
+            <ContentBlock>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                Leadwisee was founded in 2018 with a simple but powerful mission: to transform how businesses approach digital marketing. Too many companies were spending money on marketing without understanding the true impact on their bottom line.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                Our founder, John Smith, having worked in both agency and in-house marketing roles, saw a gap in the market for a truly performance-driven agency. One that wouldn't just focus on vanity metrics like impressions or clicks, but on metrics that actually matter to businesses: leads, sales, and revenue.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                Since then, we've grown from a small team of 3 to over 30 performance marketing specialists, serving clients across multiple industries including SaaS, e-commerce, real estate, and healthcare. Our approach has always remained the same: deliver measurable results that directly impact our clients' business goals.
+              </motion.p>
+            </ContentBlock>
+          </Section>
+          
+          <Section>
+            <SectionHeading>Our Values</SectionHeading>
+            <Grid>
+              {values.map((value) => (
                 <ValueCard
                   key={value.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {value.icon}
+                  <div className="icon">{value.icon}</div>
                   <h3>{value.title}</h3>
                   <p>{value.description}</p>
                 </ValueCard>
               ))}
-            </ValuesGrid>
-          </AboutContainer>
-        </ValueSection>
-        
-        <TeamSection>
-          <AboutContainer>
-            <SectionHeading
-              subtitle="Our Team"
-              title="The People Behind Leadwisee"
-              alignment="center"
-            />
-            <p style={{ textAlign: "center", maxWidth: "800px", margin: "0 auto 3rem" }}>
-              Meet our team of marketing experts who are passionate about driving 
-              results for our clients. With diverse backgrounds and specialized 
-              expertise, we collaborate to create winning strategies.
-            </p>
-            <TeamGrid>
-              {teamMembers.map((member, index) => (
-                <TeamCard
+            </Grid>
+          </Section>
+          
+          <Section>
+            <SectionHeading>Our Team</SectionHeading>
+            <Grid>
+              {teamMembers.map((member) => (
+                <TeamMemberCard
                   key={member.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="team-image">
-                    <img src={member.image} alt={member.name} />
-                  </div>
-                  <div className="team-content">
+                  <img 
+                    className="team-image" 
+                    src={member.image} 
+                    alt={member.name} 
+                  />
+                  <div className="team-info">
                     <h3>{member.name}</h3>
-                    <div className="position">{member.position}</div>
+                    <span className="position">{member.position}</span>
                     <p>{member.bio}</p>
                   </div>
-                </TeamCard>
+                </TeamMemberCard>
               ))}
-            </TeamGrid>
-          </AboutContainer>
-        </TeamSection>
+            </Grid>
+          </Section>
+          
+          <Section>
+            <SectionHeading>Our Journey</SectionHeading>
+            <TimelineContainer>
+              <TimelineItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="timeline-content">
+                  <span className="date">2018</span>
+                  <h3>Leadwisee Founded</h3>
+                  <p>Established with a mission to deliver measurable marketing results.</p>
+                </div>
+              </TimelineItem>
+              
+              <TimelineItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="timeline-content">
+                  <span className="date">2019</span>
+                  <h3>Team Expansion</h3>
+                  <p>Grew to 10 team members and expanded our service offerings.</p>
+                </div>
+              </TimelineItem>
+              
+              <TimelineItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="timeline-content">
+                  <span className="date">2020</span>
+                  <h3>Digital Transformation Focus</h3>
+                  <p>Helped clients navigate the pandemic by accelerating their digital transformation.</p>
+                </div>
+              </TimelineItem>
+              
+              <TimelineItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="timeline-content">
+                  <span className="date">2021</span>
+                  <h3>Industry Recognition</h3>
+                  <p>Received multiple awards for our performance marketing campaigns.</p>
+                </div>
+              </TimelineItem>
+              
+              <TimelineItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="timeline-content">
+                  <span className="date">2022</span>
+                  <h3>International Expansion</h3>
+                  <p>Opened our first international office to serve clients globally.</p>
+                </div>
+              </TimelineItem>
+              
+              <TimelineItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="timeline-content">
+                  <span className="date">2023</span>
+                  <h3>Today & Beyond</h3>
+                  <p>Continuing to innovate and deliver exceptional results for our clients.</p>
+                </div>
+              </TimelineItem>
+            </TimelineContainer>
+          </Section>
+        </PageWrapper>
       </motion.div>
     </>
   );

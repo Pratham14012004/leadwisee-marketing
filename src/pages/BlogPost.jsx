@@ -1,12 +1,21 @@
+import React, { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
+import {
+  FaCalendarAlt,
+  FaUser,
+  FaTag,
+  FaClock,
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaArrowLeft,
+  FaArrowRight,
+} from "react-icons/fa";
 
-import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet';
-import { FaCalendarAlt, FaUser, FaTag, FaClock, FaFacebookF, FaTwitter, FaLinkedinIn, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-
-import SectionHeading from '../components/common/SectionHeading';
+import SectionHeading from "../components/common/SectionHeading";
 
 const BlogPostContainer = styled.div`
   max-width: 1200px;
@@ -17,47 +26,47 @@ const BlogPostContainer = styled.div`
 const BlogPostHeader = styled.div`
   text-align: center;
   margin-bottom: 3rem;
-  
+
   h1 {
     font-size: 2.8rem;
     margin-bottom: 1.5rem;
-    
+
     @media (max-width: 768px) {
       font-size: 2.2rem;
     }
   }
-  
+
   .meta {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.5rem;
     margin-bottom: 2rem;
-    color: ${props => props.theme.colors.textSecondary};
-    
+    color: ${(props) => props.theme.colors.textSecondary};
+
     .meta-item {
       display: flex;
       align-items: center;
-      
+
       svg {
         margin-right: 0.5rem;
-        color: ${props => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.primary};
       }
     }
   }
-  
+
   .featured-image {
     width: 100%;
     height: 500px;
     border-radius: 12px;
     overflow: hidden;
-    
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    
+
     @media (max-width: 768px) {
       height: 300px;
     }
@@ -68,7 +77,7 @@ const BlogContent = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem;
-  
+
   @media (min-width: 1024px) {
     grid-template-columns: 2fr 1fr;
   }
@@ -80,59 +89,60 @@ const MainContent = styled.div`
     font-size: 1.1rem;
     line-height: 1.8;
   }
-  
+
   h2 {
     font-size: 2rem;
     margin: 3rem 0 1.5rem;
   }
-  
+
   h3 {
     font-size: 1.6rem;
     margin: 2.5rem 0 1.25rem;
   }
-  
-  ul, ol {
+
+  ul,
+  ol {
     margin: 1.5rem 0;
     padding-left: 2rem;
-    
+
     li {
       margin-bottom: 0.8rem;
       line-height: 1.7;
     }
   }
-  
+
   blockquote {
-    border-left: 4px solid ${props => props.theme.colors.primary};
+    border-left: 4px solid ${(props) => props.theme.colors.primary};
     padding: 1rem 2rem;
     margin: 2rem 0;
-    background-color: ${props => props.theme.colors.bgAlt};
+    background-color: ${(props) => props.theme.colors.bgAlt};
     font-style: italic;
-    
+
     p {
       margin-bottom: 0;
     }
   }
-  
+
   img {
     max-width: 100%;
     border-radius: 8px;
     margin: 2rem 0;
   }
-  
+
   .article-share {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid ${props => props.theme.colors.border};
-    
+    border-top: 1px solid ${(props) => props.theme.colors.border};
+
     h3 {
       font-size: 1.3rem;
       margin-bottom: 1rem;
     }
-    
+
     .share-buttons {
       display: flex;
       gap: 1rem;
-      
+
       a {
         display: flex;
         align-items: center;
@@ -140,12 +150,12 @@ const MainContent = styled.div`
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: ${props => props.theme.colors.bgAlt};
-        color: ${props => props.theme.colors.text};
+        background-color: ${(props) => props.theme.colors.bgAlt};
+        color: ${(props) => props.theme.colors.text};
         transition: all 0.3s ease;
-        
+
         &:hover {
-          background-color: ${props => props.theme.colors.primary};
+          background-color: ${(props) => props.theme.colors.primary};
           color: white;
         }
       }
@@ -159,134 +169,134 @@ const PostNavigation = styled.div`
   gap: 2rem;
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 1px solid ${props => props.theme.colors.border};
-  
+  border-top: 1px solid ${(props) => props.theme.colors.border};
+
   .nav-item {
     transition: transform 0.3s ease;
-    
+
     &:hover {
       transform: translateY(-5px);
     }
-    
+
     &.next {
       text-align: right;
     }
-    
+
     .label {
       display: flex;
       align-items: center;
       font-size: 0.9rem;
       font-weight: 500;
-      color: ${props => props.theme.colors.textSecondary};
+      color: ${(props) => props.theme.colors.textSecondary};
       margin-bottom: 0.5rem;
-      
+
       svg {
         margin: 0 0.5rem;
       }
     }
-    
+
     .title {
       font-size: 1.1rem;
       font-weight: 600;
-      color: ${props => props.theme.colors.text};
+      color: ${(props) => props.theme.colors.text};
     }
   }
 `;
 
 const Sidebar = styled.div`
   .sidebar-section {
-    background-color: ${props => props.theme.colors.bgAlt};
+    background-color: ${(props) => props.theme.colors.bgAlt};
     border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
-    
+
     h3 {
       font-size: 1.3rem;
       margin-bottom: 1.5rem;
       position: relative;
       padding-bottom: 0.75rem;
-      
+
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: 0;
         left: 0;
         width: 50px;
         height: 3px;
-        background-color: ${props => props.theme.colors.primary};
+        background-color: ${(props) => props.theme.colors.primary};
       }
     }
   }
-  
+
   .author-bio {
     text-align: center;
-    
+
     .author-image {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       overflow: hidden;
       margin: 0 auto 1.5rem;
-      
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
     }
-    
+
     .author-name {
       font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
-    
+
     .author-role {
-      color: ${props => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.primary};
       font-weight: 500;
       margin-bottom: 1rem;
     }
-    
+
     p {
       font-size: 1rem;
       line-height: 1.7;
     }
   }
-  
+
   .table-of-contents {
     ul {
       list-style: none;
       padding: 0;
-      
+
       li {
         margin-bottom: 0.8rem;
-        
+
         a {
-          color: ${props => props.theme.colors.text};
+          color: ${(props) => props.theme.colors.text};
           text-decoration: none;
           transition: color 0.3s ease;
           display: flex;
           align-items: center;
-          
+
           &:hover {
-            color: ${props => props.theme.colors.primary};
+            color: ${(props) => props.theme.colors.primary};
           }
-          
+
           &:before {
-            content: '•';
-            color: ${props => props.theme.colors.primary};
+            content: "•";
+            color: ${(props) => props.theme.colors.primary};
             margin-right: 0.5rem;
           }
         }
       }
     }
   }
-  
+
   .related-posts {
     .post-item {
       display: flex;
       margin-bottom: 1.5rem;
-      
+
       .post-image {
         width: 80px;
         height: 80px;
@@ -294,34 +304,34 @@ const Sidebar = styled.div`
         overflow: hidden;
         flex-shrink: 0;
         margin-right: 1rem;
-        
+
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
       }
-      
+
       .post-info {
         .post-title {
           font-weight: 600;
           margin-bottom: 0.4rem;
           line-height: 1.4;
-          
+
           a {
-            color: ${props => props.theme.colors.text};
+            color: ${(props) => props.theme.colors.text};
             text-decoration: none;
             transition: color 0.3s ease;
-            
+
             &:hover {
-              color: ${props => props.theme.colors.primary};
+              color: ${(props) => props.theme.colors.primary};
             }
           }
         }
-        
+
         .post-date {
           font-size: 0.9rem;
-          color: ${props => props.theme.colors.textSecondary};
+          color: ${(props) => props.theme.colors.textSecondary};
         }
       }
     }
@@ -330,12 +340,12 @@ const Sidebar = styled.div`
 
 const BlogPost = () => {
   const { slug } = useParams();
-  
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   // Sample blog post data (in a real app, this would come from an API or CMS)
   const post = {
     title: "7 Proven Strategies to Increase Your Google Ads Quality Score",
@@ -343,12 +353,14 @@ const BlogPost = () => {
     author: {
       name: "Sarah Johnson",
       role: "PPC Specialist",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80",
-      bio: "Sarah has 8+ years of experience in digital marketing with a focus on PPC campaign optimization. She specializes in helping businesses improve their ad performance and ROI."
+      image:
+        "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80",
+      bio: "Sarah has 8+ years of experience in digital marketing with a focus on PPC campaign optimization. She specializes in helping businesses improve their ad performance and ROI.",
     },
     category: "PPC Advertising",
     readTime: "8 min read",
-    featuredImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    featuredImage:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     content: `<p>Quality Score is one of the most important metrics in Google Ads, directly impacting your ad positions, cost-per-click, and overall campaign performance. In this comprehensive guide, we'll explore proven strategies to boost your Quality Score and improve your PPC results.</p>
     
     <h2>What is Quality Score and Why Does it Matter?</h2>
@@ -476,44 +488,49 @@ const BlogPost = () => {
       "Implement Ad Extensions",
       "Monitor and Optimize Regularly",
       "Measuring the Impact of Your Quality Score Improvements",
-      "Conclusion"
+      "Conclusion",
     ],
     relatedPosts: [
       {
-        title: "Google Ads Automation: When to Trust the Machines and When to Take Control",
+        title:
+          "Google Ads Automation: When to Trust the Machines and When to Take Control",
         date: "July 28, 2023",
-        image: "https://images.unsplash.com/photo-1535378620166-273708d44e4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80",
-        slug: "google-ads-automation"
+        image:
+          "https://images.unsplash.com/photo-1535378620166-273708d44e4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80",
+        slug: "google-ads-automation",
       },
       {
         title: "The Ultimate Guide to Google Ads Budget Optimization",
         date: "June 15, 2023",
-        image: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2090&q=80",
-        slug: "google-ads-budget-optimization"
+        image:
+          "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2090&q=80",
+        slug: "google-ads-budget-optimization",
       },
       {
         title: "Advanced Match Type Strategies in a Post-Exact Match World",
         date: "May 10, 2023",
-        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-        slug: "advanced-match-type-strategies"
-      }
+        image:
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        slug: "advanced-match-type-strategies",
+      },
     ],
     previousPost: {
-      title: "Facebook Ads vs. Google Ads: Which Platform Is Right For Your Business?",
-      slug: "facebook-ads-vs-google-ads"
+      title:
+        "Facebook Ads vs. Google Ads: Which Platform Is Right For Your Business?",
+      slug: "facebook-ads-vs-google-ads",
     },
     nextPost: {
       title: "How to Create an Effective B2B Content Marketing Strategy",
-      slug: "b2b-content-marketing-strategy"
-    }
+      slug: "b2b-content-marketing-strategy",
+    },
   };
-  
+
   return (
     <>
       <Helmet>
         <title>{post.title} | Leadwisee Blog</title>
-        <meta 
-          name="description" 
+        <meta
+          name="description"
           content="Learn proven strategies to improve your Google Ads Quality Score and enhance your PPC campaign performance."
         />
       </Helmet>
@@ -527,7 +544,7 @@ const BlogPost = () => {
         <BlogPostContainer>
           <BlogPostHeader>
             <h1>{post.title}</h1>
-            
+
             <div className="meta">
               <div className="meta-item">
                 <FaCalendarAlt />
@@ -546,16 +563,16 @@ const BlogPost = () => {
                 <span>{post.readTime}</span>
               </div>
             </div>
-            
+
             <div className="featured-image">
               <img src={post.featuredImage} alt={post.title} />
             </div>
           </BlogPostHeader>
-          
+
           <BlogContent>
             <MainContent>
               <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              
+
               <div className="article-share">
                 <h3>Share This Article</h3>
                 <div className="share-buttons">
@@ -570,16 +587,22 @@ const BlogPost = () => {
                   </a>
                 </div>
               </div>
-              
+
               <PostNavigation>
-                <Link to={`/blog/${post.previousPost.slug}`} className="nav-item prev">
+                <Link
+                  to={`/blog/${post.previousPost.slug}`}
+                  className="nav-item prev"
+                >
                   <div className="label">
                     <FaArrowLeft /> Previous Article
                   </div>
                   <div className="title">{post.previousPost.title}</div>
                 </Link>
-                
-                <Link to={`/blog/${post.nextPost.slug}`} className="nav-item next">
+
+                <Link
+                  to={`/blog/${post.nextPost.slug}`}
+                  className="nav-item next"
+                >
                   <div className="label">
                     Next Article <FaArrowRight />
                   </div>
@@ -587,7 +610,7 @@ const BlogPost = () => {
                 </Link>
               </PostNavigation>
             </MainContent>
-            
+
             <Sidebar>
               <div className="sidebar-section author-bio">
                 <div className="author-image">
@@ -597,7 +620,7 @@ const BlogPost = () => {
                 <div className="author-role">{post.author.role}</div>
                 <p>{post.author.bio}</p>
               </div>
-              
+
               <div className="sidebar-section table-of-contents">
                 <h3>Table of Contents</h3>
                 <ul>
@@ -608,7 +631,7 @@ const BlogPost = () => {
                   ))}
                 </ul>
               </div>
-              
+
               <div className="sidebar-section related-posts">
                 <h3>Related Articles</h3>
                 {post.relatedPosts.map((relatedPost, index) => (
@@ -618,7 +641,9 @@ const BlogPost = () => {
                     </div>
                     <div className="post-info">
                       <div className="post-title">
-                        <Link to={`/blog/${relatedPost.slug}`}>{relatedPost.title}</Link>
+                        <Link to={`/blog/${relatedPost.slug}`}>
+                          {relatedPost.title}
+                        </Link>
                       </div>
                       <div className="post-date">{relatedPost.date}</div>
                     </div>
@@ -627,7 +652,7 @@ const BlogPost = () => {
               </div>
             </Sidebar>
           </BlogContent>
-          
+
           <div style={{ marginTop: "6rem" }}>
             <SectionHeading
               subtitle="More Resources"
@@ -635,16 +660,13 @@ const BlogPost = () => {
               description="Discover more insights and strategies to improve your digital marketing performance"
               centered
             />
-            
+
             {/* You could include a list of additional blog posts here */}
           </div>
         </BlogPostContainer>
       </motion.div>
     </>
   );
-};
-
-export default BlogPost;;
 };
 
 export default BlogPost;

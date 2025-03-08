@@ -1,0 +1,79 @@
+I need to create comprehensive industry pages for my performance marketing agency website "Leadwisee." Please develop React.js components for each of the following industries, ensuring they're optimized for the SEO keywords provided.
+
+GENERAL REQUIREMENTS:
+1. Create separate, distinct pages for each industry listed below
+2. Implement consistent styling matching the existing website
+3. Ensure mobile responsiveness and fast loading times
+4. Include proper header/meta tags for SEO
+5. Add contact forms at the bottom of each page
+6. Create B2B and SaaS as completely separate components/pages
+7. Incorporate relevant industry-specific images
+8. Include call-to-action buttons throughout
+9. Structure content with H1, H2, H3 tags properly for SEO
+10. Implement schema markup for each industry page
+
+INDUSTRIES TO CREATE (BESIDES SAAS AND REAL ESTATE WHICH ARE ALREADY DONE):
+
+1. B2B MARKETING PAGE:
+Primary keywords to include: B2B marketing agency, B2B lead generation, account-based marketing, B2B content marketing, B2B digital strategy, B2B performance marketing, LinkedIn marketing for B2B
+
+2. E-COMMERCE MARKETING PAGE:
+Primary keywords to include: e-commerce marketing agency, e-commerce advertising, conversion rate optimization, shopping ads management, D2C marketing, mobile-first marketing, e-commerce SEO, product feed optimization
+
+3. RETAIL MARKETING PAGE:
+Primary keywords to include: retail marketing agency, omnichannel marketing strategy, in-store traffic generation, retail digital transformation, retail customer acquisition, brick and mortar marketing, retail advertising solutions
+
+4. FASHION & LUXURY MARKETING PAGE:
+Primary keywords to include: luxury brand marketing, fashion digital marketing, high-end retail marketing, premium brand advertising, influencer marketing for luxury brands, luxury social media marketing
+
+5. HEALTHCARE MARKETING PAGE:
+Primary keywords to include: healthcare marketing agency, medical practice advertising, patient acquisition strategy, HIPAA-compliant marketing, healthcare lead generation, medspa marketing, healthcare PPC
+
+6. OTT & ENTERTAINMENT MARKETING PAGE:
+Primary keywords to include: entertainment marketing agency, OTT platform marketing, subscriber acquisition, streaming service promotion, audience retention strategy, content monetization, video marketing for media
+
+7. COACHING & CONSULTING MARKETING PAGE:
+Primary keywords to include: coaching business marketing, consultant lead generation, high-ticket client acquisition, webinar marketing, course creator marketing, coaching funnel optimization
+
+8. INTERIOR DESIGN & ARCHITECTURE MARKETING PAGE:
+Primary keywords to include: interior design marketing, architect digital marketing, luxury project promotion, design portfolio optimization, high-end client acquisition, interior design lead generation
+
+CONTENT STRUCTURE FOR EACH PAGE:
+1. Compelling headline incorporating primary keywords
+2. Introduction paragraph establishing industry pain points
+3. Value proposition section highlighting Leadwisee's expertise
+4. 4-5 key service offerings specific to that industry
+5. Why choose Leadwisee section with industry-specific benefits
+6. Case study or results section (use placeholder data if needed)
+7. Testimonial section (use placeholder if needed)
+8. FAQ section addressing industry-specific questions
+9. Clear call-to-action and contact form
+
+For mobile optimization, incorporate these keywords naturally:
+- Mobile-first marketing
+- Mobile-first strategy
+- Mobile-first design
+- Mobile-first web design
+- Mobile marketing strategies
+- Mobile ad targeting
+- Audience targeting
+
+Additionally, please include sections on each page that reference our SEO capabilities using these keywords:
+- SEO audit
+- SEO tech audit
+- Local SEO strategy
+- Website optimization
+- Page speed analysis
+- Crawlability analysis
+
+TECHNICAL IMPLEMENTATION:
+1. Use React Router for navigation
+2. Implement lazy loading for images
+3. Ensure all forms are properly validated
+4. Add appropriate animations for enhanced UX
+5. Create reusable components where applicable
+6. Follow accessibility best practices
+7. Include schema markup for local businesses
+8. Implement tracking capabilities for analytics
+
+Please provide the complete React components for all industry pages, ensuring each has unique, valuable content that addresses the specific needs of that industry while incorporating the SEO keywords naturally.

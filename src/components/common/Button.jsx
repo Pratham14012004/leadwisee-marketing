@@ -1,6 +1,5 @@
-
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Base button styles
 const BaseButton = styled.button`
@@ -73,8 +72,25 @@ const TextButton = styled(BaseButton)`
   }
 `;
 
+// Custom Link component that handles scrolling to top
+const ScrollToTopLink = ({ to, children, ...rest }) => {
+  const handleClick = () => {
+    // Scroll to top with smooth behavior
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <Link to={to} onClick={handleClick} {...rest}>
+      {children}
+    </Link>
+  );
+};
+
 // Button as Link
-const LinkButton = styled(Link)`
+const LinkButton = styled(ScrollToTopLink)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -174,7 +190,13 @@ const Button = ({
   
   // If 'to' prop is provided, render as a Link
   if (to) {
-    const linkProps = external ? { as: 'a', href: to, target: '_blank', rel: 'noopener noreferrer' } : { to };
+    const linkProps = external ? { 
+      as: 'a', 
+      href: to, 
+      target: '_blank', 
+      rel: 'noopener noreferrer',
+      onClick: () => {} // No scroll for external links
+    } : { to };
     
     switch (variant) {
       case 'secondary':

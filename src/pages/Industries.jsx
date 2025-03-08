@@ -117,9 +117,14 @@ const Industries = () => {
   // Industry data
   const industries = [
     {
-      id: 'b2b-saas',
-      title: 'B2B SaaS',
-      description: 'Specialized marketing strategies for Software-as-a-Service companies, focusing on lead generation and customer acquisition.',
+      id: 'saas',
+      title: 'SaaS',
+      description: 'Strategic marketing solutions for Software-as-a-Service companies focused on user acquisition, retention, and growth.',
+    },
+    {
+      id: 'b2b',
+      title: 'B2B',
+      description: "Strategic marketing solutions for Business-to-Business companies focused on lead generation, account-based marketing, and sales enablement.",
     },
     {
       id: 'ecommerce',

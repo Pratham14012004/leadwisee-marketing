@@ -215,7 +215,8 @@ const Navbar = ({ theme, toggleTheme }) => {
   
   // Industries dropdown items
   const industries = [
-    { name: 'B2B SAAS', path: '/industries/b2b-saas' },
+    { name: 'SAAS', path: '/industries/saas' },
+    { name: 'B2B', path: '/industries/b2b' },
     { name: 'E-commerce', path: '/industries/ecommerce' },
     { name: 'Retail', path: '/industries/retail' },
     { name: 'Real Estate', path: '/industries/real-estate' },

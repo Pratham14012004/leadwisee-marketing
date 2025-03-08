@@ -206,69 +206,135 @@ const IndustryDetail = () => {
   
   // Mock data for industries
   const industriesData = {
-    'b2b-saas': {
-      title: 'B2B SaaS',
-      description: 'Specialized marketing strategies for Software-as-a-Service companies to drive lead generation and customer acquisition.',
+    'saas': {
+      title: 'SaaS',
+      description: 'Strategic marketing solutions for Software-as-a-Service companies focused on user acquisition, retention, and growth.',
       fullDescription: `
-        The B2B SaaS market is competitive and constantly evolving. Marketing effectively in this space requires a deep understanding of complex sales cycles, technical products, and the needs of business decision-makers.
+        The SaaS market is highly competitive with constantly evolving customer expectations. Effective marketing in this space requires understanding product-led growth, user experience, and subscription economics.
         
-        At Leadwisee, we've helped numerous SaaS companies scale their user base through strategic digital marketing approaches. We understand that acquiring and retaining customers is the lifeblood of your subscription business, and our strategies are designed to optimize both customer acquisition cost (CAC) and customer lifetime value (LTV).
+        At Leadwisee, we've helped numerous SaaS companies scale their user base through data-driven digital marketing approaches. We understand that acquiring and retaining customers is the lifeblood of your subscription business, and our strategies are designed to optimize both customer acquisition cost (CAC) and customer lifetime value (LTV).
       `,
       challenges: [
-        'Long and complex sales cycles with multiple decision-makers',
-        'Explaining technical products in simple, benefit-focused ways',
-        'High customer acquisition costs (CAC)',
-        'Competitive keyword landscapes with expensive CPCs',
-        'Demonstrating ROI potential to prospective clients'
+        'High customer acquisition costs in competitive markets',
+        'Converting free users to paying customers',
+        'Reducing churn and improving retention rates',
+        'Scaling user onboarding processes efficiently',
+        'Demonstrating product value quickly to new users'
       ],
       solutions: [
-        'Account-based marketing strategies to target ideal customer profiles',
-        'Content marketing focused on thought leadership and problem-solving',
-        'Multi-touch attribution to understand the full customer journey',
-        'Segmented email nurture sequences for different buyer personas',
-        'Retargeting campaigns to re-engage prospects throughout the decision process',
-        'Free trial and demo conversion optimization'
+        'Product-led growth strategies to drive organic adoption',
+        'Freemium and trial optimization to increase conversion rates',
+        'User behavior analysis to identify conversion opportunities',
+        'Automated nurture campaigns for user activation and retention',
+        'Feature adoption marketing to increase product stickiness',
+        'Customer success-focused content marketing'
       ],
       recommendedServices: [
         {
           title: 'PPC Marketing',
-          description: 'Targeted campaigns on Google, LinkedIn, and other platforms to generate qualified leads.',
+          description: 'Targeted campaigns to reach potential users searching for software solutions.',
           link: '/services/ppc-marketing'
         },
         {
           title: 'Content Marketing',
-          description: 'Thought leadership content that establishes authority and drives organic traffic.',
+          description: 'Educational content that showcases product capabilities and builds trust.',
           link: '/services/content-marketing'
         },
         {
           title: 'Conversion Rate Optimization',
-          description: 'Optimize your website and landing pages to convert more visitors into trial users and customers.',
+          description: 'Optimize your website, landing pages and trial experiences to convert more visitors.',
           link: '/services/cro'
         }
       ],
       caseStudies: [
         {
-          title: 'Lead Generation Campaign for HR Tech Platform',
-          client: 'HR Software Company',
-          description: 'We developed a comprehensive digital marketing strategy for an HR tech platform, focusing on LinkedIn advertising, content marketing, and conversion optimization.',
+          title: 'User Acquisition Campaign for Project Management Platform',
+          client: 'Project Management SaaS',
+          description: 'We developed a comprehensive digital marketing strategy for a project management tool, focusing on product-led growth and conversion optimization.',
           results: [
-            { number: '213%', label: 'Increase in MQLs' },
-            { number: '41%', label: 'Reduction in CAC' },
-            { number: '28%', label: 'Increase in Trial-to-Paid Conversion' }
+            { number: '187%', label: 'Increase in Free Signups' },
+            { number: '32%', label: 'Improvement in Free-to-Paid Conversion' },
+            { number: '24%', label: 'Reduction in User Onboarding Dropoff' }
           ]
         },
         {
-          title: 'Market Expansion for Business Intelligence Tool',
-          client: 'Data Analytics SaaS Provider',
-          description: 'We helped a data analytics company expand into new vertical markets through targeted content and paid advertising campaigns.',
+          title: 'Retention Campaign for Analytics Platform',
+          client: 'Data Analytics Provider',
+          description: 'We helped a data analytics platform reduce churn through targeted email campaigns and product adoption marketing.',
           results: [
-            { number: '187%', label: 'Growth in New Market Segment' },
-            { number: '43%', label: 'Increase in Enterprise Deals' },
-            { number: '35%', label: 'Reduction in Sales Cycle Length' }
+            { number: '41%', label: 'Reduction in Churn Rate' },
+            { number: '53%', label: 'Increase in Feature Adoption' },
+            { number: '28%', label: 'Growth in Expansion Revenue' }
           ]
         }
       ]
     },
+
+    // B2B Industry Content
+    'b2b': {
+      title: 'B2B',
+      description: 'Strategic marketing solutions for Business-to-Business companies focused on lead generation, account-based marketing, and sales enablement.',
+      fullDescription: `
+        The B2B market has unique challenges with complex sales cycles and multiple stakeholders involved in purchasing decisions. Marketing effectively in this space requires understanding business needs, buying committees, and solution selling.
+        
+        At Leadwisee, we've helped numerous B2B companies generate high-quality leads and streamline their sales processes through targeted marketing strategies. We understand the importance of aligning marketing and sales efforts to drive business growth and optimize return on marketing investment.
+      `,
+      challenges: [
+        'Long and complex sales cycles with multiple decision-makers',
+        'Identifying and targeting key accounts and stakeholders',
+        'Generating high-quality leads that convert to revenue',
+        'Creating content that addresses different stakeholder concerns',
+        'Measuring marketing impact on complex B2B sales processes'
+      ],
+      solutions: [
+        'Account-based marketing strategies targeting ideal customer profiles',
+        'Multi-channel lead generation campaigns',
+        'Marketing and sales alignment through CRM integration',
+        'Buyer persona development and targeted messaging',
+        'Sales enablement content creation and distribution',
+        'Pipeline acceleration campaigns for leads in consideration stage'
+      ],
+      recommendedServices: [
+        {
+          title: 'PPC Marketing',
+          description: 'Targeted campaigns on Google, LinkedIn, and other platforms to generate qualified B2B leads.',
+          link: '/services/ppc-marketing'
+        },
+        {
+          title: 'Account-Based Marketing',
+          description: 'Strategic targeting of key accounts with personalized marketing approaches.',
+          link: '/services/account-based-marketing'
+        },
+        {
+          title: 'Marketing Automation',
+          description: 'Streamlined lead nurturing and qualification processes to support your sales team.',
+          link: '/services/marketing-automation'
+        }
+      ],
+      caseStudies: [
+        {
+          title: 'Lead Generation Campaign for Industrial Equipment Manufacturer',
+          client: 'Industrial Solutions Provider',
+          description: 'We developed a comprehensive digital marketing strategy for an industrial equipment manufacturer, focusing on LinkedIn advertising and technical content marketing.',
+          results: [
+            { number: '213%', label: 'Increase in Marketing Qualified Leads' },
+            { number: '41%', label: 'Reduction in Cost Per Acquisition' },
+            { number: '35%', label: 'Increase in Sales Pipeline Value' }
+          ]
+        },
+        {
+          title: 'Account-Based Marketing Campaign for Business Services',
+          client: 'Professional Services Firm',
+          description: 'We helped a professional services firm target and engage key accounts through personalized marketing campaigns across multiple channels.',
+          results: [
+            { number: '167%', label: 'Increase in Target Account Engagement' },
+            { number: '48%', label: 'Improvement in Sales Meeting Conversion' },
+            { number: '32%', label: 'Reduction in Sales Cycle Length' }
+          ]
+        }
+      ]
+    },
+
     'ecommerce': {
       title: 'E-commerce',
       description: 'Data-driven marketing solutions to increase traffic, conversions, and average order value for online stores.',

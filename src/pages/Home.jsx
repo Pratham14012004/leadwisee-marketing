@@ -463,17 +463,34 @@ const Home = () => {
           />
           
           <IndustriesGrid>
-            {/* Industry cards */}
-            <Card
+            {/* <Card
               hoverable
-              title="B2B SaaS"
-              description="Generate qualified leads and demo bookings for your SaaS business with our specialized marketing strategies."
+              title="SaaS"
+              description="Accelerate user acquisition and reduce churn for your software-as-a-service business with our data-driven marketing strategies."
               imageSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-              imageAlt="B2B SaaS Marketing"
-              to="/industries/b2b-saas"
+              imageAlt="SaaS Marketing"
+              to="/industries/saas"
               footer={
                 <Button 
-                  to="/industries/b2b-saas" 
+                  to="/industries/saas" 
+                  variant="text"
+                  rightIcon={<FaArrowRight />}
+                >
+                  Learn More
+                </Button>
+              }
+            /> */}
+            
+            {/* B2B Industry Card */}
+            <Card
+              hoverable
+              title="B2B"
+              description="Generate high-quality leads and shorten sales cycles with our strategic B2B marketing solutions focused on your business growth."
+              imageSrc="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              imageAlt="B2B Marketing"
+              footer={
+                <Button 
+                  to="/industries/b2b" 
                   variant="text"
                   rightIcon={<FaArrowRight />}
                 >
@@ -506,7 +523,6 @@ const Home = () => {
               description="Attract qualified property buyers and sellers with targeted digital campaigns."
               imageSrc="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80"
               imageAlt="Real Estate Marketing"
-              to="/industries/real-estate"
               footer={
                 <Button 
                   to="/industries/real-estate" 

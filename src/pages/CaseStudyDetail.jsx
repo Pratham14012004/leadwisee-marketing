@@ -1,9 +1,9 @@
 
-import React, { useEffect, useState } from 'react';
+import {React, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet';
+import motion from 'framer-motion';
+import Helmet from 'react-helmet';
 import { FaArrowLeft, FaCheck } from 'react-icons/fa';
 
 import SectionHeading from '../components/common/SectionHeading';

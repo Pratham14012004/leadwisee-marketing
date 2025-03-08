@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState } from 'react';
+import {React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';

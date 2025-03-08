@@ -1,0 +1,78 @@
+I need to update the content for the Real Estate industry page on my Leadwisee website. Please create React JS code for this specific page using the following content exactly as provided:
+
+CONTENT TO IMPLEMENT:
+
+**Real Estate Digital Marketing Agency: Performance-Driven Ads That Sell Properties Faster**
+**The #1 Real Estate Marketing Agency for High-Ticket Sales**
+
+The real estate market is fiercely competitive—and without a strong digital presence, even the best properties can go unnoticed. At Leadwisee, we specialize in high-performance real estate ads that bring in serious buyers, not just empty clicks.
+
+🚀 We don't just market properties—we sell them. With our data-driven real estate advertising services, we help developers, brokers, and real estate agents attract high-intent leads, convert more buyers, and close deals faster.
+
+**Our Real Estate Digital Marketing Services**
+
+**1. Real Estate PPC & Google Ads: High-Intent Buyers, Ready to Convert**
+🔹 **Google Ads for Real Estate** – Get your properties in front of buyers searching for homes in your market.
+🔹 **Real Estate PPC Campaigns** – Maximize ROI with strategic bidding & hyper-local targeting.
+🔹 **Google Real Estate Leads** – Precision-targeted campaigns to capture motivated buyers & investors.
+🔹 **PPC for Real Estate Investors** – Reach high-net-worth individuals actively searching for properties.
+🔹 **Real Estate PPC Agency** – Data-backed ad strategies that generate quality leads, not just traffic.
+
+💡 **Why it works:** Homebuyers and investors search on Google before making a decision. With our real estate PPC company, your listings will appear at the top of search results, capturing ready-to-buy customers before your competition does.
+
+**2. Facebook & Instagram Ads for Real Estate: Sell More Homes with Social Media**
+🔹 **Real Estate Facebook Ads** – Generate high-converting leads from Facebook's vast audience.
+🔹 **Facebook Ads for Real Estate Agents** – Personalized ad campaigns to drive local property inquiries.
+🔹 **Facebook Real Estate Lead Generation** – Optimized strategies for more site visits and home tours.
+🔹 **Luxury Real Estate Ads** – Premium ad creatives designed to attract high-net-worth clients.
+🔹 **Facebook Lead Generation for Real Estate** – Advanced targeting to filter serious buyers from casual browsers.
+
+💡 **Why it works:** 78% of homebuyers use Facebook and Instagram to research properties. We use data-driven audience targeting, retargeting, and AI-powered ad optimization to put your listings in front of qualified buyers.
+
+**3. Real Estate Video & YouTube Marketing: Dominate with Visual Content**
+🔹 **Real Estate YouTube Ads** – Engage potential buyers with high-impact video marketing.
+🔹 **Real Estate Video Marketing Services** – Showcase listings with cinematic property tours.
+🔹 **Creative Real Estate Ads** – Stand out with attention-grabbing video campaigns.
+
+💡 **Why it works:** Video is 53x more likely to generate organic engagement than text. With YouTube and social video marketing, your properties get seen by serious buyers actively searching for homes.
+
+**4. LinkedIn Marketing for Real Estate: Target High-Value Investors & Brokers**
+🔹 **LinkedIn for Real Estate Agents** – Build brand authority and attract qualified leads.
+🔹 **LinkedIn Real Estate Ads** – Precision targeting for commercial and luxury real estate investors.
+
+💡 **Why it works:** LinkedIn is where high-net-worth investors and corporate buyers search for premium real estate. We position your listings in front of decision-makers and business owners looking for investment opportunities.
+
+**5. Real Estate Social Media Marketing: Build a Brand That Sells**
+🔹 **Real Estate Social Media Marketing** – Full-scale campaigns to grow your agency's online presence.
+🔹 **Social Media Real Estate Marketing** – Custom content, ads, and audience engagement.
+
+💡 **Why it works:** The best real estate agents and agencies aren't just selling properties—they're building relationships. Our social media strategies elevate your brand, positioning you as the go-to expert in your market.
+
+**Why Choose Leadwisee for Your Real Estate Advertising?**
+✅ **We Deliver Qualified Leads, Not Just Clicks:** Every lead we generate is highly targeted, ensuring you speak only to serious buyers.
+✅ **AI-Driven Targeting & Retargeting:** Our ads use AI-powered automation to identify and convert motivated buyers faster.
+✅ **100% ROI-Driven Marketing:** Every ad campaign is optimized to maximize your return on investment.
+✅ **Exclusive Lead Generation Strategies:** Unlike generic agencies, we specialize in real estate-specific marketing that works.
+
+**Get More Leads & Close More Sales with Leadwisee**
+Book a Free Strategy Call Today to learn how our real estate digital marketing services can help you:
+
+- Generate high-quality real estate leads
+- Sell more properties faster
+- Scale your business with performance-driven advertising
+
+**Contact Us!!**
+
+IMPLEMENTATION REQUIREMENTS:
+1. Create a React component for the Real Estate industry page using this exact content
+2. Format all text appropriately (bold text should remain bold)
+3. Include all emojis exactly as shown
+4. Organize the page with proper sections and whitespace
+5. Add a relevant real estate header image (property or luxury home)
+6. Include a contact form at the bottom for the "Contact Us!!" section
+7. Ensure the page is fully responsive on all devices
+8. Maintain consistent styling with the rest of the website
+9. Add subtle animations for enhanced user experience
+10. Ensure proper formatting of the bullet points in the final section
+
+The component should seamlessly integrate with my existing React codebase for the Leadwisee website.
